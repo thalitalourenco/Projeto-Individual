@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Cruzadinha | Clube da Fenda</title>
+  <link rel="stylesheet" href="cruzadinha.css">
+  <link rel="stylesheet" href="SpongeboyRegular.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+</head>
+
+<body>
+
+  <header id="menu-lateral">
+    <div class="logo">
+      <div class="linha">
+        <span class="letra" style="background-position: 0% 0%;">C</span>
+        <span class="letra" style="background-position: 8% 0%;">l</span>
+        <span class="letra" style="background-position: 16% 0%;">u</span>
+        <span class="letra" style="background-position: 24% 0%;">b</span>
+        <span class="letra" style="background-position: 32% 0%;">e</span>
+        <span class="espaco"></span>
+        <span class="letra" style="background-position: 48% 0%;">d</span>
+        <span class="letra" style="background-position: 56% 0%;">a</span>
+      </div>
+      <div class="linha">
+        <span class="letra" style="background-position: 72% 0%;">F</span>
+        <span class="letra" style="background-position: 80% 0%;">e</span>
+        <span class="letra" style="background-position: 88% 0%;">n</span>
+        <span class="letra" style="background-position: 96% 0%;">d</span>
+        <span class="letra" style="background-position: 104% 0%;">a</span>
+      </div>
+    </div>
+
+    <nav role="navigation">
+      <div class="hello">
+        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+      </div>
+      <ul>
+        <li id="dashboard">
+          <span class="material-symbols-outlined">dashboard</span>
+          <a href="/dashboard/overview.html">OVERVIEW</a>
+        </li>
+        <li class="ativo" aria-current="page" id="games">
+          <span class="material-symbols-outlined">sports_esports</span>
+          <a href="/dashboard/games.html">GAMES</a>
+        </li>
+        <li id="perfil">
+          <span class="material-symbols-outlined">person</span>
+          <a href="/dashboard/perfil.html">PERFIL</a>
+        </li>
+        <li id="sair">
+          <span class="material-symbols-outlined">logout</span>
+          <a onclick="limparSessao()">SAIR</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="tela-inicial" class="tela-inicial">
+    <h1 class="titulo_telaInicial">
+      <span class="letra" style="background-position: 0% 0%;">P</span>
+      <span class="letra" style="background-position: 8% 0%;">a</span>
+      <span class="letra" style="background-position: 16% 0%;">l</span>
+      <span class="letra" style="background-position: 24% 0%;">a</span>
+      <span class="letra" style="background-position: 32% 0%;">v</span>
+      <span class="letra" style="background-position: 40% 0%;">r</span>
+      <span class="letra" style="background-position: 48% 0%;">a</span>
+      <span class="letra" style="background-position: 56% 0%;">s</span>
+      <span class="letra espaco"></span>
+      <span class="letra" style="background-position: 64% 0%;">C</span>
+      <span class="letra" style="background-position: 72% 0%;">r</span>
+      <span class="letra" style="background-position: 80% 0%;">u</span>
+      <span class="letra" style="background-position: 88% 0%;">z</span>
+      <span class="letra" style="background-position: 96% 0%;">a</span>
+      <span class="letra" style="background-position: 104% 0%;">d</span>
+      <span class="letra" style="background-position: 112% 0%;">a</span>
+      <span class="letra" style="background-position: 120% 0%;">s</span>
+    </h1>
+    <p class="descricao">
+      O objetivo é preencher a cruzadinha com as palavras relacionadas ao tema de acordo com as dicas, buscando o máximo
+      de acertos e no menor tempo possível.
+    </p>
+    <button id="botao-iniciar" onclick="iniciarJogo()" style="background-position:100% 0%;">Iniciar Jogo</button>
+  </div>
+
+  <div id="tela-cruzadinha" class="tela-cruzadinha">
+    <div class="container">
+
+      <div class="layout">
+        <table id="crossword"></table>
+
+        <div class="dicas">
+          <div class="titulo_dicas">Dicas <div class="timer">Tempo: 00:00</div>
+          </div>
+          <li><span>1.</span> A casa do Bob Esponja.</li>
+          <li><span>2.</span> Que animal é a Sandy?</li>
+          <li><span>3.</span> O nome da cidade que os personagens moram: Fenda do _______.</li>
+          <li><span>4.</span> O instrumento musical que o Lula Molusco toca.</li>
+          <li><span>5.</span> Melhor amigo do Bob Esponja.</li>
+          <li><span>6.</span> Instrumento que usam para pegar àgua-viva.</li>
+          <li><span>7.</span> Animal de estimação do Bob Esponja.</li>
+          <li><span>8.</span> Vilão pequeno e verde.</li>
+          <li><span>9.</span> Comida servida no Siri Cascudo: __________ de Siri.</li>
+          <li><span>10.</span> O que o Bob nunca consegue tirar (de motorista!).</li>
+          <li><span>11.</span> Filha do Sr. Sirigueijo.</li>
+          <li><span>12.</span> A paixão do Sr. Sirigueijo.</li>
+          <li><span>13.</span> Casa do Patrick.</li>
+
+          <button onclick="verificarRespostas()" id="verificar_respostas">Verificar Respostas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div id="tela-feedback" class="tela-feedback" style="display: none;">
+      <h1>
+        <span class="letra" style="background-position: 0% 0%;">R</span>
+        <span class="letra" style="background-position: 8% 0%;">e</span>
+        <span class="letra" style="background-position: 16% 0%;">s</span>
+        <span class="letra" style="background-position: 24% 0%;">u</span>
+        <span class="letra" style="background-position: 32% 0%;">l</span>
+        <span class="letra" style="background-position: 40% 0%;">t</span>
+        <span class="letra" style="background-position: 48% 0%;">a</span>
+        <span class="letra" style="background-position: 56% 0%;">d</span>
+        <span class="letra" style="background-position: 64% 0%;">o</span>
+      </h1>
+      <p id="mensagem-feedback"></p>
+      <button onclick="voltarInicio()" class="button">Voltar ao Início</button>
+      <p>ou</p>
+      <button onclick="voltarJogo()" class="button">Voltar ao Jogo</button>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+  function iniciarJogo() {
+    document.getElementById("tela-inicial").style.display = "none";
+    document.getElementById("menu-lateral").style.display = "none";
+    document.getElementById("tela-cruzadinha").style.display = "flex";
+
+    iniciarTimer();
+  }
+
+  const altura = 17;
+  const largura = 24;
+
+  // cria a grade vazia (não está sendo usada diretamente no código atual)
+  const grid = Array(altura).fill(null).map(() => Array(largura).fill(null));
+
+  const words = [
+    { word: "ABACAXI", row: 1, col: 8, dir: "down", num: 1 },
+    { word: "ESQUILO", row: 14, col: 11, dir: "across", num: 2 },
+    { word: "BIQUINI", row: 9, col: 5, dir: "down", num: '3' },
+    { word: "CLARINETE", row: 6, col: 11, dir: "down", num: '4/10' },
+    { word: "PATRICK", row: 4, col: 3, dir: "across", num: '11/5' },
+    { word: "REDE", row: 5, col: 1, dir: "down", num: 6 },
+    { word: "GARY", row: 1, col: 7, dir: "across", num: 7 },
+    { word: "PLANKTON", row: 4, col: 18, dir: "down", num: '8' },
+    { word: "HAMBURGUER", row: 9, col: 2, dir: "across", num: 9 },
+    { word: "CARTEIRA", row: 6, col: 11, dir: "across", num: 10 },
+    { word: "PEROLA", row: 4, col: 3, dir: "down", num: 11 },
+    { word: "DINHEIRO", row: 11, col: 16, dir: "across", num: '12' },
+    { word: "PEDRA", row: 6, col: 0, dir: "across", num: 13 },
+  ];
+
+  // criação da tabela
+  const table = document.getElementById("crossword");
+  let posicaoUsada = {}; // mantém as posições e letras das palavras
+
+  for (let i = 0; i < altura; i++) {
+    const tr = document.createElement("tr");
+    for (let j = 0; j < largura; j++) {
+      const td = document.createElement("td");
+      td.dataset.row = i;
+      td.dataset.col = j;
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+
+  // Preenchendo palavras na tabela e mapeando letras na posicaoUsada
+  for (let { word, row, col, dir, num } of words) {
+    for (let i = 0; i < word.length; i++) {
+      const r = dir === "across" ? row : row + i;
+      const c = dir === "across" ? col + i : col;
+
+      const td = document.querySelector(`td[data-row="${r}"][data-col="${c}"]`);
+      td.classList.add("cell");
+
+      if (!td.querySelector("input")) {
+        const input = document.createElement("input");
+        input.maxLength = 1;
+        td.appendChild(input);
+      }
+
+      const posKey = `${r},${c}`;
+      posicaoUsada[posKey] = word[i].toUpperCase();
+
+      if (i === 0 && !td.querySelector(".number")) {
+        const number = document.createElement("div");
+        number.className = "number";
+        number.textContent = num;
+        td.appendChild(number);
+      }
+    }
+  }
+
+  let timerInterval;
+  let segundos = 0;
+  let tempoFormatado = "";
+
+  function iniciarTimer() {
+    const timer = document.querySelector(".timer");
+
+    // Para qualquer timer rodando antes de iniciar outro
+    pararTimer();
+
+    timerInterval = setInterval(() => {
+      segundos++;
+      const minutos = Math.floor(segundos / 60);
+
+      tempoFormatado = `${minutos.toString().padStart(2, '0')}:${(segundos % 60).toString().padStart(2, '0')}`;
+
+      timer.textContent = `Tempo: ${tempoFormatado}`;
+    }, 1000);
+  }
+
+  function pararTimer() {
+    clearInterval(timerInterval);
+  }
+
+  function resetarTimer() {
+    pararTimer();
+    segundos = 0;
+    tempoFormatado = "00:00";
+    document.querySelector(".timer").textContent = "Tempo: 00:00";
+  }
+
+  // verifica as respostas
+  function verificarRespostas() {
+    let corretas = 0;
+    let total = 0;
+
+    for (const pos in posicaoUsada) {
+      const [r, c] = pos.split(',').map(Number);
+      const td = document.querySelector(`td[data-row="${r}"][data-col="${c}"]`);
+      const input = td.querySelector("input");
+      if (!input) continue;
+
+      const esperado = posicaoUsada[pos];
+      const inserido = input.value.toUpperCase();
+
+      if (inserido === esperado) {
+        input.classList.add("corretas");
+        input.classList.remove("incorretas");
+        corretas++;
+      } else {
+        input.classList.add("incorretas");
+        input.classList.remove("corretas");
+      }
+      total++;
+    }
+
+    // Para o timer APENAS depois de verificar todas as respostas
+    pararTimer();
+
+    if (corretas === total) {
+      mostrarFeedback(`🎉 Parabéns! Você completou a cruzadinha em `);
+    } else {
+      const porcentagem = ((corretas / total) * 100).toFixed(2);
+      mostrarFeedback(`Você acertou ${porcentagem}% da cruzadinha em `);
+    }
+  }
+
+  function mostrarFeedback(mensagem) {
+
+    pararTimer();
+
+    document.getElementById("tela-cruzadinha").style.display = "none";
+    document.getElementById("menu-lateral").style.display = "flex";
+    document.getElementById("tela-feedback").style.display = "flex";
+
+    const mensagemFeedback = document.getElementById("mensagem-feedback");
+    mensagemFeedback.textContent = `${mensagem}\n${tempoFormatado}!`;
+
+    cadastrar();
+  }
+
+  function cadastrar() {
+
+    const dados = {
+      idUserServer: sessionStorage.ID_USUARIO || null,
+      tempoCruzadinhaServer: tempoFormatado || "00:00",
+    };
+
+    console.log("Enviando dados para o servidor:", dados);
+
+    fetch("/cruzadinha/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    })
+      .then((resposta) => {
+        if (resposta.ok) {
+          console.log("Tempo enviado com sucesso!");
+          return resposta.json();
+        } else {
+          throw new Error("Erro ao enviar o tempo.");
+        }
+      })
+      .then((dados) => {
+        console.log("Resposta do servidor:", dados);
+      })
+      .catch((erro) => {
+        console.error("Erro no envio:", erro);
+      });
+  }
+
+  function voltarInicio() {
+    document.getElementById("tela-feedback").style.display = "none";
+    document.getElementById("tela-inicial").style.display = "flex";
+    resetarJogo();
+  }
+
+  function resetarJogo() {
+    // Limpa inputs e classes, mas não zera posicaoUsada, que é fixa para as palavras
+    const inputs = document.querySelectorAll("#crossword input");
+    inputs.forEach((input) => {
+      input.value = "";
+      input.classList.remove("corretas", "incorretas");
+    });
+
+    resetarTimer();
+  }
+
+  function voltarJogo() {
+    document.getElementById("tela-feedback").style.display = "none";
+    document.getElementById("menu-lateral").style.display = "none";
+    document.getElementById("tela-cruzadinha").style.display = "flex";
+    iniciarTimer();
+  }
+
+  function limparSessao() {
+    sessionStorage.clear();
+    window.location = "/login.html";
+  }
+
+</script>

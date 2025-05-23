@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./assets/css/cadastro.css">
+    <link rel="stylesheet" href="./assets/Fontes/SpongeboyRegular.woff" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html">
+                <h1 class="titulo">
+                    <span class="letra" style="background-position: 0% 0%;">C</span>
+                    <span class="letra" style="background-position: 8% 0%;">l</span>
+                    <span class="letra" style="background-position: 16% 0%;">u</span>
+                    <span class="letra" style="background-position: 24% 0%;">b</span>
+                    <span class="letra" style="background-position: 32% 0%;">e</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 48% 0%;">d</span>
+                    <span class="letra" style="background-position: 56% 0%;">a</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 72% 0%;">F</span>
+                    <span class="letra" style="background-position: 80% 0%;">e</span>
+                    <span class="letra" style="background-position: 88% 0%;">n</span>
+                    <span class="letra" style="background-position: 96% 0%;">d</span>
+                    <span class="letra" style="background-position: 104% 0%;">a</span>
+                </h1>
+            </a>
+            <ul class="navbar">
+                <li>
+                    <a href="index.html"><img src="./assets/img/abacaxi.png" alt="casa abacaxi"></a>
+                </li>
+                <li>
+                    <a href="index.html#sobre">Mergulhar</a>
+                </li>
+                <li>|</li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li class="agora">
+                    <a href="">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="containerCadastro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
+        <div class="bolhas-container"></div>
+        <div class="boxCadastro">
+            <div class="Card">
+                <div class="buttonsForm">
+                    <div class="btnColor"></div>
+                    <button id="btnLogin">Login</button>
+                    <button id="btnCadastro">Cadastro</button>
+                </div>
+                <div class="titleCadastro">
+                    <h1>Criar conta</h1>
+                </div>
+                <form class="formulario">
+                    <input type="text" id="input_nome" required placeholder="Nome usuário" oninput="validarNome()">
+                    <input type="text" id="input_email" required placeholder="E-mail" oninput="validarEmail()">
+                    <input type="text" id="input_telefone" required placeholder="Telefone" maxlength="15"
+                        oninput="validarTelefone()">
+                    <input type="password" id="input_senha" placeholder="Senha" oninput="validarSenha()">
+                    <div class="containerSenha">
+                        <span id="span_maiuscula">Letras maiúsculas(A-Z)</span>
+                        <span id="span_minuscula">Letras minúsculas(a-z)</span>
+                        <span id="span_numero">Números (0-9)</span>
+                        <span id="span_especial">Caracteres especiais(!, @, etc.)</span>
+                        <span id="span_tamanho">Pelo menos 10 caracteres</span>
+                    </div>
+                    <input type="password" id="input_confirmacaoSenha" placeholder="Confirme a senha"
+                        oninput="validarConfirmacaoSenha()">
+                    <div id="div_mensagemSenhas">As senhas não coincidem.</div>
+                </form>
+                <div class="btnCadastro">
+                    <button onclick="cadastrar()">Cadastrar-se</button>
+                </div>
+
+            </div>
+        </div>
+        <div id="div_aguardar" class="loading-div">
+            <img src="./assets/circle-loading.gif" id="loading-gif">
+        </div>
+    </div>
+
+    <div class="rodape">
+        <div class="container">
+            <div class="menu">
+                <li>
+                    <a href="home.html">Home</a>
+                </li>
+                <li>
+                    <a href="#sobre">Mergulhar</a>
+                </li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </div>
+                <div class="rodape_home">
+                <a href="index.html">
+                    <h1 class="titulo">
+                    <span class="letra" style="background-position: 0% 0%;">C</span>
+                    <span class="letra" style="background-position: 8% 0%;">l</span>
+                    <span class="letra" style="background-position: 16% 0%;">u</span>
+                    <span class="letra" style="background-position: 24% 0%;">b</span>
+                    <span class="letra" style="background-position: 32% 0%;">e</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 48% 0%;">d</span>
+                    <span class="letra" style="background-position: 56% 0%;">a</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 72% 0%;">F</span>
+                    <span class="letra" style="background-position: 80% 0%;">e</span>
+                    <span class="letra" style="background-position: 88% 0%;">n</span>
+                    <span class="letra" style="background-position: 96% 0%;">d</span>
+                    <span class="letra" style="background-position: 104% 0%;">a</span>
+                </h1>
+                </a>
+                <p>@2025 Clube da Fenda.Todos os direitos reservador.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/bolhas.js"></script>
+</body>
+
+</html>
+<script>
+   
+    function validarNome() {
+        var nomeVar= input_nome.value;
+        if (nomeVar.length > 0) {
+            if (input_nome.value.length > 0) {
+                input_nome.style.border = '1px solid green';
+            } else {
+                input_nome.style.border = '1px solid red';
+            }
+        } else {
+            input_nome.style.border = '1px solid #604da4';
+        }
+    }
+    function validarTelefone() {
+        var telefoneVar = input_telefone.value.replace(/\D/g, '');
+
+        var formatandoInput = '';
+        for (var i = 0; i < telefoneVar.length; i++) {
+            if (i === 0) {
+                formatandoInput += '(' + telefoneVar[i];
+            } else if (i === 1) {
+                formatandoInput += telefoneVar[i] + ') ';
+            } else if (i === 6) {
+                formatandoInput += telefoneVar[i] + '-';
+            } else {
+                formatandoInput += telefoneVar[i];
+            }
+        }
+        input_telefone.value = formatandoInput;
+
+        if (telefoneVar.length > 0) {
+            if (input_telefone.value.length >= 15) {
+                input_telefone.style.border = '1px solid green';
+            } else {
+                input_telefone.style.border = '1px solid red';
+            }
+        } else {
+            input_telefone.style.border = '1px solid #604da4';
+        }
+
+    }
+
+    function validarEmail() {
+        var emailVar = input_email.value;
+        if (emailVar.length > 0) {
+            if (emailVar.includes('@') && (emailVar.endsWith('.com') || emailVar.endsWith('.br'))) {
+                input_email.style.border = '1px solid green';
+            } else {
+                input_email.style.border = '1px solid red';
+            }
+        } else {
+            input_email.style.border = '1px solid #604da4';
+        }
+    }
+
+    function validarSenha() {
+        var senhaVar = input_senha.value;
+        input_senha.value = senhaVar.replaceAll("'", '').replaceAll('=', '').replaceAll('-', '').replaceAll(';', '').replaceAll('"', '').replaceAll('#', '');
+        var senhaMaiuscula = senhaVar.toUpperCase();
+        var senhaMinuscula = senhaVar.toLowerCase();
+        var senhaExclamacao = senhaVar.includes('!');
+        var senhaArroba = senhaVar.includes('@');
+        var senhaSifrao = senhaVar.includes('$');
+        var senhaPorcetagem = senhaVar.includes('%');
+        var senhaEcomercial = senhaVar.includes('&');
+        var senhaAsteristico = senhaVar.includes('*');
+        var senhaUnderline = senhaVar.includes('_');
+        var senhaHashtag = senhaVar.includes('#');
+        var senhaNumero = false;
+        var letraMaiuscula = false;
+        var letraMinusculo = false;
+
+        if (senhaVar != senhaMaiuscula) {
+            letraMinusculo = true;
+        } else {
+            letraMinusculo = false;
+        }
+
+        if (senhaVar != senhaMinuscula) {
+            letraMaiuscula = true;
+        } else {
+            letraMaiuscula = false;
+        }
+        if (senhaVar.includes(0)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(1)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(2)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(3)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(4)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(5)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(6)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(7)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(8)) {
+            senhaNumero = true;
+        } else if (senhaVar.includes(9)) {
+            senhaNumero = true;
+        } else {
+            senhaNumero = false;
+        }
+
+        if (letraMaiuscula) {
+            span_maiuscula.style.color = 'green';
+        }
+
+        if (letraMinusculo) {
+            span_minuscula.style.color = 'green';
+        }
+
+        if (senhaNumero) {
+            span_numero.style.color = 'green';
+        }
+
+        if (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag) {
+            span_especial.style.color = 'green';
+        }
+        
+        if (senhaVar.length >= 10) {
+            span_tamanho.style.color = 'green';
+        }
+        
+        if (senhaVar.length > 0) {
+            if (senhaNumero && letraMaiuscula && letraMinusculo && (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag)) {
+                input_senha.style.border = '1px solid green';
+            } else {
+                input_senha.style.border = '1px solid red';
+            }
+        } else {
+            input_senha.style.border = '1px solid #604da4';
+        }
+    }
+
+    function validarConfirmacaoSenha() {
+        const senha = document.getElementById('input_senha').value;
+        const confirmacaoSenha = document.getElementById('input_confirmacaoSenha').value;
+        const mensagemSenhas = document.getElementById('div_mensagemSenhas');
+
+        if (senha !== confirmacaoSenha && confirmacaoSenha !== "") {
+            mensagemSenhas.style.display = 'block'; // Exibe a mensagem
+        } else {
+            mensagemSenhas.style.display = 'none'; // Oculta a mensagem
+        }
+    }
+
+    function cadastrar() {
+        var nomeVar = input_nome.value;
+        var emailVar = input_email.value;
+        var telefoneVar = input_telefone.value;
+        var senhaVar = input_senha.value;
+
+        if (input_senha.style.border == '1px solid green' && input_email.style.border == '1px solid green' && input_nome.style.border == '1px solid green' && input_telefone.style.border == '1px solid green') {
+
+
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        telefoneServer: telefoneVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+        } else {
+            alert('Preencha todos os campos corretamente')
+        }
+    
+    }
+
+    const btnLogin = document.getElementById('btnLogin');
+    const btnCadastro = document.getElementById('btnCadastro');
+    const btnColor = document.querySelector('.btnColor');
+
+    // Quando clicar em "Cadastro"
+    btnCadastro.addEventListener('click', () => {
+        btnColor.style.left = "50%"; // cor vai para Cadastro
+    });
+
+    // Quando clicar em "Login"
+    btnLogin.addEventListener('click', () => {
+        btnColor.style.left = "0%"; // cor volta para Login
+        window.location.href = 'login.html'; // redireciona para login.html
+    });
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

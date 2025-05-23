@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./assets/css/login.css">
+    <link rel="stylesheet" href="./assets/Fontes/SpongeboyRegular.woff" as="font" type="font/woff2" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <a href="index.html">
+                <h1 class="titulo">
+                    <span class="letra" style="background-position: 0% 0%;">C</span>
+                    <span class="letra" style="background-position: 8% 0%;">l</span>
+                    <span class="letra" style="background-position: 16% 0%;">u</span>
+                    <span class="letra" style="background-position: 24% 0%;">b</span>
+                    <span class="letra" style="background-position: 32% 0%;">e</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 48% 0%;">d</span>
+                    <span class="letra" style="background-position: 56% 0%;">a</span>
+                    <span class="letra espaco"></span>
+                    <span class="letra" style="background-position: 72% 0%;">F</span>
+                    <span class="letra" style="background-position: 80% 0%;">e</span>
+                    <span class="letra" style="background-position: 88% 0%;">n</span>
+                    <span class="letra" style="background-position: 96% 0%;">d</span>
+                    <span class="letra" style="background-position: 104% 0%;">a</span>
+                </h1>
+            </a>
+            <ul class="navbar">
+                <li>
+                    <a href="index.html"><img src="./assets/img/abacaxi.png" alt="casa abacaxi"></a>
+                </li>
+                <li>
+                    <a href="index.html#sobre">Mergulhar</a>
+                </li>
+                <li>|</li>
+                <li class="agora">
+                    <a href="">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="containerLogin">
+        <div class="bolhas-container"></div>
+        <div class="boxLogin">
+            <div class="Card">
+                <div class="buttonsForm">
+                    <div class="btnColor"></div>
+                    <button id="btnLogin">Login</button>
+                    <button id="btnCadastro">Cadastro</button>
+                </div>
+                <div class="titleLogin">
+                    <h1>Entrar</h1>
+                </div>
+                <form class="formulario">
+                    <input type="text" id="input_email" required placeholder="E-mail">
+                    <input type="password" id="input_senha" placeholder="******">
+                </form>
+                <div class="btnLogin">
+                    <button onclick="autenticar()">Entrar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="div_aguardar" class="loading-div">
+            <img src="./assets/circle-loading.gif" id="loading-gif">
+        </div>
+
+        <div id="div_erros_login"></div>
+    </div>
+
+    <div class="rodape">
+        <div class="container">
+            <div class="menu">
+                <li>
+                    <a href="index.html"><img src="./assets/img/abacaxi.png" alt="casa abacaxi"></a>
+                </li>
+                <li>
+                    <a href="#sobre">Mergulhar</a>
+                </li>
+                <li>
+                    <a href="login.html">Login</a>
+                </li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </div>
+            <div class="rodape_home">
+                <a href="index.html">
+                    <h1 class="titulo">
+                        <span class="letra" style="background-position: 0% 0%;">C</span>
+                        <span class="letra" style="background-position: 8% 0%;">l</span>
+                        <span class="letra" style="background-position: 16% 0%;">u</span>
+                        <span class="letra" style="background-position: 24% 0%;">b</span>
+                        <span class="letra" style="background-position: 32% 0%;">e</span>
+                        <span class="letra espaco"></span>
+                        <span class="letra" style="background-position: 48% 0%;">d</span>
+                        <span class="letra" style="background-position: 56% 0%;">a</span>
+                        <span class="letra espaco"></span>
+                        <span class="letra" style="background-position: 72% 0%;">F</span>
+                        <span class="letra" style="background-position: 80% 0%;">e</span>
+                        <span class="letra" style="background-position: 88% 0%;">n</span>
+                        <span class="letra" style="background-position: 96% 0%;">d</span>
+                        <span class="letra" style="background-position: 104% 0%;">a</span>
+                    </h1>
+                </a>
+                <p>@2025 Clube da Fenda.Todos os direitos reservador.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/bolhas.js"></script>
+</body>
+
+</html>
+
+<script>
+    const btnLogin = document.getElementById('btnLogin');
+    const btnCadastro = document.getElementById('btnCadastro');
+    const btnColor = document.querySelector('.btnColor');
+
+    btnLogin.addEventListener('click', () => {
+        btnColor.style.left = "50%"; // cor vai para Login
+    });
+
+    btnCadastro.addEventListener('click', () => {
+        btnColor.style.left = "0%"; // cor volta para cadastro
+        window.location.href = 'cadastro.html'; // redireciona para login.html
+
+    });
+
+    function autenticar() {
+        aguardar();
+
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar === "" || senhaVar === "") {
+            finalizarAguardar("Preencha todos os campos.");
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/overview.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+    var divErrosLogin = document.getElementById("div_erros_login");
+    divErrosLogin.innerHTML = "";
+    divErrosLogin.style.display = "none";
+    }
+</script>

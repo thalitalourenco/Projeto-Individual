@@ -1,0 +1,355 @@
+:root {
+  --amarelo-bob: #ffeb3b;
+  --amarelo-sombra: #f0c800;
+  --marrom-calca: #8b5e3c;
+  --branco: #ffffff;
+  --vermelho-gravata: #ff0000;
+  --preto-sapato: #000000;
+  --azul-olhos: #3b9eff;
+  --azul-escuro: #0080ff;
+  --azul-mais-escuro: #04509d;
+  --azul_acinzentado: #436c95;
+  --azul-oceano-claro: #b8e7f2;
+  --azul-submarino: #7fd6e3;
+  --verde-alga: #7cd3a3;
+  --verde-escuro: #029c47;
+  --rosa-agua-viva: #ff91c0;
+  --roxo-pedra: #a282be;
+  --roxo-claro: #dbb2ff;
+  --roxo-escuro: #735d86;
+  --areia-fundo-mar: #f2e1a1;
+  --azul-esverdeado-logo: #ADD8E6;
+  --gelo: #f6f5f5;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#tela-inicial,
+#tela-quiz,
+#tela-feedback {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+}
+
+
+.menu-lateral {
+  background-color: var(--azul-mais-escuro);
+  width: 19%;
+  position: fixed;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.linha {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.espaco {
+  width: 20px;
+}
+
+.letra {
+  font-family: 'SpongeboyRegular', sans-serif;
+  font-size: 1.9rem;
+  display: inline-block;
+  background: url('./assets/textura\ bob\ esponja\ .jpg') center center / 200% no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hello {
+  font-size: 1.5rem;
+  color: var(--gelo);
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 1%;
+  text-align: center;
+}
+
+.menu-lateral nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.menu-lateral nav ul li {
+  display: flex;
+  align-items: center;
+  padding: 10% 10%;
+  transition: background-color 0.3s;
+  gap: 12px;
+}
+
+.menu-lateral nav ul li:hover {
+  background-color: var(--azul-escuro);
+  cursor: pointer;
+  border-left: 4px solid var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li span.material-symbols-outlined {
+  font-size: 2.3rem;
+  color: var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li a {
+  color: var(--gelo);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu-lateral nav ul li:hover a {
+  color: var(--branco);
+}
+
+.menu-lateral nav ul li.ativo {
+  background-color: var(--azul_acinzentado);
+  border-left: 4px solid var(--amarelo-sombra);
+}
+
+.menu-lateral nav ul li.ativo span.material-symbols-outlined {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+}
+
+#tela-inicial {
+  background: url(./assets/roxo.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 81%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-left: 19%;
+}
+
+#tela-inicial .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 70%;
+  background-color: var(--roxo-pedra);
+  background-size: cover;
+  border-radius: 15px;
+  flex-direction: column;
+}
+
+
+.container .titulo {
+  position: relative;
+  max-width: 100%;
+  gap: 2px;
+  text-align: center;
+}
+
+.titulo .letra {
+  font-family: 'SpongeboyRegular', sans-serif;
+  font-size: 2.5rem;
+  display: inline-block;
+  background: url('./assets/textura\ bob\ esponja\ .jpg') no-repeat;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.titulo .espaco {
+  width: 20px;
+  display: inline-block;
+}
+
+#tela-inicial h2 {
+  font-weight: 650;
+  font-size: 1.7rem;
+  padding-left: 1%;
+  color: var(--branco);
+}
+
+#tela-inicial h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--branco);
+}
+
+#tela-inicial button {
+  background-color: transparent;
+  background: url('./assets/textura\ bob\ esponja\ .jpg') no-repeat;
+  background-size: 200% auto;
+  color: var(--preto-sapato);
+  font-size: 1.5rem;
+  border: 2px solid var(--amarelo-sombra);
+  padding: 10px;
+  width: 20%;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#tela-inicial button:hover {
+  background-color: var(--azul-mais-escuro);
+  color: var(--rosa-agua-viva);
+}
+
+#tela-quiz {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 81%;
+  background: url(./assets/roxo.jpg);
+  background-size: cover;
+  margin-left: 19%;
+}
+
+.quiz-container {
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  background: var(--roxo-pedra);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.numero-pergunta {
+  font-family: 'SpongeboyRegular', sans-serif;
+  font-size: 2.7rem;
+  text-align: center;
+  background: url('./assets/textura\ bob\ esponja\ .jpg') no-repeat;
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  /* Certifique-se de que a imagem de fundo está carregando */
+  margin-bottom: 20px;
+  /* Adiciona espaço abaixo do número */
+}
+
+#pergunta {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--branco);
+  margin-bottom: 1%;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.opcoes {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+  background: var(--branco);
+  border: 1px solid var(--roxo-escuro);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.opcoes:hover {
+  background-color: var(--roxo-claro);
+}
+
+#tela-feedback {
+  display: none;
+  background: url(./assets/roxo.jpg);
+  background-size: cover;
+  height: 100vh;
+  width: 81%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 19%;
+}
+
+#tela-feedback #resultado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  width: 60%;
+  background-color: var(--roxo-pedra);
+  background-size: cover;
+  border-radius: 15px;
+  flex-direction: column;
+  text-align: center;
+}
+
+#tela-feedback p {
+  font-size: 1.7rem;
+  color: var(--branco);
+  margin-top: 2%;
+  text-align: center;
+  text-wrap: wrap;
+  width: 75%;
+  margin-left: 15%;
+  font-weight: 600;
+}
+
+#tela-feedback img {
+  height: 50%;
+  width: auto;
+  margin-top: 1%;
+}
+
+#tela-feedback button {
+  background-color: transparent;
+  background: url('./assets/textura\ bob\ esponja\ .jpg') no-repeat;
+  background-size: 200% auto;
+  color: var(--preto-sapato);
+  font-size: 1.5rem;
+  border: 2px solid var(--amarelo-sombra);
+  padding: 10px;
+  width: 30%;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+#tela-feedback button:hover {
+  background-color: var(--azul-mais-escuro);
+  color: var(--rosa-agua-viva);
+}
