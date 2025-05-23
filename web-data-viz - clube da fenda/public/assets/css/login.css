@@ -86,73 +86,73 @@ input[type="button"],
     font-style: normal;
   }
 
-  .header{
+  .header {
     background-color: var(--azul-submarino);
     width: 100%;
     position: fixed;
-    border-bottom: var(--azul-olhos);
-    height: 85px;
-    z-index: 10; /* maior que o z-index da .bolhas-container (que é 0) */
+    height: 12%;
+    z-index: 10;
   }
-
-  .header .container{
+  
+  .header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 120px;
+    padding: 0 2%;
+    height: 100%;
+    width: 100%;
   }
-
-  .titulo {
+  
+  .container .titulo {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     gap: 2px;
-    text-decoration: none;
+    width: 150%;
+    height: 70%;
   }
   
   .letra {
     font-family: 'SpongeboyRegular', sans-serif;
-    font-size: 30px;
+    font-size: 1.7rem;
     display: inline-block;
     background: url('../Fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    text-decoration: none;
   }
   
   .espaco {
-    width: 20px; /* ajusta o espaço visível */
+    width: 7%;
   }
-
+  
   .navbar {
     display: flex;
-    justify-content: space-between;
-    background-color: var(--azul-submarino);
+    justify-content: space-evenly;
     list-style: none;
-    width: 300px;
+    width: 40%;
     align-items: center;
+    padding-right: 5%;
   }
   
   .navbar li {
-    position: relative; 
+    position: relative;
     color: var(--amarelo-bob);
   }
   
   .navbar a {
     color: var(--amarelo-bob);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 1.2rem;
     position: relative;
     display: inline-block;
-    padding: 4px 8px;
   }
   
   .navbar a::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -2px; 
+    bottom: -2px;
     width: 100%;
     height: 2px;
     background-color: var(--amarelo-sombra);
@@ -164,20 +164,34 @@ input[type="button"],
   .navbar a:hover::after {
     transform: scaleX(1);
   }
-
-  .navbar img{
+  
+  .navbar img {
     width: 45px;
     height: 45px;
+    vertical-align: middle; /* Garante alinhamento com o texto */
   }
   
-  .agora{
+  .agora {
     font-weight: bolder;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column; /* Empilha os itens em telas menores */
+      width: 100%; /* Ocupa toda a largura */
+    }
+  
+    .navbar a {
+      padding: 10px; /* Reduz o padding em telas menores */
+      font-size: 1rem; /* Ajusta o tamanho da fonte */
+    }
   }
   
 /*LOGIN*/
 .containerLogin{
     width: 100%;
-    height: 700px;
+    height: 86vh;
     display: flex;
     align-items: center;
     justify-content: center;
