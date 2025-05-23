@@ -1,0 +1,233 @@
+:root {
+  --amarelo-bob:        #ffeb3b;
+  --amarelo-sombra:     #f0c800;
+  --marrom-calca:       #8b5e3c;
+  --branco:             #ffffff;
+  --vermelho-gravata:   #ff0000;
+  --preto-sapato:       #000000;
+  --azul-olhos:         #3b9eff;
+  --azul-escuro:        #0080ff;
+  --azul-mais-escuro:   #04509d;
+  --azul_acinzentado:   #436c95;
+  --azul-oceano-claro:  #b8e7f2;
+  --azul-submarino:     #7fd6e3;
+  --verde-alga:         #7cd3a3;
+  --verde-escuro:       #029c47;
+  --rosa-agua-viva:     #ff91c0;
+  --roxo-pedra:         #a282be;
+  --roxo-claro:         #dbb2ff;
+  --roxo-escuro:        #735d86;
+  --areia-fundo-mar:    #f2e1a1;
+  --azul-esverdeado-logo: #ADD8E6;
+  --gelo:               #f6f5f5;
+  --cinza-claro:        #e0e0e0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--gelo);
+  height: 100vh;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.menu-lateral {
+  background-color: var(--azul-mais-escuro);
+  width: 19%;
+  position: fixed;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.linha {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.espaco {
+  width: 20px;
+}
+
+.letra {
+  font-family: 'SpongeboyRegular', sans-serif;
+  font-size: 1.9rem;
+  display: inline-block;
+  background: url('../css-dashboard/fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hello {
+  font-size: 1.5rem;
+  color: var(--gelo);
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 1%;
+  text-align: center;
+}
+
+.menu-lateral nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.menu-lateral nav ul li {
+  display: flex;
+  align-items: center;
+  padding: 10% 10%;
+  transition: background-color 0.3s;
+  gap: 12px;
+}
+
+.menu-lateral nav ul li:hover {
+  background-color: var(--azul-escuro);
+  cursor: pointer;
+  border-left: 4px solid var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li span.material-symbols-outlined {
+  font-size: 2.3rem;
+  color: var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li a {
+  color: var(--gelo);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu-lateral nav ul li:hover a {
+  color: var(--branco);
+}
+
+.menu-lateral nav ul li.ativo {
+  background-color: var(--azul_acinzentado);
+  border-left: 4px solid var(--amarelo-sombra);
+}
+
+.menu-lateral nav ul li.ativo span.material-symbols-outlined {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.85; }
+}
+
+.main-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 colunas iguais */
+  grid-template-rows: repeat(4, 200px); /* 4 linhas de 200px */
+  gap: 20px;
+  margin-left: 19%;
+  padding: 20px;
+  box-sizing: border-box;
+  height: calc(100vh - 40px);
+}
+
+.main-overview .card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.main-overview .card:hover {
+  transform: translateY(-5px);
+}
+
+.main-overview .card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.main-overview .card p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.main-overview .card button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+  width: fit-content;
+}
+
+.main-overview .card button:hover {
+  background-color: #0056b3;
+}
+
+/* Posicionamento dos cards e gráfico */
+.main-overview .card:nth-child(1) {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.main-overview .card:nth-child(2) {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.main-overview .card:nth-child(3) {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.main-overview .card:nth-child(4) {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.grafico {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  background-color: #fff;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.3s ease;
+  height:390px; 
+}
+
+.grafico:hover {
+  transform: translateY(-5px);
+}

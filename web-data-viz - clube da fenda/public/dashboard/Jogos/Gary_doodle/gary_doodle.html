@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gary_doodle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <title>Gary Doodle</title>
+</head>
+
+<body>
+    <header class="menu-lateral">
+        <div class="logo">
+            <div class="linha">
+                <span class="letra" style="background-position: 0% 0%;">C</span>
+                <span class="letra" style="background-position: 8% 0%;">l</span>
+                <span class="letra" style="background-position: 16% 0%;">u</span>
+                <span class="letra" style="background-position: 24% 0%;">b</span>
+                <span class="letra" style="background-position: 32% 0%;">e</span>
+                <span class="espaco"></span>
+                <span class="letra" style="background-position: 48% 0%;">d</span>
+                <span class="letra" style="background-position: 56% 0%;">a</span>
+            </div>
+            <div class="linha">
+                <span class="letra" style="background-position: 72% 0%;">F</span>
+                <span class="letra" style="background-position: 80% 0%;">e</span>
+                <span class="letra" style="background-position: 88% 0%;">n</span>
+                <span class="letra" style="background-position: 96% 0%;">d</span>
+                <span class="letra" style="background-position: 104% 0%;">a</span>
+            </div>
+        </div>
+
+        <nav role="navigation">
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+            <ul>
+                <li id="dashboard">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <a href="/dashboard/overview.html">OVERVIEW</a>
+                </li>
+                <li class="ativo" aria-current="page" id="games">
+                    <span class="material-symbols-outlined">sports_esports</span>
+                    <a href="/dashboard/games.html">GAMES</a>
+                </li>
+                <li id="perfil">
+                    <span class="material-symbols-outlined">person</span>
+                    <a href="/dashboard/perfil.html">PERFIL</a>
+                </li>
+                <li id="sair">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a onclick="limparSessao()">SAIR</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="tela_inicial">
+        <h1 class="titulo_telaInicial">
+            <span class="letra" style="background-position: 0% 0%;">G</span>
+            <span class="letra" style="background-position: 8% 0%;">a</span>
+            <span class="letra" style="background-position: 16% 0%;">r</span>
+            <span class="letra" style="background-position: 24% 0%;">y</span>
+            <span class="letra espaco"></span>
+            <span class="letra" style="background-position: 32% 0%;">D</span>
+            <span class="letra" style="background-position: 40% 0%;">o</span>
+            <span class="letra" style="background-position: 48% 0%;">o</span>
+            <span class="letra" style="background-position: 56% 0%;">d</span>
+            <span class="letra" style="background-position: 64% 0%;">l</span>
+            <span class="letra" style="background-position: 72% 0%;">e</span>
+        </h1>
+        <p class="descricao">Ajude o Gary a comer os Snail Bites!</p>
+        <img src="./assets/img/snail_food.png" alt="Gary comendo" class="gary_inicial">
+        <button class="botao_play" onclick="iniciarJogo()">Iniciar</button>
+    </div>
+
+    <div id="tela_jogo" style="display:none;">
+        <div class="pontuacao">Pontuação: 0</div>
+        <div class="tela_menor" id="tela_menor">
+            <img src="./assets/img/gary_sem_fundo-removebg-preview (1).png" alt="Gary" class="gary">
+            <img src="./assets/img/snail_bites.webp" alt="snail bites" class="snail_bites">
+        </div>
+    </div>
+
+    <div id="tela_gameOver" style="display:none; flex-direction: column; align-items: center;">
+        <h1>Game Over!</h1>
+        <p class="pontuacao" id="pontuacao_final">Sua pontuação: 0</p>
+        <img src="./assets/img/bob-triste.png" alt="bob triste chorando">
+        <button class="botao_reiniciar">Reiniciar</button>
+    </div>
+
+
+</body>
+
+</html>
+
+<script src="/Users/Thalita/Desktop/Clube da fenda/web-data-viz - clube da fenda/public/js/redirecionadores.js"></script>
+
+<script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    const gary = document.querySelector('.gary');
+    const telaMenor = document.querySelector('.tela_menor');
+    const snailBites = document.querySelector('.snail_bites');
+
+    const tamanhoGary = 50;
+    const tamanhoSnail = 50;
+
+    let direcao = 'ArrowRight';
+    let intervaloMovimento;
+    let posX = 0;
+    let posY = 0;
+    let pontuacao = 0;
+
+    function iniciarJogo() {
+        document.getElementById("tela_inicial").style.display = "none";
+        document.getElementById("tela_jogo").style.display = "flex";
+        document.getElementById("tela_gameOver").style.display = "none";
+
+        posX = 0;
+        posY = 0;
+        pontuacao = 0;
+
+        atualizarPosicaoGary();
+        posicionarSnailBites();
+        atualizarPontuacao();
+
+        intervaloMovimento = setInterval(moverGary, 200);
+    }
+
+    function atualizarPosicaoGary() {
+        gary.style.left = posX + 'px';
+        gary.style.top = posY + 'px';
+    }
+
+    function posicionarSnailBites() {
+        const limiteX = telaMenor.clientWidth - tamanhoSnail;
+        const limiteY = telaMenor.clientHeight - tamanhoSnail;
+
+        const novoPosX = Math.floor(Math.random() * limiteX);
+        const novoPosY = Math.floor(Math.random() * limiteY);
+
+        snailBites.style.left = novoPosX + 'px';
+        snailBites.style.top = novoPosY + 'px';
+    }
+
+    function atualizarPontuacao() {
+        const pontuacaoDiv = document.querySelector('.pontuacao');
+        pontuacaoDiv.textContent = `Pontuação: ${pontuacao}`;
+    }
+
+    function moverGary() {
+        const limiteX = telaMenor.clientWidth - tamanhoGary;
+        const limiteY = telaMenor.clientHeight - tamanhoGary;
+
+        if (direcao === 'ArrowUp') posY -= 20;
+        else if (direcao === 'ArrowDown') posY += 20;
+        else if (direcao === 'ArrowLeft') posX -= 20;
+        else if (direcao === 'ArrowRight') posX += 20;
+
+        if (posX < 0 || posY < 0 || posX > limiteX || posY > limiteY) {
+            clearInterval(intervaloMovimento);
+            mostrarGameOver();
+            return;
+        }
+
+        atualizarPosicaoGary();
+        verificarColisao();
+    }
+
+    function alterarDirecao(event) {
+        const novaDirecao = event.key;
+
+        if (!['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(novaDirecao)) return;
+
+        event.preventDefault();
+
+        if (
+            (direcao === 'ArrowUp' && novaDirecao === 'ArrowDown') ||
+            (direcao === 'ArrowDown' && novaDirecao === 'ArrowUp') ||
+            (direcao === 'ArrowLeft' && novaDirecao === 'ArrowRight') ||
+            (direcao === 'ArrowRight' && novaDirecao === 'ArrowLeft')
+        ) return;
+
+        direcao = novaDirecao;
+    }
+
+    function verificarColisao() {
+        const garyRect = gary.getBoundingClientRect();
+        const snailRect = snailBites.getBoundingClientRect();
+
+        const colidiu =
+            garyRect.left < snailRect.right &&
+            garyRect.right > snailRect.left &&
+            garyRect.top < snailRect.bottom &&
+            garyRect.bottom > snailRect.top;
+
+        if (colidiu) {
+            pontuacao++;
+            posicionarSnailBites();
+            atualizarPontuacao();
+        }
+    }
+
+    function mostrarGameOver() {
+        document.getElementById("tela_jogo").style.display = "none";
+        document.getElementById("tela_gameOver").style.display = "flex";
+
+        const pontuacaoFinalDiv = document.getElementById('pontuacao_final');
+        pontuacaoFinalDiv.textContent = `Sua pontuação: ${pontuacao}`;
+
+        const botaoReiniciar = document.querySelector('.botao_reiniciar');
+        botaoReiniciar.onclick = reiniciarJogo;
+
+        cadastrar();
+    }
+
+    function cadastrar() {
+        const dados = {
+            idUserServer: sessionStorage.ID_USUARIO, // Certifique-se de que "ID_USUARIO" está definido
+            pontuacaoGaryServer: pontuacao, // Certifique-se de que "pontuacao" tem um valor válido
+        };
+
+        console.log("Enviando dados para o servidor:", dados); // Verifique os dados no console
+
+        fetch("/gary/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados),
+        })
+            .then((resposta) => {
+                if (resposta.ok) {
+                    console.log("Pontuação enviada com sucesso!");
+                    return resposta.json();
+                } else {
+                    throw new Error("Erro ao enviar a pontuação.");
+                }
+            })
+            .then((dados) => {
+                console.log("Resposta do servidor:", dados);
+            })
+            .catch((erro) => {
+                console.error("Erro no envio:", erro);
+            });
+    }
+
+    function reiniciarJogo() {
+        document.getElementById("tela_gameOver").style.display = "none";
+        document.getElementById("tela_inicial").style.display = "flex";
+
+        clearInterval(intervaloMovimento);
+        pontuacao = 0;
+        atualizarPontuacao();
+    }
+
+    window.addEventListener('keydown', alterarDirecao);
+
+    function limparSessao() {
+    sessionStorage.clear();
+    window.location = "/login.html";
+}
+
+</script>

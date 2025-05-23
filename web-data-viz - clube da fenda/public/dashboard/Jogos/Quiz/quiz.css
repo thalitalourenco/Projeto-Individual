@@ -1,0 +1,281 @@
+:root{
+    --amarelo-bob:        #ffeb3b;
+    --amarelo-sombra:     #f0c800;
+    --marrom-calca:       #8b5e3c;
+    --branco:      #ffffff;
+    --vermelho-gravata:   #ff0000;
+    --preto-sapato:       #000000;
+    --azul-olhos:         #3b9eff;
+    --azul-escuro:#0080ff;
+    --azul-mais-escuro:#04509d;
+    --azul_acinzentado:#436c95;
+    --azul-oceano-claro:  #b8e7f2;
+    --azul-submarino:     #7fd6e3;
+    --verde-alga:         #7cd3a3;
+    --verde-escuro: #029c47 ;
+    --rosa-agua-viva:     #ff91c0;
+    --roxo-pedra:         #a67eb4;
+    --areia-fundo-mar:    #f2e1a1;
+    --azul-esverdeado-logo: #ADD8E6;
+    --gelo: #f6f5f5;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: auto;
+}
+
+.menu-lateral {
+    background-color: var(--azul-mais-escuro);
+    width: 19%;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-lateral .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .logo .linha {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+  
+.logo .espaco {
+    width: 20px;
+  }
+  
+.logo .letra {
+    font-family: 'SpongeboyRegular', sans-serif;
+    font-size: 1.9rem;
+    display: inline-block;
+    background: url('./assets/fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  
+  .hello {
+    font-size: 1.5rem;
+    color: var(--gelo);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 1%;
+    text-align: center;
+  }
+  
+  .menu-lateral nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+  }
+  
+  .menu-lateral nav ul li {
+    display: flex;
+    align-items: center;
+    padding: 10% 10%;
+    transition: background-color 0.3s;
+    gap: 12px;
+  }
+  
+  .menu-lateral nav ul li:hover {
+    background-color: var(--azul-escuro);
+    cursor: pointer;
+    border-left: 4px solid var(--amarelo-bob);
+  }
+  
+  .menu-lateral nav ul li span.material-symbols-outlined {
+    font-size: 2.3rem;
+    color: var(--amarelo-bob);
+  }
+  
+  .menu-lateral nav ul li a {
+    color: var(--gelo);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .menu-lateral nav ul li:hover a {
+    color: var(--branco);
+  }
+  
+  .menu-lateral nav ul li.ativo {
+    background-color: var(--azul_acinzentado);
+    border-left: 4px solid var(--amarelo-sombra);
+  }
+  
+  .menu-lateral nav ul li.ativo span.material-symbols-outlined {
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+  
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  
+    50% {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+  }
+
+#tela-inicial{
+    background: url(./assets/img/fundo\ azul\ escuro\ com\ siri\ cascudo.png);
+    background-size: cover;
+    height: 100vh;
+    width: 81%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 19%;
+}
+
+#tela-inicial #titulo{
+    position: relative;
+    top: 30%; /* Move o título para baixo */
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.letra {
+    font-family: 'SpongeboyRegular', sans-serif;
+    font-size: 3.2rem;
+    display: inline-block;
+    background: url('./assets/fontes/textura\ bob\ esponja.jpg') no-repeat;
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  #tela-inicial h2{
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--branco);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 18%;
+}
+
+#tela-inicial button{
+    background-color: var(--branco);
+    color: var(--azul-escuro);
+    font-size: 1.5rem;
+    border: 2px solid var(--azul-escuro);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#tela-inicial button:hover{
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+}
+
+#tela-quiz{
+    background: url(./assets/img/fundo\ azul\ escuro\ com\ siri\ cascudo.png);
+    background-size: cover;
+    height: 100vh;
+    width: 81%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: 19%;
+}
+
+#quiz-container{
+    background-color: rgba(0, 0, 0, 0.6);
+    width: calc(40% + 20%);
+    height: calc(35% + 20%);
+}
+
+.numero-pergunta{
+    margin-top: 2%;
+    margin-left: 45%;
+    font-family: 'SpongeboyRegular', sans-serif;
+    font-size: 2.7rem;
+    display: inline-block;
+    background: url('./assets/fontes/textura\ bob\ esponja.jpg') no-repeat;
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.pergunta {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1%;
+    text-align: center;
+    color: var(--branco);
+}
+
+.opcoes button {
+    display: block;
+    margin-top: 1%;
+    margin-left: 15%;
+    padding: 10px;
+    width: 70%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: var(--branco);
+}
+
+.opcoes button:hover {
+    background-color: var(--amarelo-bob);
+}
+
+#tela-feedback{
+    background: url(./assets/img/fundo\ azul\ escuro\ com\ siri\ cascudo.png);
+    background-size: cover;
+    height: 100vh;
+    width: 81%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 19%;
+}
+
+#tela-feedback #resultado {
+    font-weight: 600;
+    color: var(--branco);
+    padding-top: 20%;
+    font-size: 1.7rem;
+}
+
+#tela-feedback button{
+    background-color: var(--branco);
+    color: var(--azul-escuro);
+    font-size: 1.5rem;
+    border: 2px solid var(--azul-escuro);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 5%;
+}
+
+#tela-feedback button:hover{
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+}

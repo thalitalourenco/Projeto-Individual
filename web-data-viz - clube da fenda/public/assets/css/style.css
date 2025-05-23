@@ -1,0 +1,403 @@
+:root {
+    --amarelo-bob:        #ffeb3b;
+    --amarelo-sombra:     #f0c800;
+    --marrom-calca:       #8b5e3c;
+    --branco:      #ffffff;
+    --vermelho-gravata:   #ff0000;
+    --preto-sapato:       #000000;
+    --azul-olhos:         #3b9eff;
+    --azul-escuro:#0080ff;
+    --azul-oceano-claro:  #b8e7f2;
+    --azul-submarino:     #7fd6e3;
+    --verde-alga:         #7cd3a3;
+    --verde-escuro: #029c47 ;
+    --rosa-agua-viva:     #ff91c0;
+    --roxo-pedra:         #a67eb4;
+    --areia-fundo-mar:    #f2e1a1;
+    --azul-esverdeado-logo: #ADD8E6;
+    --gelo: #f6f5f5;
+  }
+  .bolhas-container {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  
+  .bolha {
+    position: absolute;
+    bottom: -100px;
+    background-image: url('../img/bolhas.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    animation: subir 8s linear infinite;
+  }
+  
+  @keyframes subir {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-120vh) scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+a{
+  text-decoration: none;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Impede a barra de rolagem horizontal */
+    margin: 0; /* Remove margens padrão que podem causar bordas */
+    padding: 0; /* Remove paddings padrão que podem causar bordas */
+  
+}
+
+body{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    cursor: url('../img/agua-viva.png'), auto;
+}
+
+button,
+a,
+input[type="submit"],
+input[type="button"],
+.clickable {
+  cursor: url('../img/rede.png'), auto;
+}
+
+
+
+.header {
+  background-color: var(--azul-submarino);
+  width: 100%;
+  position: fixed;
+  height: 12%;
+  z-index: 10;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
+  height: 100%;
+  width: 100%;
+}
+
+.container .titulo {
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  gap: 2px;
+  width: 150%;
+  height: 70%;
+}
+
+.letra {
+  font-family: 'SpongeboyRegular', sans-serif;
+  font-size: 1.7rem;
+  display: inline-block;
+  background: url('../Fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.espaco {
+  width: 7%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  width: 40%;
+  align-items: center;
+  padding-right: 5%;
+}
+
+.navbar li {
+  position: relative;
+  color: var(--amarelo-bob);
+}
+
+.navbar a {
+  color: var(--amarelo-bob);
+  text-decoration: none;
+  font-size: 1.2rem;
+  position: relative;
+  display: inline-block;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--amarelo-sombra);
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease;
+}
+
+.navbar a:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar img {
+  width: 45px;
+  height: 45px;
+  vertical-align: middle; /* Garante alinhamento com o texto */
+}
+
+.agora {
+  font-weight: bolder;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Empilha os itens em telas menores */
+    width: 100%; /* Ocupa toda a largura */
+  }
+
+  .navbar a {
+    padding: 10px; /* Reduz o padding em telas menores */
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+  }
+}
+
+  /*BANNER*/
+
+  .banner{
+    width: 100%;
+    height: 100vh;
+    background-image: url("../img/fundo_do_mar.jpg");
+    background-size: cover;
+    padding-top:5%;
+      position: relative; /* Importante para posicionar a bolhas-container dentro */
+      z-index: 1;
+      overflow: hidden;
+  }
+
+  .banner .container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+  .banner .container p{
+    width: 60%;
+    color: var(--branco);
+    font-size: 3rem;
+    font-weight: bolder;
+    text-align: center;
+  }
+  
+/*S0BRE*/
+
+.sobre{
+    height: 100vh;
+    width: 100%;
+    background-color: var(--gelo);
+    display: flex;
+    align-items: center;
+}
+
+.texto_sobre{
+    margin-left: 3%;
+    width: 76%;
+    align-items: center;
+}
+
+.sobre .titulo{
+    font-family: 'SpongeboyRegular', sans-serif;
+    color: var(--azul-escuro);
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 1% 0 2% 0;
+    margin-left: 0;
+}
+
+.sobre p{
+    color: var(--azul-olhos);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1%; 
+}
+
+.foto_bob_esponja_joinha{
+    width: 24%;
+    height: auto;
+    max-width: 40%; 
+    padding: 1% 12% 5% 1%;
+}
+
+/*PERSONAGENS*/
+
+.carrossel {
+  width: 100%;
+  height: 100vh; 
+  background: var(--azul-oceano-claro);
+  text-align: center;
+  padding: 60px 0; /* Adiciona padding superior e inferior */
+  position: relative;
+  box-sizing: border-box;
+}
+
+.titulo_carrossel {
+  font-family: 'SpongeboyRegular', sans-serif;
+  color: var(--verde-escuro);
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
+
+.carrossel_personagens {
+  position: relative;
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  overflow: hidden; /* Esconde os itens fora da área visível */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center;
+}
+
+.conteudo {
+  display: flex;
+  gap: 20px;
+  will-change: transform;
+}
+
+.conteudo li {
+  list-style: none;
+  flex: 0 0 20%; /* Diminui a largura base para aproximadamente 20% */
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  opacity: 0.5;
+  transform: scale(0.9);
+  transition: all 0.5s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: calc(100% / 5 - 20px); /* Ajusta a largura calculada */
+  box-sizing: border-box;
+}
+
+.conteudo li img {
+  width: 60%; /* Diminui o tamanho da imagem dentro do item */
+  height: auto;
+  max-height: 200px; /* Ajusta a altura máxima da imagem */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.conteudo li h1 {
+  font-size: 16px; /* Diminui o tamanho da fonte do título */
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.conteudo li p {
+  font-size: 12px; /* Diminui o tamanho da fonte da descrição */
+  color: #555;
+  line-height: 1.2;
+}
+
+.conteudo li.ativo {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.anterior,
+.proximo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffd700;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.anterior:hover,
+.proximo:hover {
+  background-color: #ffcc00;
+}
+
+.anterior {
+  left: 10px;
+}
+
+.proximo {
+  right: 10px;
+}
+
+/*RODAPE*/
+.rodape{
+  width: 100%;
+  height: 350px;
+  background-color: var(--azul-submarino);
+  border-top: var(--azul-olhos);
+  justify-content: center;
+  align-items: center;
+}
+
+.rodape .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 550px 50px 350px;
+  width: 50%;
+  flex-direction: column;
+}
+
+.rodape .menu{
+  display: flex;
+    justify-content: space-between;
+    background-color: var(--azul-submarino);
+    list-style: none;
+    width: 50%;
+    align-items: center;
+}
+
+.rodape_home{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+  color:var(--amarelo-bob);
+  padding: 20px 0 20px 0;
+}
+
+.rodape a{
+  color: var(--amarelo-bob);
+text-decoration: none;
+}
+
+.rodape img{
+  width: 45px;
+  height: 45px;
+}
