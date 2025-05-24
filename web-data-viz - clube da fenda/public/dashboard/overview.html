@@ -8,11 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="./css-dashboard/overview.css" />
+  <script src="../js/sessao.js"></script>
 </head>
 
-<body>
-
-  <body onload="validarSessao()"></body>
+<body onload="validarSessao(); listarQuiz();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -63,8 +62,8 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Quiz</h3>
-        <p>Pontuação</p>
+        <h3>Maior pontuação no Quiz</h3>
+        <div id="pontuacaoQuiz">Pontuação</div>
         <button>Jogar</button>
       </div>
     </div>
@@ -72,7 +71,7 @@
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Quiz de Personalidade</h3>
-        <p>Pontuação</p>
+        <div id="pontuacaoQuizPersonalidade">Pontuação</div>
         <button>Jogar</button>
       </div>
     </div>
@@ -80,7 +79,7 @@
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Cruzadinha</h3>
-        <p>Pontuação</p>
+        <div id="tempoCruzadinha">Pontuação</div>
         <button>Jogar</button>
       </div>
     </div>
@@ -88,7 +87,7 @@
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Gary Doodle</h3>
-        <p>Pontuação</p>
+        <div id="pontuacaoGaryDoodle">Pontuação</div>
         <button>Jogar</button>
       </div>
     </div>
@@ -114,5 +113,56 @@
     sessionStorage.clear();
     window.location = "/login.html";
   }
+
+  function exibirAquarios() {
+        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+            document.getElementById("cardAquarios").innerHTML += `
+                    <div class="card-aquario">
+                        <div class="title-aquario">
+                            <h1>${item.descricao}</h1>
+                        </div>
+                        <div class="desc-aquario">
+                        <div class="temperatura">
+                            <p id="temp_aquario_${item.id}">-°C</p>
+                        </div>
+                        <div class="cor-alerta" id="card_${item.id}"></div>
+                    </div>
+                    </div>
+                    `
+        });
+    }
+
+    function listarQuiz() {
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarQuiz:", idUser);
+
+    fetch(`/dash/listarQuiz?idUserServer=${idUser}`)
+        .then(function(resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
+                    return;
+                }
+                return resposta.json();
+            } else {
+                throw "Erro na resposta da API";
+            }
+        })
+        .then(function(dados) {
+            if(dados) {
+                console.log("Dados recebidos: ", dados);
+                // Atualize o conteúdo com os dados recebidos
+                if (dados[0].pontuacao == undefined) {
+                    document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
+                } else {
+                    document.getElementById("pontuacaoQuiz").innerHTML = ` ${dados[0].pontuacao}`;
+                }
+            }
+        })
+        .catch(function(erro) {
+            console.error("Erro na requisição listarQuiz:", erro);
+        });
+}
+
 
 </script>
