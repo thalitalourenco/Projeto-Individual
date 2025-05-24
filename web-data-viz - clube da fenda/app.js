@@ -21,6 +21,7 @@ var quizRouter = require("./src/routes/quiz");
 var quizPersonalidadeRouter = require("./src/routes/quizPersonalidade");
 var cruzadinhaRouter = require("./src/routes/cruzadinha");
 var garyRouter = require("./src/routes/gary");
+var dashRouter = require("./src/routes/dash");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +35,7 @@ app.use("/quiz", quizRouter);
 app.use("/quizPersonalidade", quizPersonalidadeRouter);
 app.use("/cruzadinha", cruzadinhaRouter);
 app.use("/gary", garyRouter);
+app.use("/dash", dashRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

@@ -2,7 +2,7 @@ var database = require("../database/config")
 
 function listar() {
     var instrucao = `
-        SELECT pontuacao FROM partida;
+        SELECT MAX(pontuacao) FROM partida WHERE idJogo = 1 AND idUser = ${idUserServer};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

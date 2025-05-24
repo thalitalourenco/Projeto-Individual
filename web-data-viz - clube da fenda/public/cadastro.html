@@ -52,7 +52,7 @@
     <div class="containerCadastro">
         <div class="card_erro" id="cardErro">
             <span id="mensagem_erro"></span>
-          </div>
+        </div>
         <div class="bolhas-container"></div>
         <div class="boxCadastro">
             <div class="Card">
@@ -87,8 +87,8 @@
 
             </div>
         </div>
-        <div id="div_aguardar" class="loading-div">
-            <img src="./assets/circle-loading.gif" id="loading-gif">
+        <div id="div_aguardar" class="loading-gif">
+            <img src="./assets/img/bob-esponja-arco-iris.gif" id="loading-gif" style="display: none;">
         </div>
     </div>
 
@@ -108,38 +108,38 @@
                     <a href="cadastro.html">Cadastro</a>
                 </li>
             </div>
-                <div class="rodape_home">
+            <div class="rodape_home">
                 <a href="index.html">
                     <h1 class="titulo">
-                    <span class="letra" style="background-position: 0% 0%;">C</span>
-                    <span class="letra" style="background-position: 8% 0%;">l</span>
-                    <span class="letra" style="background-position: 16% 0%;">u</span>
-                    <span class="letra" style="background-position: 24% 0%;">b</span>
-                    <span class="letra" style="background-position: 32% 0%;">e</span>
-                    <span class="letra espaco"></span>
-                    <span class="letra" style="background-position: 48% 0%;">d</span>
-                    <span class="letra" style="background-position: 56% 0%;">a</span>
-                    <span class="letra espaco"></span>
-                    <span class="letra" style="background-position: 72% 0%;">F</span>
-                    <span class="letra" style="background-position: 80% 0%;">e</span>
-                    <span class="letra" style="background-position: 88% 0%;">n</span>
-                    <span class="letra" style="background-position: 96% 0%;">d</span>
-                    <span class="letra" style="background-position: 104% 0%;">a</span>
-                </h1>
+                        <span class="letra" style="background-position: 0% 0%;">C</span>
+                        <span class="letra" style="background-position: 8% 0%;">l</span>
+                        <span class="letra" style="background-position: 16% 0%;">u</span>
+                        <span class="letra" style="background-position: 24% 0%;">b</span>
+                        <span class="letra" style="background-position: 32% 0%;">e</span>
+                        <span class="letra espaco"></span>
+                        <span class="letra" style="background-position: 48% 0%;">d</span>
+                        <span class="letra" style="background-position: 56% 0%;">a</span>
+                        <span class="letra espaco"></span>
+                        <span class="letra" style="background-position: 72% 0%;">F</span>
+                        <span class="letra" style="background-position: 80% 0%;">e</span>
+                        <span class="letra" style="background-position: 88% 0%;">n</span>
+                        <span class="letra" style="background-position: 96% 0%;">d</span>
+                        <span class="letra" style="background-position: 104% 0%;">a</span>
+                    </h1>
                 </a>
                 <p>@2025 Clube da Fenda.Todos os direitos reservador.</p>
             </div>
         </div>
     </div>
-    
+
     <script src="./js/bolhas.js"></script>
 </body>
 
 </html>
 <script>
-   
+
     function validarNome() {
-        var nomeVar= input_nome.value;
+        var nomeVar = input_nome.value;
         if (nomeVar.length > 0) {
             if (input_nome.value.length > 0) {
                 input_nome.style.border = '1px solid green';
@@ -259,11 +259,11 @@
         if (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag) {
             span_especial.style.color = 'green';
         }
-        
+
         if (senhaVar.length >= 10) {
             span_tamanho.style.color = 'green';
         }
-        
+
         if (senhaVar.length > 0) {
             if (senhaNumero && letraMaiuscula && letraMinusculo && (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag)) {
                 input_senha.style.border = '1px solid green';
@@ -288,6 +288,10 @@
     }
 
     function cadastrar() {
+        const loadingGif = document.getElementById("loading-gif");
+
+        loadingGif.style.display = "block";
+
         var nomeVar = input_nome.value;
         var emailVar = input_email.value;
         var telefoneVar = input_telefone.value;
@@ -296,49 +300,51 @@
         if (input_senha.style.border == '1px solid green' && input_email.style.border == '1px solid green' && input_nome.style.border == '1px solid green' && input_telefone.style.border == '1px solid green') {
 
 
-    fetch("/usuarios/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        emailServer: emailVar,
-        telefoneServer: telefoneVar,
-        senhaServer: senhaVar,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    telefoneServer: telefoneVar,
+                    senhaServer: senhaVar,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
 
-        if (resposta.ok) {
-          cardErro.style.display = "block";
+                    if (resposta.ok) {
+                        cardErro.style.display = "block";
 
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                        loadingGif.style.display = "none";
 
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
+                        mensagem_erro.innerHTML =
+                            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-          limparFormulario();
-          finalizarAguardar();
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
-      });
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, "2000");
 
-    return false;
+                        limparFormulario();
+                        finalizarAguardar();
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                    finalizarAguardar();
+                });
+
+            return false;
         } else {
             alert('Preencha todos os campos corretamente')
         }
-    
+
     }
 
     const btnLogin = document.getElementById('btnLogin');
@@ -356,7 +362,7 @@
         window.location.href = 'login.html'; // redireciona para login.html
     });
 
-  function sumirMensagem() {
-    cardErro.style.display = "none";
-  }
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
 </script>

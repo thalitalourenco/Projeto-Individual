@@ -176,6 +176,12 @@ a {
   margin-bottom: 15px;
 }
 
+.main-overview .card div{
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
 .main-overview .card button {
   background-color: #007bff;
   border: none;
