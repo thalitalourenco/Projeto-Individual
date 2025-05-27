@@ -202,16 +202,6 @@ input[type="button"],
   padding-top: 100px;
 }
 
-.containerCadastro img{
-  width: 100px;
-  height: auto;
-}
-
-#cardErro{
-  font-size: 1rem;
-  margin-bottom: 5px;
-}
-
 .boxCadastro {
   width: 35%;
   height: 80%;
