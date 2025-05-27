@@ -54,9 +54,9 @@ function listarCruzadinha(req, res) {
     });
 }
 
-function listarGaryDoodle(req, res) {
+function listarPontuacaoGaryDoodle(req, res) {
     var idUserServer = req.query.idUserServer;
-    dashModel.listarGaryDoodle(idUserServer).then(function (resultado) {
+    dashModel.listarPontuacaoGaryDoodle(idUserServer).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -89,6 +89,6 @@ module.exports = {
     listarQuiz,
     listarQuizPersonalidade,
     listarCruzadinha,
-    listarGaryDoodle,
+    listarPontuacaoGaryDoodle,
     totalJogadores
 }

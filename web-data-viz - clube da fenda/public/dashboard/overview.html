@@ -11,7 +11,7 @@
   <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao(); listarQuiz();">
+<body onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -71,7 +71,7 @@
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Quiz de Personalidade</h3>
-        <div id="pontuacaoQuizPersonalidade">Pontuação</div>
+        <div id="personagemQuizPersonalidade">Pontuação</div>
         <button>Jogar</button>
       </div>
     </div>
@@ -161,6 +161,70 @@
         })
         .catch(function(erro) {
             console.error("Erro na requisição listarQuiz:", erro);
+        });
+}
+
+function listarQuizPersonalidade() {
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarQuizPersonalidade:", idUser);
+
+    fetch(`/dash/listarQuizPersonalidade?idUserServer=${idUser}`)
+        .then(function(resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    document.getElementById("personagemQuizPersonalidade").innerHTML = `Você ainda não jogou o Quiz de Personalidade!`;
+                    return;
+                }
+                return resposta.json();
+            } else {
+                throw "Erro na resposta da API";
+            }
+        })
+        .then(function(dados) {
+            if(dados) {
+                console.log("Dados recebidos: ", dados);
+                // Atualize o conteúdo com os dados recebidos
+                if (dados[0].personagem == undefined) {
+                    document.getElementById("personagemQuizPersonalidade").innerHTML = `Você ainda não jogou o Quiz de Personalidade!`;
+                } else {
+                    document.getElementById("personagemQuizPersonalidade").innerHTML = ` ${dados[0].personagem}`;
+                }
+            }
+        })
+        .catch(function(erro) {
+            console.error("Erro na requisição listarQuizPersonalidade:", erro);
+        });
+}
+
+function listarPontuacaoGaryDoodle() {
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarPontuacaoGaryDoodle:", idUser);
+
+    fetch(`/dash/listarPontuacaoGaryDoodle?idUserServer=${idUser}`)
+        .then(function(resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
+                    return;
+                }
+                return resposta.json();
+            } else {
+                throw "Erro na resposta da API";
+            }
+        })
+        .then(function(dados) {
+            if(dados) {
+                console.log("Dados recebidos: ", dados);
+                // Atualize o conteúdo com os dados recebidos
+                if (dados[0].pontuacaoGary == undefined) {
+                    document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
+                } else {
+                    document.getElementById("pontuacaoGaryDoodle").innerHTML = ` ${dados[0].pontuacaoGary}`;
+                }
+            }
+        })
+        .catch(function(erro) {
+            console.error("Erro na requisição listarPontuacaoGaryDoodle:", erro);
         });
 }
 

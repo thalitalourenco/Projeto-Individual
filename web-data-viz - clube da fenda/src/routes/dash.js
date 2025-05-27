@@ -15,8 +15,8 @@ router.get("/listarCruzadinha", function (req, res) {
     dashController.listarCruzadinha(req, res);
 });
 
-router.get("/listarGaryDoodle", function (req, res) {
-    dashController.listarGaryDoodle(req, res);
+router.get("/listarPontuacaoGaryDoodle", function (req, res) {
+    dashController.listarPontuacaoGaryDoodle(req, res);
 });
 
 router.get("/totalJogadores", function (req, res) {
