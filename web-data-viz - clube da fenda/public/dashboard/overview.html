@@ -11,7 +11,8 @@
   <script src="../js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle();">
+<body
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -70,14 +71,6 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Quiz de Personalidade</h3>
-        <div id="personagemQuizPersonalidade">Pontuação</div>
-        <button>Jogar</button>
-      </div>
-    </div>
-    <div class="card">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
-      <div class="card-content">
         <h3>Cruzadinha</h3>
         <div id="tempoCruzadinha">Pontuação</div>
         <button>Jogar</button>
@@ -88,6 +81,16 @@
       <div class="card-content">
         <h3>Gary Doodle</h3>
         <div id="pontuacaoGaryDoodle">Pontuação</div>
+        <button>Jogar</button>
+      </div>
+    </div>
+    <div class="card">
+      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
+      <div class="card-content">
+        <h3>Quiz de Personalidade</h3>
+        <h4>Você é :</h4>
+        <div id="personagemQuizPersonalidade">Pontuação</div>
+        <img id="resultado-imagem" src="" alt="Imagem do personagem" />
         <button>Jogar</button>
       </div>
     </div>
@@ -115,8 +118,8 @@
   }
 
   function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
+    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
+      document.getElementById("cardAquarios").innerHTML += `
                     <div class="card-aquario">
                         <div class="title-aquario">
                             <h1>${item.descricao}</h1>
@@ -129,104 +132,164 @@
                     </div>
                     </div>
                     `
-        });
-    }
+    });
+  }
 
-    function listarQuiz() {
+  function listarQuiz() {
     const idUser = sessionStorage.ID_USUARIO;
     console.log("Enviando idUser para listarQuiz:", idUser);
 
     fetch(`/dash/listarQuiz?idUserServer=${idUser}`)
-        .then(function(resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
-                    return;
-                }
-                return resposta.json();
-            } else {
-                throw "Erro na resposta da API";
-            }
-        })
-        .then(function(dados) {
-            if(dados) {
-                console.log("Dados recebidos: ", dados);
-                // Atualize o conteúdo com os dados recebidos
-                if (dados[0].pontuacao == undefined) {
-                    document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
-                } else {
-                    document.getElementById("pontuacaoQuiz").innerHTML = ` ${dados[0].pontuacao}`;
-                }
-            }
-        })
-        .catch(function(erro) {
-            console.error("Erro na requisição listarQuiz:", erro);
-        });
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
+            return;
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
+        }
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
+          // Atualize o conteúdo com os dados recebidos
+          if (dados[0].pontuacaoQuiz == undefined) {
+            document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
+          } else {
+            document.getElementById("pontuacaoQuiz").innerHTML = ` ${dados[0].pontuacaoQuiz}`;
+          }
+        }
+      })
+      .catch(function (erro) {
+        console.error("Erro na requisição listarQuiz:", erro);
+      });
+  }
+
+  function listarQuizPersonalidade() {
+  const idUser = sessionStorage.ID_USUARIO;
+  console.log("Enviando idUser para listarQuizPersonalidade:", idUser);
+
+  fetch(`/dash/listarQuizPersonalidade?idUserServer=${idUser}`)
+    .then(function (resposta) {
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          document.getElementById("personagemQuizPersonalidade").innerHTML =
+            `Você ainda não jogou o Quiz de Personalidade!`;
+          return;
+        }
+        return resposta.json();
+      } else {
+        throw "Erro na resposta da API";
+      }
+    })
+    .then(function (dados) {
+      if (dados) {
+        console.log("Dados recebidos: ", dados);
+
+        const personagem = dados[0].personagem;
+
+        if (!personagem) {
+          document.getElementById("personagemQuizPersonalidade").innerHTML =
+            `Você ainda não jogou o Quiz de Personalidade!`;
+          return;
+        }
+
+        document.getElementById("personagemQuizPersonalidade").innerHTML = personagem;
+
+        const imagens = {
+          Bob: "./Jogos/Quiz_personalidade/assets/Personagens/bob_esponja.png",
+          Patrick: "./Jogos/Quiz_personalidade/assets/Personagens/patrick.png",
+          Siriguejo: "./Jogos/Quiz_personalidade/assets/Personagens/sr.sirigueijo.png",
+          Plankton: "./Jogos/Quiz_personalidade/assets/Personagens/plankton.png",
+          Sandy: "./Jogos/Quiz_personalidade/assets/Personagens/sandy.png",
+          Lula: "./Jogos/Quiz_personalidade/assets/Personagens/lula_molusco.png"
+        };
+
+        const imagem = document.getElementById("resultado-imagem");
+
+        if (imagens[personagem]) {
+          imagem.src = imagens[personagem];
+        }
+      }
+    })
+    .catch(function (erro) {
+      console.error("Erro na requisição listarQuizPersonalidade:", erro);
+    });
 }
 
-function listarQuizPersonalidade() {
-    const idUser = sessionStorage.ID_USUARIO;
-    console.log("Enviando idUser para listarQuizPersonalidade:", idUser);
-
-    fetch(`/dash/listarQuizPersonalidade?idUserServer=${idUser}`)
-        .then(function(resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    document.getElementById("personagemQuizPersonalidade").innerHTML = `Você ainda não jogou o Quiz de Personalidade!`;
-                    return;
-                }
-                return resposta.json();
-            } else {
-                throw "Erro na resposta da API";
-            }
-        })
-        .then(function(dados) {
-            if(dados) {
-                console.log("Dados recebidos: ", dados);
-                // Atualize o conteúdo com os dados recebidos
-                if (dados[0].personagem == undefined) {
-                    document.getElementById("personagemQuizPersonalidade").innerHTML = `Você ainda não jogou o Quiz de Personalidade!`;
-                } else {
-                    document.getElementById("personagemQuizPersonalidade").innerHTML = ` ${dados[0].personagem}`;
-                }
-            }
-        })
-        .catch(function(erro) {
-            console.error("Erro na requisição listarQuizPersonalidade:", erro);
-        });
-}
-
-function listarPontuacaoGaryDoodle() {
+  function listarPontuacaoGaryDoodle() {
     const idUser = sessionStorage.ID_USUARIO;
     console.log("Enviando idUser para listarPontuacaoGaryDoodle:", idUser);
 
     fetch(`/dash/listarPontuacaoGaryDoodle?idUserServer=${idUser}`)
-        .then(function(resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
-                    return;
-                }
-                return resposta.json();
-            } else {
-                throw "Erro na resposta da API";
-            }
-        })
-        .then(function(dados) {
-            if(dados) {
-                console.log("Dados recebidos: ", dados);
-                // Atualize o conteúdo com os dados recebidos
-                if (dados[0].pontuacaoGary == undefined) {
-                    document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
-                } else {
-                    document.getElementById("pontuacaoGaryDoodle").innerHTML = ` ${dados[0].pontuacaoGary}`;
-                }
-            }
-        })
-        .catch(function(erro) {
-            console.error("Erro na requisição listarPontuacaoGaryDoodle:", erro);
-        });
-}
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
+            return;
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
+        }
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
+          // Atualize o conteúdo com os dados recebidos
+          if (dados[0].pontuacaoGary == undefined) {
+            document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
+          } else {
+            document.getElementById("pontuacaoGaryDoodle").innerHTML = ` ${dados[0].pontuacaoGary}`;
+          }
+        }
+      })
+      .catch(function (erro) {
+        console.error("Erro na requisição listarPontuacaoGaryDoodle:", erro);
+      });
+  }
+
+  function listarCruzadinha() {
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarCruzadinha:", idUser);
+
+    fetch(`/dash/listarCruzadinha?idUserServer=${idUser}`)
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
+            return;
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
+        }
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
+          // Atualize o conteúdo com os dados recebidos
+          if (dados[0].tempoCruzadinha == undefined) {
+            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
+          } else {
+            const tempo = dados[0].tempoCruzadinha;
+
+            const minutos = Math.floor(tempo / 60);
+            const segundos = tempo % 60;
+
+            const tempoFormatado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+
+            document.getElementById("tempoCruzadinha").innerHTML = `${tempoFormatado}`;
+          }
+        }
+      })
+
+      .catch(function (erro) {
+        console.error("Erro na requisição listarCruzadinha:", erro);
+      });
+  }
 
 
 </script>

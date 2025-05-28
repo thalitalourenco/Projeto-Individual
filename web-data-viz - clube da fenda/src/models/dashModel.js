@@ -9,7 +9,7 @@ function listarQuiz(idUserServer) {
     }
 
     var instrucaoSql = `
-        SELECT MAX(pontuacao) AS pontuacao 
+        SELECT MAX(pontuacao) AS pontuacaoQuiz 
         FROM partida 
         WHERE idJogo = 1 AND idUser = ${idUserServer};
     `;
@@ -27,7 +27,7 @@ function listarQuizPersonalidade(idUserServer) {
 
 function listarCruzadinha(idUserServer) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT MIN(tempo) FROM partida WHERE idJogo = 3 AND idUser = ${idUserServer};
+    var instrucaoSql = `SELECT MIN(tempo) as tempoCruzadinha FROM partida WHERE idJogo = 3 AND idUser = ${idUserServer};
  `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
