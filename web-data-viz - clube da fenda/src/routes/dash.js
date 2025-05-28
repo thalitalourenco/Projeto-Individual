@@ -19,8 +19,8 @@ router.get("/listarPontuacaoGaryDoodle", function (req, res) {
     dashController.listarPontuacaoGaryDoodle(req, res);
 });
 
-router.get("/totalJogadores", function (req, res) {
-    dashController.totalJogadores(req, res);
+router.get("/jogosMaisJogados", function (req, res) {
+    dashController.jogosMaisJogados(req, res);
 });
 
 module.exports = router;

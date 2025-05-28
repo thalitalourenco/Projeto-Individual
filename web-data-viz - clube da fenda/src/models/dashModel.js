@@ -19,7 +19,7 @@ function listarQuiz(idUserServer) {
 
 function listarQuizPersonalidade(idUserServer) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-    var instrucaoSql = `SELECT personagem FROM partida WHERE idJogo = 2 AND idUser = ${idUserServer};
+    var instrucaoSql = `SELECT personagem FROM partida WHERE idJogo = 2 AND idUser = ${idUserServer} ORDER BY data_partida DESC LIMIT 1;
  `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -41,10 +41,14 @@ function listarPontuacaoGaryDoodle(idUserServer) {
     return database.executar(instrucaoSql);
 }
 
-function totalJogadores() {
-    console.log("ACESSEI O AVISO MODEL PARA TOTAL DE JOGADORES");
+function jogosMaisJogados(idUserServer) {
+    console.log("ACESSEI O AVISO MODEL PARA JOGOS MAIS JOGADOS");
     var instrucaoSql = `
-        SELECT COUNT(DISTINCT fkUsuario) as totalJogadores FROM pontuacao;
+    SELECT idJogo, COUNT(idPartida) as quantidade
+    FROM partida
+    WHERE idUser = ${idUserServer}
+    GROUP BY idJogo;
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -56,6 +60,6 @@ module.exports = {
     listarQuizPersonalidade,
     listarCruzadinha,
     listarPontuacaoGaryDoodle,
-    totalJogadores,
+    jogosMaisJogados,
 
 }

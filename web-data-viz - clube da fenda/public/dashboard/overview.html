@@ -9,10 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="./css-dashboard/overview.css" />
   <script src="../js/sessao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha();">
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); obterDados();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -63,25 +64,25 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Maior pontuação no Quiz</h3>
+        <h3>Maior pontuação no Quiz de Conhecimentos</h3>
         <div id="pontuacaoQuiz">Pontuação</div>
-        <button>Jogar</button>
+        <button onclick="jogarQuiz()">Jogar</button>
       </div>
     </div>
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Cruzadinha</h3>
+        <h3>Menor tempo na Cruzadinha</h3>
         <div id="tempoCruzadinha">Pontuação</div>
-        <button>Jogar</button>
+        <button onclick="jogarCruzadinha()">Jogar</button>
       </div>
     </div>
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Gary Doodle</h3>
+        <h3>Maior pontuação no Gary Doodle</h3>
         <div id="pontuacaoGaryDoodle">Pontuação</div>
-        <button>Jogar</button>
+        <button onclick="jogarGary()">Jogar</button>
       </div>
     </div>
     <div class="card">
@@ -91,15 +92,14 @@
         <h4>Você é :</h4>
         <div id="personagemQuizPersonalidade">Pontuação</div>
         <img id="resultado-imagem" src="" alt="Imagem do personagem" />
-        <button>Jogar</button>
+        <button onclick="jogarQuizPersonalidade()">Jogar</button>
       </div>
     </div>
     <div class="grafico">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Dias consecutivos jogando</h3>
-        <p>Pontuação</p>
-        <button>Jogar</button>
+        <h3>Jogos que você mais jogou</h3>
+        <canvas id="meuGrafico"></canvas>
       </div>
     </div>
   </main>
@@ -112,27 +112,74 @@
 <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+function obterDados(){
+
+    fetch('/jogosMaisJogados')
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(data){
+    plotarGraficoLinha(data);
+    plotarGraficoBarra(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  })
+
+  const ctx = document.getElementById('meuGrafico').getContext('2d');
+
+const meuGrafico = new Chart(ctx, {
+    type: 'bar', // Tipo 'bar' para gráfico de colunas
+    data: {
+        labels: ['Quiz', 'Quiz Personalidade', 'Cruzadinha', 'Gary Doodle'], // Eixo X (categorias)
+        datasets: [{
+            label: 'Vendas (R$)',
+            data: [1200, 1900, 3000, 500], // Eixo Y (valores)
+            backgroundColor: [
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(255, 99, 132, 0.5)'
+            ],
+            borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true // Começa o eixo Y no zero
+            }
+        }
+    }
+});
+
+}
+
   function limparSessao() {
     sessionStorage.clear();
     window.location = "/login.html";
   }
 
-  function exibirAquarios() {
-    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-      document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-    });
+  function jogarQuiz(){
+    window.location = "./Jogos/Quiz/quiz.html";
+  }
+
+  function jogarCruzadinha(){
+    window.location = "./Jogos/Cruzadinha/cruzadinha.html";
+  }
+
+  function jogarGary(){
+    window.location = "./Jogos/Gary_doodle/gary_doodle.html";
+  }
+
+  function jogarQuizPersonalidade(){
+    window.location = "./Jogos/Quiz_personalidade/quizPersonalidade.html";
   }
 
   function listarQuiz() {

@@ -70,17 +70,23 @@ function listarPontuacaoGaryDoodle(req, res) {
     });
 }
 
-function totalJogadores(req, res) {
+function jogosMaisJogados(req, res) {
+
+    const limite_linhas = 7;
+
     var idUserServer = req.query.idUserServer;
-    dashModel.totalJogadores().then(function (resultado) {
+
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    dashModel.jogosMaisJogados(idUserServer, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
-            res.status(200).json({ totalJogadores: resultado[0].totalJogadores });
+            res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum jogador encontrado!");
+            res.status(204).send("Nenhum resultado encontrado!")
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar a quantidade de jogadores: ", erro.sqlMessage);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -90,5 +96,5 @@ module.exports = {
     listarQuizPersonalidade,
     listarCruzadinha,
     listarPontuacaoGaryDoodle,
-    totalJogadores
+    jogosMaisJogados
 }

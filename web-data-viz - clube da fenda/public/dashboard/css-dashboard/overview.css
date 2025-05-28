@@ -171,6 +171,62 @@ a {
   justify-content: space-between;
 }
 
+.main-overview .card:nth-child(1),
+.main-overview .card:nth-child(2),
+.main-overview .card:nth-child(3){
+  height: 30vh;
+  margin-top: 5%;
+}
+
+.main-overview .card:nth-child(1) .card-content h3,
+.main-overview .card:nth-child(2) .card-content h3,
+.main-overview .card:nth-child(3) .card-content h3{
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.main-overview .card:nth-child(1) .card-content button,
+.main-overview .card:nth-child(2) .card-content button,
+.main-overview .card:nth-child(3) .card-content button{
+  margin-top: 10%;
+}
+
+.main-overview .card:nth-child(1) .card-content div,
+.main-overview .card:nth-child(2) .card-content div,
+.main-overview .card:nth-child(3) .card-content div{
+  font-size: 1.5rem;
+}
+
+.main-overview .card:nth-child(4){
+  height: 50vh;
+}
+
+.main-overview .card:nth-child(4) .card-content h3{
+  margin-top: 0%;
+}
+
+.main-overview .card:nth-child(4) .card-content h4{
+  font-size: 1.2;
+  margin-top: -3%;
+}
+
+.main-overview .card:nth-child(4) .card-content button{
+  margin-top: 10%;
+}
+
+.main-overview .card:nth-child(4) .card-content div{
+  font-size: 1.2rem;
+  margin-top: -2%;
+}
+
+.main-overview .grafico{
+  height: 50vh;
+}
+
+.main-overview .grafico .card-content h3{
+  margin-top: 0%;
+}
+
 .main-overview .card:hover{
 transform: translateY(-5px);
 transition: 0.3s ease;
@@ -182,32 +238,52 @@ transition: 0.3s ease;
 
 /* Quiz ocupa as primeiras 3 colunas da segunda linha */
 .main-overview > .card:nth-child(4) {
-  grid-column: span 3;
+  grid-column: span 2;
 }
 
 /* Gráfico ocupa as últimas 3 colunas da segunda linha */
 .main-overview > .grafico {
-  grid-column: span 3;
+  grid-column: span 4;
+}
+
+.card-content{
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  margin: 0;
 }
 
 /* Ajustes para títulos e botões dentro dos cards */
 .card-content h3 {
-  margin-bottom: 12px;
   font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
 }
 
+/*Você é:*/
 .card-content h4 {
   margin-top: 10px;
   margin-bottom: 8px;
   font-weight: 500;
   color: #555;
+  text-align: center;
+}
+
+.card-content div {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+  text-align: center;
 }
 
 .card-content button {
-  align-self: flex-start;
-  margin-top: 12px;
-  padding: 8px 16px;
-  background-color: #ffcc00;
+  align-self: center;
+  padding: 10px 25px;
+  background: url('./fontes/textura\ bob\ esponja.jpg');
+  color: var(--preto-sapato);
+  background-size: 200%;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -216,7 +292,8 @@ transition: 0.3s ease;
 }
 
 .card-content button:hover {
-  background-color: #e6b800;
+  transform: translateY(-2px);
+  transition: 0.3s ease;
 }
 
 /* Imagem do resultado do quiz de personalidade */
