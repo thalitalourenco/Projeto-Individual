@@ -13,7 +13,7 @@
 </head>
 
 <body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); obterDados();">
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -64,7 +64,7 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Maior pontuação no Quiz de Conhecimentos</h3>
+        <h3>Sua maior pontuação no Quiz de Conhecimentos</h3>
         <div id="pontuacaoQuiz">Pontuação</div>
         <button onclick="jogarQuiz()">Jogar</button>
       </div>
@@ -72,7 +72,7 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Menor tempo na Cruzadinha</h3>
+        <h3>Seu menor tempo na Cruzadinha</h3>
         <div id="tempoCruzadinha">Pontuação</div>
         <button onclick="jogarCruzadinha()">Jogar</button>
       </div>
@@ -80,7 +80,7 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Maior pontuação no Gary Doodle</h3>
+        <h3>Sua maior pontuação no Gary Doodle</h3>
         <div id="pontuacaoGaryDoodle">Pontuação</div>
         <button onclick="jogarGary()">Jogar</button>
       </div>
@@ -88,11 +88,12 @@
     <div class="card">
       <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
-        <h3>Quiz de Personalidade</h3>
-        <h4>Você é :</h4>
-        <div id="personagemQuizPersonalidade">Pontuação</div>
-        <img id="resultado-imagem" src="" alt="Imagem do personagem" />
-        <button onclick="jogarQuizPersonalidade()">Jogar</button>
+        <h3>Usuários com Mais Partidas</h3>
+        <div id="rankingJogadores">
+          <div id="1lugar"></div>
+          <div id="2lugar"></div>
+          <div id="3lugar"></div>
+        </div>
       </div>
     </div>
     <div class="grafico">
@@ -100,6 +101,24 @@
       <div class="card-content">
         <h3>Jogos que você mais jogou</h3>
         <canvas id="meuGrafico"></canvas>
+      </div>
+    </div>
+    <div class="grafico2">
+      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
+      <div class="card-content">
+        <h3>Personagens Mais Populares</h3>
+        <h4>Veja quais personagens mais apareceram no quiz de personalidade dos usuários!</h4>
+        <canvas id="meuGrafico2"></canvas>
+      </div>
+    </div>
+    <div class="cardPersonagem">
+      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
+      <div class="card-content">
+        <h3>Quiz de Personalidade</h3>
+        <h4>Você é :</h4>
+        <div id="personagemQuizPersonalidade">Pontuação</div>
+        <img id="resultado-imagem" src="" alt="Imagem do personagem" />
+        <button onclick="jogarQuizPersonalidade()">Jogar</button>
       </div>
     </div>
   </main>
@@ -112,75 +131,215 @@
 <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-function obterDados(){
+  function obterDados() {
+  const idUserServer = sessionStorage.ID_USUARIO;
 
-    fetch('/jogosMaisJogados')
-  .then(function(response){
-    return response.json();
-  })
-  .then(function(data){
-    plotarGraficoLinha(data);
-    plotarGraficoBarra(data);
-  })
-  .catch(function(err){
-    console.log(err);
-  })
+  const nomeJogos = {
+    1: 'Quiz',
+    2: 'Personalidade',
+    3: 'Cruzadinha',
+    4: 'Gary'
+  };
+
+  const coresFundo = {
+    1: '#36A2EB',
+    2: '#FFCE56',
+    3: '#FF6384',
+    4: '#4BC0C0'
+  };
+
+  const coresBorda = {
+    1: '#1F77B4',
+    2: '#C49C94',
+    3: '#D62728',
+    4: '#17BECF'
+  };
+
+  const nomePersonagens = {
+    1: 'Bob',
+    2: 'Patrick',
+    3: 'Sr. Siriguejo',
+    4: 'Plankton',
+    5: 'Sandy',
+    6: 'Lula'
+  };
+
+  const coresPersonagensFundo = {
+  1: '#FFD700', 
+  2: '#FF69B4', 
+  3: '#B22222', 
+  4: '#228B22', 
+  5: '#D2B48C', 
+  6: '#4682B4'  
+};
+
+const coresPersonagensBorda = {
+  1: '#B8860B', 
+  2: '#C71585', 
+  3: '#8B0000', 
+  4: '#006400', 
+  5: '#8B4513', 
+  6: '#2F4F4F'  
+};
 
   const ctx = document.getElementById('meuGrafico').getContext('2d');
+  const ctx2 = document.getElementById('meuGrafico2').getContext('2d');
 
-const meuGrafico = new Chart(ctx, {
-    type: 'bar', // Tipo 'bar' para gráfico de colunas
+  const meuGrafico = new Chart(ctx, {
+    type: 'doughnut',
     data: {
-        labels: ['Quiz', 'Quiz Personalidade', 'Cruzadinha', 'Gary Doodle'], // Eixo X (categorias)
-        datasets: [{
-            label: 'Vendas (R$)',
-            data: [1200, 1900, 3000, 500], // Eixo Y (valores)
-            backgroundColor: [
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
-                'rgba(255, 99, 132, 0.5)'
-            ],
-            borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-        }]
+      labels: [],
+      datasets: [{
+        label: 'Vezes jogadas',
+        data: [],
+        backgroundColor: [],
+        borderColor: [],
+        borderWidth: 1
+      }]
+    },
+    options: {}
+  });
+
+  const meuGrafico2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Personagens mais escolhidos',
+        data: [],
+        backgroundColor: 'rgba(255, 205, 86, 0.5)',
+        borderColor: 'rgba(255, 205, 86, 1)',
+        borderWidth: 2
+      }]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true // Começa o eixo Y no zero
-            }
+      scales: {
+        y: {
+          beginAtZero: true
         }
+      }
     }
-});
+  });
 
-}
+  fetch(`/dash/jogosMaisJogados?idUserServer=${idUserServer}`)
+    .then(res => res.json())
+    .then(dados => {
+      const labels = dados.map(item => nomeJogos[item.idJogo] || 'Outro');
+      const data = dados.map(item => item.quantidade);
+      const backgroundColor = dados.map(item => coresFundo[item.idJogo] || '#999');
+      const borderColor = dados.map(item => coresBorda[item.idJogo] || '#666');
+
+      meuGrafico.data.labels = labels;
+      meuGrafico.data.datasets[0].data = data;
+      meuGrafico.data.datasets[0].backgroundColor = backgroundColor;
+      meuGrafico.data.datasets[0].borderColor = borderColor;
+      meuGrafico.update();
+    })
+    .catch(err => console.error('Erro ao buscar dados do gráfico 1:', err));
+
+
+    fetch(`/dash/personagensPartidas?idUserServer=${idUserServer}`)
+  .then(res => res.json())
+  .then(dados => {
+    console.log('Recebidos personagens:', dados);
+
+    const labels = dados.map(item => item.personagem);
+    const data = dados.map(item => item.quantidade);
+
+    const backgroundColor = dados.map(item => {
+      switch (item.personagem) {
+        case 'Bob': return '#FFD700';
+        case 'Patrick': return '#FF69B4';
+        case 'Sr. Siriguejo': return '#B22222';
+        case 'Plankton': return '#228B22';
+        case 'Sandy': return '#D2B48C';
+        case 'Lula': return '#4682B4';
+        default: return '#ccc';
+      }
+    });
+
+    const borderColor = dados.map(item => {
+      switch (item.personagem) {
+        case 'Bob': return '#B8860B';
+        case 'Patrick': return '#C71585';
+        case 'Sr. Siriguejo': return '#8B0000';
+        case 'Plankton': return '#006400';
+        case 'Sandy': return '#8B4513';
+        case 'Lula': return '#2F4F4F';
+        default: return '#999';
+      }
+    });
+
+    meuGrafico2.data.labels = labels;
+    meuGrafico2.data.datasets[0].data = data;
+    meuGrafico2.data.datasets[0].backgroundColor = backgroundColor;
+    meuGrafico2.data.datasets[0].borderColor = borderColor;
+    meuGrafico2.update();
+  })
+  .catch(err => console.error('Erro ao buscar dados do gráfico 2:', err));
+
+  }
+
+
 
   function limparSessao() {
     sessionStorage.clear();
     window.location = "/login.html";
   }
 
-  function jogarQuiz(){
+  function jogarQuiz() {
     window.location = "./Jogos/Quiz/quiz.html";
   }
 
-  function jogarCruzadinha(){
+  function jogarCruzadinha() {
     window.location = "./Jogos/Cruzadinha/cruzadinha.html";
   }
 
-  function jogarGary(){
+  function jogarGary() {
     window.location = "./Jogos/Gary_doodle/gary_doodle.html";
   }
 
-  function jogarQuizPersonalidade(){
+  function jogarQuizPersonalidade() {
     window.location = "./Jogos/Quiz_personalidade/quizPersonalidade.html";
   }
+
+  function listarRanking() {
+  const idUser = sessionStorage.ID_USUARIO;
+  console.log("Enviando idUser para listarRanking:", idUser);
+
+  fetch(`/dash/listarRanking?idUserServer=${idUser}`)
+    .then(function (resposta) {
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          document.getElementById("rankingJogadores").innerHTML = `ERRO: Não há jogadores cadastrados!`;
+          return null; // para não continuar no próximo then
+        }
+        return resposta.json();
+      } else {
+        throw "Erro na resposta da API";
+      }
+    })
+    .then(function (dados) {
+      if (dados) {
+        console.log("Dados recebidos: ", dados);
+
+        for (let i = 0; i < dados.length; i++) {
+          const jogador = dados[i].nome;
+
+          if (i == 0) {
+            document.getElementById("1lugar").innerHTML = `<span class="material-symbols-outlined" style="color: gold">trophy</span>${jogador}`;
+          } else if (i == 1) {
+            document.getElementById("2lugar").innerHTML = `<span class="material-symbols-outlined" style="color: silver">trophy</span>${jogador}`;
+          } else if (i == 2) {
+            document.getElementById("3lugar").innerHTML = `<span class="material-symbols-outlined" style="color: #CD7F32">trophy</span>${jogador}`;
+          } 
+        }
+      }
+    })
+    .catch(function (erro) {
+      console.error("Erro na requisição listarRanking:", erro);
+    });
+}
 
   function listarQuiz() {
     const idUser = sessionStorage.ID_USUARIO;
@@ -204,6 +363,7 @@ const meuGrafico = new Chart(ctx, {
           // Atualize o conteúdo com os dados recebidos
           if (dados[0].pontuacaoQuiz == undefined) {
             document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
+            document.getElementById("pontuacaoQuiz").style.fontSize = "1.0rem";
           } else {
             document.getElementById("pontuacaoQuiz").innerHTML = ` ${dados[0].pontuacaoQuiz}`;
           }
@@ -215,56 +375,58 @@ const meuGrafico = new Chart(ctx, {
   }
 
   function listarQuizPersonalidade() {
-  const idUser = sessionStorage.ID_USUARIO;
-  console.log("Enviando idUser para listarQuizPersonalidade:", idUser);
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarQuizPersonalidade:", idUser);
 
-  fetch(`/dash/listarQuizPersonalidade?idUserServer=${idUser}`)
-    .then(function (resposta) {
-      if (resposta.ok) {
-        if (resposta.status == 204) {
-          document.getElementById("personagemQuizPersonalidade").innerHTML =
-            `Você ainda não jogou o Quiz de Personalidade!`;
-          return;
+    fetch(`/dash/listarQuizPersonalidade?idUserServer=${idUser}`)
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("personagemQuizPersonalidade").innerHTML =
+              `Você ainda não jogou o Quiz de Personalidade!`;
+            document.getElementById("personagemQuizPersonalidade").style.fontSize = "1.0rem";
+            document.getElementById("resultado-imagem").style.display = "none";
+            return;
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
         }
-        return resposta.json();
-      } else {
-        throw "Erro na resposta da API";
-      }
-    })
-    .then(function (dados) {
-      if (dados) {
-        console.log("Dados recebidos: ", dados);
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
 
-        const personagem = dados[0].personagem;
+          const personagem = dados[0].personagem;
 
-        if (!personagem) {
-          document.getElementById("personagemQuizPersonalidade").innerHTML =
-            `Você ainda não jogou o Quiz de Personalidade!`;
-          return;
+          if (!personagem) {
+            document.getElementById("personagemQuizPersonalidade").innerHTML =
+              `Você ainda não jogou o Quiz de Personalidade!`;
+            return;
+          }
+
+          document.getElementById("personagemQuizPersonalidade").innerHTML = personagem;
+
+          const imagens = {
+            Bob: "./Jogos/Quiz_personalidade/assets/Personagens/bob_esponja.png",
+            Patrick: "./Jogos/Quiz_personalidade/assets/Personagens/patrick.png",
+            Siriguejo: "./Jogos/Quiz_personalidade/assets/Personagens/sr.sirigueijo.png",
+            Plankton: "./Jogos/Quiz_personalidade/assets/Personagens/plankton.png",
+            Sandy: "./Jogos/Quiz_personalidade/assets/Personagens/sandy.png",
+            Lula: "./Jogos/Quiz_personalidade/assets/Personagens/lula_molusco.png"
+          };
+
+          const imagem = document.getElementById("resultado-imagem");
+
+          if (imagens[personagem]) {
+            imagem.src = imagens[personagem];
+          }
         }
-
-        document.getElementById("personagemQuizPersonalidade").innerHTML = personagem;
-
-        const imagens = {
-          Bob: "./Jogos/Quiz_personalidade/assets/Personagens/bob_esponja.png",
-          Patrick: "./Jogos/Quiz_personalidade/assets/Personagens/patrick.png",
-          Siriguejo: "./Jogos/Quiz_personalidade/assets/Personagens/sr.sirigueijo.png",
-          Plankton: "./Jogos/Quiz_personalidade/assets/Personagens/plankton.png",
-          Sandy: "./Jogos/Quiz_personalidade/assets/Personagens/sandy.png",
-          Lula: "./Jogos/Quiz_personalidade/assets/Personagens/lula_molusco.png"
-        };
-
-        const imagem = document.getElementById("resultado-imagem");
-
-        if (imagens[personagem]) {
-          imagem.src = imagens[personagem];
-        }
-      }
-    })
-    .catch(function (erro) {
-      console.error("Erro na requisição listarQuizPersonalidade:", erro);
-    });
-}
+      })
+      .catch(function (erro) {
+        console.error("Erro na requisição listarQuizPersonalidade:", erro);
+      });
+  }
 
   function listarPontuacaoGaryDoodle() {
     const idUser = sessionStorage.ID_USUARIO;
@@ -288,6 +450,7 @@ const meuGrafico = new Chart(ctx, {
           // Atualize o conteúdo com os dados recebidos
           if (dados[0].pontuacaoGary == undefined) {
             document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
+            document.getElementById("pontuacaoGaryDoodle").style.fontSize = "1.0rem";
           } else {
             document.getElementById("pontuacaoGaryDoodle").innerHTML = ` ${dados[0].pontuacaoGary}`;
           }
@@ -320,6 +483,7 @@ const meuGrafico = new Chart(ctx, {
           // Atualize o conteúdo com os dados recebidos
           if (dados[0].tempoCruzadinha == undefined) {
             document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
+            document.getElementById("tempoCruzadinha").style.fontSize = "1.0rem";
           } else {
             const tempo = dados[0].tempoCruzadinha;
 

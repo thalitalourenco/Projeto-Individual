@@ -138,29 +138,15 @@ a {
 
 .main-overview {
   margin-left: 19%; /* espaço para o menu lateral fixo */
-  padding: 20px;
+  padding: 10px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 colunas iguais */
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: auto auto;
-  gap: 20px;
+  gap: 15px;
 }
 
-/* Primeira linha: cards 1, 2 e 3 ocupam 2 colunas cada */
-.main-overview > .card:nth-child(-n+3) {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 200px;
-  grid-column: span 2; /* ocupa 2 colunas (2x3 = 6 colunas totais) */
-}
-
-/* Segunda linha: quiz de personalidade e gráfico - maiores e meio a meio */
-.main-overview > .card:nth-child(4),
-.main-overview > .grafico {
+.main-overview > .grafico,
+.main-overview > .grafico2{
   background: #fff;
   border-radius: 12px;
   padding: 20px;
@@ -173,54 +159,117 @@ a {
 
 .main-overview .card:nth-child(1),
 .main-overview .card:nth-child(2),
-.main-overview .card:nth-child(3){
-  height: 30vh;
-  margin-top: 5%;
-}
-
-.main-overview .card:nth-child(1) .card-content h3,
-.main-overview .card:nth-child(2) .card-content h3,
-.main-overview .card:nth-child(3) .card-content h3{
-  margin-top: 5%;
-  margin-bottom: 8%;
-}
-
-.main-overview .card:nth-child(1) .card-content button,
-.main-overview .card:nth-child(2) .card-content button,
-.main-overview .card:nth-child(3) .card-content button{
-  margin-top: 10%;
-}
-
-.main-overview .card:nth-child(1) .card-content div,
-.main-overview .card:nth-child(2) .card-content div,
-.main-overview .card:nth-child(3) .card-content div{
-  font-size: 1.5rem;
-}
-
+.main-overview .card:nth-child(3),
 .main-overview .card:nth-child(4){
-  height: 50vh;
+  height: 30vh;
+  margin-top: 3%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-column: span 2;
 }
 
+.main-overview .cardPersonagem{
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 53vh;
+  grid-column: span 2;
+}
+
+#rankingJogadores{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 1.7rem;
+}
+/*Card 1(Quiz)*/
+.main-overview .card:nth-child(1) .card-content h3{
+  margin-top: 5% ;
+  width: 100%;
+}
+
+.main-overview .card:nth-child(1) .card-content div{
+  font-size: 2rem;
+  margin-top: 7%;
+}
+
+.main-overview .card:nth-child(1) .card-content button{
+  margin-top: 7%;
+}
+
+/*Card 2(Cruzadinha)*/
+.main-overview .card:nth-child(2) .card-content h3{
+  margin-top: 5% ;
+  width: 100%;
+}
+
+.main-overview .card:nth-child(2) .card-content div{
+  font-size: 2rem;
+  margin-top: 7%;
+}
+
+.main-overview .card:nth-child(2) .card-content button{
+  margin-top: 7%;
+}
+
+/*Card 3(Gary Doodle)*/
+.main-overview .card:nth-child(3) .card-content h3{
+  margin-top: 5% ;
+  width: 100%;
+}
+
+.main-overview .card:nth-child(3) .card-content div{
+  font-size: 2rem;
+  margin-top: 7%;
+}
+
+.main-overview .card:nth-child(3) .card-content button{
+  margin-top: 7%;
+}
+
+/*Card 4(Ranking)*/
 .main-overview .card:nth-child(4) .card-content h3{
-  margin-top: 0%;
+  margin-top: 5% ;
+  width: 100%;
 }
 
-.main-overview .card:nth-child(4) .card-content h4{
-  font-size: 1.2;
-  margin-top: -3%;
+/*Card 7(Personagem)*/
+.main-overview .cardPersonagem .card-content h3{
+  margin-top: 0 ;
+  width: 100%;
 }
 
-.main-overview .card:nth-child(4) .card-content button{
-  margin-top: 10%;
+.main-overview .cardPersonagem .card-content h4{
+  width: 100%;
+  font-size: 1.1rem;
 }
 
-.main-overview .card:nth-child(4) .card-content div{
-  font-size: 1.2rem;
-  margin-top: -2%;
+.main-overview .cardPersonagem .card-content div{
+  font-size: 2rem;
+  margin-top: 1%;
+}
+
+.main-overview .cardPersonagem .card-content button{
+  margin-top: 7%;
 }
 
 .main-overview .grafico{
-  height: 50vh;
+  justify-content: center;
+  height: 53vh;
+  margin-top: 1%;
+}
+
+canvas #meuGrafico{
+  display: flex;
 }
 
 .main-overview .grafico .card-content h3{
@@ -236,14 +285,33 @@ transition: 0.3s ease;
   transition: 0.3s ease;
 }
 
+.main-overview .grafico2{
+  justify-content: center;
+  height: 53vh;
+}
+
+.main-overview .grafico2 .card-content h3{
+  margin-top: 0%;
+}
+
+.main-overview .grafico2 .card-content h4{
+  font-size: 0.9rem;
+}
+
+.main-overview .grafico2:hover{
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+}
+
 /* Quiz ocupa as primeiras 3 colunas da segunda linha */
 .main-overview > .card:nth-child(4) {
   grid-column: span 2;
 }
 
 /* Gráfico ocupa as últimas 3 colunas da segunda linha */
-.main-overview > .grafico {
-  grid-column: span 4;
+.main-overview > .grafico,
+.main-overview > .grafico2{
+  grid-column: span 3;
 }
 
 .card-content{
@@ -257,13 +325,13 @@ transition: 0.3s ease;
 /* Ajustes para títulos e botões dentro dos cards */
 .card-content h3 {
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.0rem;
   text-align: center;
 }
 
 /*Você é:*/
 .card-content h4 {
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 8px;
   font-weight: 500;
   color: #555;
@@ -271,7 +339,7 @@ transition: 0.3s ease;
 }
 
 .card-content div {
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 8px;
   font-weight: 500;
   color: #555;
@@ -299,8 +367,7 @@ transition: 0.3s ease;
 /* Imagem do resultado do quiz de personalidade */
 #resultado-imagem {
   width: 100%;
-  max-height: 140px;
+  max-height: 170px;
   object-fit: contain;
-  margin-top: 12px;
   border-radius: 8px;
 }

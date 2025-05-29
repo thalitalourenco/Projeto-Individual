@@ -23,4 +23,13 @@ router.get("/jogosMaisJogados", function (req, res) {
     dashController.jogosMaisJogados(req, res);
 });
 
+router.get("/personagensPartidas", function (req, res) {
+    dashController.personagensPartidas(req, res);
+});
+
+router.get("/listarRanking", function (req, res) {
+    dashController.listarRanking(req, res);
+});
+
+
 module.exports = router;

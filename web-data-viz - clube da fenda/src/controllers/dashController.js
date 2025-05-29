@@ -71,22 +71,44 @@ function listarPontuacaoGaryDoodle(req, res) {
 }
 
 function jogosMaisJogados(req, res) {
-
-    const limite_linhas = 7;
-
     var idUserServer = req.query.idUserServer;
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
-
-    dashModel.jogosMaisJogados(idUserServer, limite_linhas).then(function (resultado) {
+    dashModel.jogosMaisJogados(idUserServer).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
-            res.status(204).send("Nenhum resultado encontrado!")
+            res.status(204).send("Nenhum resultado encontrado!");
         }
     }).catch(function (erro) {
         console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function personagensPartidas(req, res) {
+    var idUserServer = req.query.idUserServer;
+
+    dashModel.personagensPartidas(idUserServer).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function listarRanking(req, res) {
+    dashModel.listarRanking().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.log(erro);
         res.status(500).json(erro.sqlMessage);
     });
 }
@@ -96,5 +118,7 @@ module.exports = {
     listarQuizPersonalidade,
     listarCruzadinha,
     listarPontuacaoGaryDoodle,
-    jogosMaisJogados
+    jogosMaisJogados,
+    personagensPartidas,
+    listarRanking
 }

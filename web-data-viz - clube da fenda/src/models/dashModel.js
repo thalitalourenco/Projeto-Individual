@@ -54,6 +54,24 @@ function jogosMaisJogados(idUserServer) {
     return database.executar(instrucaoSql);
 }
 
+function personagensPartidas() {
+    console.log("ACESSEI O AVISO MODEL PARA JOGOS MAIS JOGADOS");
+    var instrucaoSql = `
+    SELECT personagem, quantidade FROM rankingPersonagens;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function listarRanking() {
+    console.log("ACESSEI O AVISO MODEL PARA JOGOS MAIS JOGADOS");
+    var instrucaoSql = `
+    SELECT nome FROM rankingUsuarios;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
     listarQuiz,
@@ -61,5 +79,6 @@ module.exports = {
     listarCruzadinha,
     listarPontuacaoGaryDoodle,
     jogosMaisJogados,
-
+    personagensPartidas,
+    listarRanking
 }
