@@ -46,10 +46,6 @@
               <span class="material-symbols-outlined">sports_esports</span>
               <a href="/dashboard/games.html">GAMES</a>
             </li>
-            <li id="perfil">
-              <span class="material-symbols-outlined">person</span>
-              <a href="/dashboard/perfil.html">PERFIL</a>
-            </li>
             <li id="sair">
               <span class="material-symbols-outlined">logout</span>
               <a onclick="limparSessao()">SAIR</a>
@@ -215,47 +211,40 @@
 
         botoes.forEach((botao) => {
             if (botao.textContent === correta) {
-                // Destaca o botão da resposta correta
                 botao.style.backgroundColor = "#5abf63";
             } else if (botao.textContent === selecionada) {
-                // Destaca o botão da resposta incorreta selecionada
                 botao.style.backgroundColor = "#eb5555";
             }
-            // Desabilita todos os botões após a seleção
             botao.disabled = true;
         });
 
-        // Incrementa a pontuação se a resposta estiver correta
         if (selecionada === correta) {
             pontuacao++;
         }
 
-        // Avança para a próxima pergunta após um pequeno atraso
         setTimeout(() => {
             perguntaAtual++;
 
             if (perguntaAtual < perguntas.length) {
-                mostrarPergunta(); // Mostra a próxima pergunta
+                mostrarPergunta(); 
             } else {
-                // Exibe o feedback final
                 document.getElementById("tela-quiz").style.display = "none";
                 document.getElementById("tela-feedback").style.display = "block";
                 const resultadoDiv = document.getElementById("resultado");
                 resultadoDiv.textContent = `Você acertou ${pontuacao} de ${perguntas.length} perguntas!`;
 
-                // Envia os dados para o servidor
                 cadastrar();
             }
-        }, 1000); // Aguarda 1 segundo antes de avançar
+        }, 1000); 
     }
 
     function cadastrar() {
         const dados = {
-            idUserServer: sessionStorage.ID_USUARIO, // Certifique-se de que "ID_USUARIO" está definido
-            pontuacaoQuizServer: pontuacao, // Certifique-se de que "pontuacao" tem um valor válido
+            idUserServer: sessionStorage.ID_USUARIO,
+            pontuacaoQuizServer: pontuacao, 
         };
 
-        console.log("Enviando dados para o servidor:", dados); // Verifique os dados no console
+        console.log("Enviando dados para o servidor:", dados);
 
         fetch("/quiz/cadastrar", {
             method: "POST",

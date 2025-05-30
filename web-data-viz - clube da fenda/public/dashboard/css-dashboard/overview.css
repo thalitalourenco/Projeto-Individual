@@ -142,7 +142,7 @@ a {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: auto auto;
-  gap: 15px;
+  gap: 12px;
 }
 
 .main-overview > .grafico,

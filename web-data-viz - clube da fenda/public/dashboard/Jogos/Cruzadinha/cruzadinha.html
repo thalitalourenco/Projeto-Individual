@@ -47,10 +47,6 @@
           <span class="material-symbols-outlined">sports_esports</span>
           <a href="/dashboard/games.html">GAMES</a>
         </li>
-        <li id="perfil">
-          <span class="material-symbols-outlined">person</span>
-          <a href="/dashboard/perfil.html">PERFIL</a>
-        </li>
         <li id="sair">
           <span class="material-symbols-outlined">logout</span>
           <a onclick="limparSessao()">SAIR</a>
@@ -152,7 +148,6 @@
   const altura = 17;
   const largura = 24;
 
-  // cria a grade vazia (não está sendo usada diretamente no código atual)
   const grid = Array(altura).fill(null).map(() => Array(largura).fill(null));
 
   const words = [
@@ -186,7 +181,6 @@
     table.appendChild(tr);
   }
 
-  // Preenchendo palavras na tabela e mapeando letras na posicaoUsada
   for (let { word, row, col, dir, num } of words) {
     for (let i = 0; i < word.length; i++) {
       const r = dir === "across" ? row : row + i;
@@ -220,7 +214,6 @@
   function iniciarTimer() {
     const timer = document.querySelector(".timer");
 
-    // Para qualquer timer rodando antes de iniciar outro
     pararTimer();
 
     timerInterval = setInterval(() => {
