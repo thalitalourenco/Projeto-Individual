@@ -67,24 +67,51 @@
                 Mergulhando na fenda do biquíni
             </h1>
             <div class="texto">
-                <p>Bob Esponja Calça Quadrada encanta gerações com seu humor peculiar e personagens adoráveis. A Fenda
-                    do Biquíni, com suas cores vibrantes e situações surreais, oferece um escape divertido que celebra a
-                    amizade e o otimismo. A capacidade do desenho de misturar comédia inocente com toques de
-                    inteligência garante seu sucesso duradouro e sua conexão especial com o público.</p>
+                <p>Seja bem-vindo(a) à Fenda do Biquíni! Este site foi criado com muito carinho para fãs de todas as
+                    idades que, assim como eu, amam o universo do Bob Esponja. Aqui você vai encontrar um espaço cheio
+                    de diversão, nostalgia e interatividade!</p>
                 <br>
-                <p>Em um período difícil, a alegria contagiante de Bob Esponja se tornou um refúgio inesperado. Sua
-                    energia positiva e resiliência me mostraram que mesmo nos momentos sombrios, é possível encontrar
-                    motivos para sorrir. As risadas e as lições sobre amizade reacenderam uma esperança que parecia
-                    perdida.</p>
+                <p>Esse projeto surgiu não só como parte dos meus estudos no curso de Análise e Desenvolvimento de
+                    Sistemas, mas também como uma homenagem a um desenho que fez (e ainda faz) parte da minha vida de
+                    forma muito especial. Quando eu tinha 10 anos, fui diagnosticada com depressão, e foi o Bob Esponja
+                    que me ajudou a atravessar aquele momento difícil. A alegria, as aventuras e o jeito otimista desse
+                    personagem incrível me ensinaram que, mesmo em dias difíceis, sempre podemos encontrar motivos para
+                    sorrir.</p>
                 <br>
-                <p>Este projeto é mais que uma homenagem; é um testemunho pessoal de como Bob Esponja me ajudou a
-                    superar a depressão. Ao explorar seu universo, busco compartilhar a alegria e o otimismo que ele me
-                    proporcionou, esperando inspirar outros a encontrar sua própria luz. É uma celebração do poder da
-                    cultura pop em oferecer conforto e esperança em momentos desafiadores.</p>
+                <p>Por isso, este site é mais do que um trabalho de programação — é um espaço para espalhar diversão,
+                    leveza e bem-estar. </p>
             </div>
         </div>
         <div class="foto_bob_esponja_joinha">
-            <img src="./assets/img/bob_esponja_joinha.png" alt="bob esponja fazendo joinha">
+            <img src="./assets/img/IMG_1823.jpg" alt="bob esponja fazendo joinha">
+        </div>
+    </div>
+
+    <div class="container-mvv">
+        <h1 class="titulo-mvv">Missão, Visão e Valores</h1>
+        <div class="cards-mvv">
+
+            <div class="card-mvv">
+                <h2>Missão</h2>
+                <p>Levar diversão, alegria e bem-estar por meio de experiências inspiradas na Fenda do Biquíni.</p>
+            </div>
+
+            <div class="card-mvv">
+                <h2>Visão</h2>
+                <p>Ser referência em projetos web que unem criatividade, entretenimento e bem-estar.</p>
+            </div>
+
+            <div class="card-mvv">
+                <h2>Valores</h2>
+                <ul>
+                    <li>Diversão</li>
+                    <li>Criatividade</li>
+                    <li>Empatia</li>
+                    <li>Aprendizado</li>
+                    <li>Superação</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 
@@ -178,13 +205,13 @@
     <div class="tempoAssistido">
         <h1 class="tituloTempoAssistido">Quanto tempo você já assistiu de Bob Esponja?</h1>
         <div class="requisicao" style="display: flex;">
-        <h2 class="descricaoInput">
-            Digite quantos episódios você já assistiu e descubra quantas horas você mergulhou nesse universo divertido!
-        </h2>
-        <input type="number" id="input_qtdEp" placeholder="Digite aqui o número de episódios…">
-        <button onclick="calcularTempo()">Calcular tempo</button>
-        <img src="./assets/img/Kids Choice Awards 3D Sticker by Nickelodeon.gif"
-            alt="Bob Esponja">
+            <h2 class="descricaoInput">
+                Digite quantos episódios você já assistiu e descubra quantas horas você mergulhou nesse universo
+                divertido!
+            </h2>
+            <input type="number" id="input_qtdEp" placeholder="Digite aqui o número de episódios…">
+            <button onclick="calcularTempo()">Calcular tempo</button>
+            <img src="./assets/img/Kids Choice Awards 3D Sticker by Nickelodeon.gif" alt="Bob Esponja">
         </div>
         <div class="TelaResposta">
             <div class="resposta"></div>
@@ -242,7 +269,7 @@
         window.location = 'cadastro.html';
     }
 
-    function calcularTempo(){
+    function calcularTempo() {
         var qtdEp = input_qtdEp.value;
         var tempoEpisodios = 11;
         var minutosAssistidos = tempoEpisodios * qtdEp;
@@ -250,20 +277,20 @@
         var telaRequisicao = document.querySelector(".requisicao");
         telaRequisicao.style.display = "none";
         var resposta = document.querySelector(".resposta");
-        resposta.innerHTML=`Em média ${horasAssistidas} hora(s)`;
+        resposta.innerHTML = `Em média ${horasAssistidas} hora(s)`;
         var mensagem = document.querySelector(".mensagem");
         var foto = document.querySelector(".foto")
-        
-        if(horasAssistidas<1){
+
+        if (horasAssistidas < 1) {
             resposta.innerHTML = `Menos de uma hora`
             mensagem.innerHTML = `Está só de visita, hein? Tem muito mais aventuras do Bob pra você ver!`;
-            foto.src=`./assets/img/Sad Animation Sticker by SpongeBob SquarePants.gif`
-        }else if(horasAssistidas<=4){
+            foto.src = `./assets/img/Sad Animation Sticker by SpongeBob SquarePants.gif`
+        } else if (horasAssistidas <= 4) {
             mensagem.innerHTML = `Você já conhece bem a Fenda do Biquíni! Dá pra ver que você curte bastante o Bob Esponja!`;
-            foto.src=`./assets/img/Well Done Thumbs Up Sticker by SpongeBob SquarePants.gif`
-        }else{
+            foto.src = `./assets/img/Well Done Thumbs Up Sticker by SpongeBob SquarePants.gif`
+        } else {
             mensagem.innerHTML = `Você gosta mesmo do Bob Esponja hein!`;
-            foto.src=`./assets/img/Bob Esponja Spongebob Sticker.gif`
+            foto.src = `./assets/img/Bob Esponja Spongebob Sticker.gif`
         }
     }
 </script>
