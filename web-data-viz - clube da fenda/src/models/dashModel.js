@@ -9,9 +9,13 @@ function listarQuiz(idUserServer) {
     }
 
     var instrucaoSql = `
-        SELECT MAX(pontuacao) AS pontuacaoQuiz 
-        FROM partida 
-        WHERE idJogo = 1 AND idUser = ${idUserServer};
+    SELECT 
+    TRUNCATE((MAX(pontuacao) / 10),2) * 100 AS pontuacaoQuiz
+    FROM 
+    partida
+    WHERE 
+    idJogo = 1 AND idUser = ${idUserServer};
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
