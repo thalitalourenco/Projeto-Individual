@@ -12,8 +12,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina() ">
+<body onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -34,64 +33,62 @@
         <span class="letra" style="background-position: 104% 0%;">a</span>
       </div>
     </div>
-  </div>
     <nav role="navigation">
       <div class="div_avatar">
-      <div class="avatar-container">
-        <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+        <div class="avatar-container">
+          <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+        </div>
+        <div class="hello">
+          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        </div>
+        <ul>
+          <li class="ativo" aria-current="page" id="dashboard">
+            <span class="material-symbols-outlined">dashboard</span>
+            <a href="overview.html">OVERVIEW</a>
+          </li>
+          <li id="games">
+            <span class="material-symbols-outlined">sports_esports</span>
+            <a href="games.html">GAMES</a>
+          </li>
+          <li id="perfil">
+            <span class="material-symbols-outlined">person</span>
+            <a href="perfil.html">PERFIL</a>
+          </li>
+          <li id="sair">
+            <span class="material-symbols-outlined">logout</span>
+            <a onclick="limparSessao()">SAIR</a>
+          </li>
+        </ul>
       </div>
-    
-      <div class="hello">
-        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-      </div>
-      <ul>
-        <li class="ativo" aria-current="page" id="dashboard">
-          <span class="material-symbols-outlined">dashboard</span>
-          <a href="overview.html">OVERVIEW</a>
-        </li>
-        <li id="games">
-          <span class="material-symbols-outlined">sports_esports</span>
-          <a href="games.html">GAMES</a>
-        </li>
-        <li id="perfil">
-          <span class="material-symbols-outlined">person</span>
-          <a href="perfil.html">PERFIL</a>
-        </li>
-        <li id="sair">
-          <span class="material-symbols-outlined">logout</span>
-          <a onclick="limparSessao()">SAIR</a>
-        </li>
-      </ul>
     </nav>
   </header>
 
   <main class="main-overview">
     <div class="card">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Sua maior pontuação no Quiz de Conhecimentos</h3>
         <div id="pontuacaoQuiz">Pontuação</div>
         <button onclick="jogarQuiz()">Jogar</button>
       </div>
     </div>
-    <div class="card">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
+
+    <!-- <div class="card">
       <div class="card-content">
         <h3>Seu menor tempo na Cruzadinha</h3>
         <div id="tempoCruzadinha">Pontuação</div>
         <button onclick="jogarCruzadinha()">Jogar</button>
       </div>
-    </div>
+    </div> -->
+
     <div class="card">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Sua maior pontuação no Gary Doodle</h3>
         <div id="pontuacaoGaryDoodle">Pontuação</div>
         <button onclick="jogarGary()">Jogar</button>
       </div>
     </div>
+
     <div class="card">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Usuários com Mais Partidas</h3>
         <div id="rankingJogadores">
@@ -101,23 +98,23 @@
         </div>
       </div>
     </div>
+
     <div class="grafico">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Jogos que você mais jogou</h3>
         <canvas id="meuGrafico"></canvas>
       </div>
     </div>
+
     <div class="grafico2">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Personagens Mais Populares</h3>
         <h4>Veja quais personagens mais apareceram no quiz de personalidade dos usuários!</h4>
         <canvas id="meuGrafico2"></canvas>
       </div>
     </div>
+
     <div class="cardPersonagem">
-      <!-- <img src="https://via.placeholder.com/300x150" alt="Imagem do card" class="card-img"> -->
       <div class="card-content">
         <h3>Quiz de Personalidade</h3>
         <h4>Você é :</h4>
@@ -127,6 +124,7 @@
       </div>
     </div>
   </main>
+
 </body>
 
 </html>
@@ -152,7 +150,6 @@
         }else{
             document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
         }
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     };
 
     function vizualizarAvatar(fkAvatar) {

@@ -35,6 +35,7 @@ a {
   text-decoration: none;
 }
 
+/* ---------------- MENU LATERAL ---------------- */
 .menu-lateral {
   background-color: var(--azul-mais-escuro);
   width: 19%;
@@ -70,7 +71,7 @@ a {
   font-family: 'SpongeboyRegular', sans-serif;
   font-size: 1.7rem;
   display: inline-block;
-  background: url('../css-dashboard/fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
+  background: url('../css-dashboard/fontes/textura bob esponja.jpg') center center / 200% no-repeat;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -114,7 +115,6 @@ a {
   color: var(--gelo);
   font-size: 1.3rem;
   font-weight: 600;
-  text-decoration: none;
   transition: color 0.3s;
 }
 
@@ -146,32 +146,31 @@ a {
   transition: all 0.3s;
 }
 
-
+/* ---------------- MAIN OVERVIEW ---------------- */
 .main-overview {
-  margin-left: 19%; /* espaço para o menu lateral fixo */
+  margin-left: 19%;
   padding: 10px;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   grid-template-rows: auto auto;
   gap: 12px;
 }
 
 .main-overview > .grafico,
-.main-overview > .grafico2{
+.main-overview > .grafico2 {
   background: #fff;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-  height: 320px;
+  height: 53vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .main-overview .card:nth-child(1),
 .main-overview .card:nth-child(2),
-.main-overview .card:nth-child(3),
-.main-overview .card:nth-child(4){
+.main-overview .card:nth-child(3) {
   height: 30vh;
   margin-top: 3%;
   background: #fff;
@@ -181,10 +180,10 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  grid-column: span 2;
+  grid-column: span 3;
 }
 
-.main-overview .cardPersonagem{
+.main-overview .cardPersonagem {
   background: #fff;
   border-radius: 12px;
   padding: 20px;
@@ -193,139 +192,76 @@ a {
   flex-direction: column;
   justify-content: space-between;
   height: 53vh;
-  grid-column: span 2;
+  grid-column: span 3;
 }
 
-#rankingJogadores{
+#rankingJogadores {
   width: 100%;
   height: 100%;
   text-align: center;
   font-size: 1.7rem;
 }
-/*Card 1(Quiz)*/
-.main-overview .card:nth-child(1) .card-content h3{
-  margin-top: 5% ;
+
+/* ---------------- CARDS ESPECÍFICOS ---------------- */
+/* Card 1 (Quiz) */
+.main-overview .card:nth-child(1) .card-content h3,
+.main-overview .card:nth-child(2) .card-content h3,
+.main-overview .card:nth-child(3) .card-content h3 {
+  margin-top: 5%;
   width: 100%;
 }
 
-.main-overview .card:nth-child(1) .card-content div{
+.main-overview .card:nth-child(1) .card-content div,
+.main-overview .card:nth-child(2) .card-content div {
   font-size: 2rem;
   margin-top: 7%;
 }
 
-.main-overview .card:nth-child(1) .card-content button{
+.main-overview .card:nth-child(1) .card-content button,
+.main-overview .card:nth-child(2) .card-content button {
   margin-top: 7%;
 }
 
-/*Card 2(Cruzadinha)*/
-.main-overview .card:nth-child(2) .card-content h3{
-  margin-top: 5% ;
+/* Card Personagem */
+.main-overview .cardPersonagem .card-content h3 {
+  margin-top: 0;
   width: 100%;
 }
 
-.main-overview .card:nth-child(2) .card-content div{
-  font-size: 2rem;
-  margin-top: 7%;
-}
-
-.main-overview .card:nth-child(2) .card-content button{
-  margin-top: 7%;
-}
-
-/*Card 3(Gary Doodle)*/
-.main-overview .card:nth-child(3) .card-content h3{
-  margin-top: 5% ;
-  width: 100%;
-}
-
-.main-overview .card:nth-child(3) .card-content div{
-  font-size: 2rem;
-  margin-top: 7%;
-}
-
-.main-overview .card:nth-child(3) .card-content button{
-  margin-top: 7%;
-}
-
-/*Card 4(Ranking)*/
-.main-overview .card:nth-child(4) .card-content h3{
-  margin-top: 5% ;
-  width: 100%;
-}
-
-/*Card 7(Personagem)*/
-.main-overview .cardPersonagem .card-content h3{
-  margin-top: 0 ;
-  width: 100%;
-}
-
-.main-overview .cardPersonagem .card-content h4{
+.main-overview .cardPersonagem .card-content h4 {
   width: 100%;
   font-size: 1.1rem;
 }
 
-.main-overview .cardPersonagem .card-content div{
+.main-overview .cardPersonagem .card-content div {
   font-size: 2rem;
   margin-top: 1%;
 }
 
-.main-overview .cardPersonagem .card-content button{
+.main-overview .cardPersonagem .card-content button {
   margin-top: 7%;
 }
 
-.main-overview .grafico{
-  justify-content: center;
-  height: 53vh;
-  margin-top: 1%;
-}
-
-canvas #meuGrafico{
-  display: flex;
-}
-
-.main-overview .grafico .card-content h3{
-  margin-top: 0%;
-}
-
-.main-overview .card:hover{
-transform: translateY(-5px);
-transition: 0.3s ease;
-}
-.main-overview .grafico:hover{
+/* Hover para elevação */
+.main-overview .card:hover,
+.main-overview .grafico:hover,
+.main-overview .grafico2:hover {
   transform: translateY(-5px);
   transition: 0.3s ease;
 }
 
-.main-overview .grafico2{
-  justify-content: center;
-  height: 53vh;
-}
-
-.main-overview .grafico2 .card-content h3{
-  margin-top: 0%;
-}
-
-.main-overview .grafico2 .card-content h4{
-  font-size: 0.9rem;
-}
-
-.main-overview .grafico2:hover{
-  transform: translateY(-5px);
-  transition: 0.3s ease;
-}
-
-/* Quiz ocupa as primeiras 3 colunas da segunda linha */
+/* ---------------- GRID ORGANIZAÇÃO ---------------- */
 .main-overview > .card:nth-child(4) {
-  grid-column: span 2;
-}
-
-/* Gráfico ocupa as últimas 3 colunas da segunda linha */
-.main-overview > .grafico,
-.main-overview > .grafico2{
   grid-column: span 3;
 }
 
-.card-content{
+.main-overview > .grafico,
+.main-overview > .grafico2 {
+  grid-column: span 3;
+}
+
+/* ---------------- CARD CONTENT ---------------- */
+.card-content {
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -333,25 +269,21 @@ transition: 0.3s ease;
   margin: 0;
 }
 
-/* Ajustes para títulos e botões dentro dos cards */
 .card-content h3 {
   font-weight: 600;
-  font-size: 1.0rem;
+  font-size: 1rem;
   text-align: center;
 }
 
-/*Você é:*/
 .card-content h4 {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   font-weight: 500;
   color: #555;
   text-align: center;
 }
 
 .card-content div {
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   font-weight: 500;
   color: #555;
   text-align: center;
@@ -360,9 +292,9 @@ transition: 0.3s ease;
 .card-content button {
   align-self: center;
   padding: 10px 25px;
-  background: url('./fontes/textura\ bob\ esponja.jpg');
-  color: var(--preto-sapato);
+  background: url('./fontes/textura bob esponja.jpg');
   background-size: 200%;
+  color: var(--preto-sapato);
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -375,10 +307,15 @@ transition: 0.3s ease;
   transition: 0.3s ease;
 }
 
-/* Imagem do resultado do quiz de personalidade */
+/* ---------------- RESULTADO QUIZ ---------------- */
 #resultado-imagem {
   width: 100%;
   max-height: 170px;
   object-fit: contain;
   border-radius: 8px;
+}
+
+/* ---------------- CANVAS ---------------- */
+#meuGrafico {
+  display: flex;
 }
