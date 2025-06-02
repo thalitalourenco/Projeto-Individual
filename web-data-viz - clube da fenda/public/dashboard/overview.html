@@ -12,7 +12,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina();">
+<body
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -132,46 +133,48 @@
 <script src="../js/redirecionadores.js"></script>
 
 <script>
-    const mapaAvatares = {
-        1: './css-dashboard/img/avatars/bob_esponja.jpg',
-        2: './css-dashboard/img/avatars/patrick.png',
-        3: './css-dashboard/img/avatars/sr.sirigueijo.png',
-        4: './css-dashboard/img/avatars/sandy.jpg',
-        5: './css-dashboard/img/avatars/lula_molusco.jpg',
-        6: './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview.png',
-        7: './css-dashboard/img/avatars/plankton.png'
-    };
 
-    function abrirPagina() {
-        const fkAvatar = sessionStorage.ID_AVATAR;
-        vizualizarAvatar(fkAvatar)
-        if (fkAvatar) {
-            document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
-        }else{
-            document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
-        }
-    };
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  const mapaAvatares = {
+    1: './css-dashboard/img/avatars/bob_esponja.jpg',
+    2: './css-dashboard/img/avatars/patrick.png',
+    3: './css-dashboard/img/avatars/sr.sirigueijo.png',
+    4: './css-dashboard/img/avatars/sandy.jpg',
+    5: './css-dashboard/img/avatars/lula_molusco.jpg',
+    6: './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview.png',
+    7: './css-dashboard/img/avatars/plankton.png'
+  };
 
-    function vizualizarAvatar(fkAvatar) {
-        var idUsuario = sessionStorage.getItem('ID_USUARIO')
-        fetch('/dash/vizualizarAvatar', {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(res => {
-                if (res.ok) {
-                    console.log('Avatar atualizado com sucesso!');
-                } else {
-                    console.log('Erro ao atualizar avatar');
-                }
-            })
-            .catch(function (error){
-                console.error(
-                    `Deu tudo certo
-                    `
-                );
-                })
+  function abrirPagina() {
+    const fkAvatar = sessionStorage.ID_AVATAR;
+
+    if (fkAvatar && mapaAvatares[fkAvatar]) {
+      document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+    } else {
+      document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
     }
+  }
+
+  function vizualizarAvatar(fkAvatar) {
+    var idUsuario = sessionStorage.getItem('ID_USUARIO')
+    fetch('/dash/vizualizarAvatar', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) {
+          console.log('Avatar atualizado com sucesso!');
+        } else {
+          console.log('Erro ao atualizar avatar');
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Deu tudo certo
+                    `
+        );
+      })
+  }
 
 
   function obterDados() {
@@ -305,7 +308,7 @@
           switch (item.personagem) {
             case 'Bob': return '#B8860B';
             case 'Patrick': return '#C71585';
-            case 'Sr. Siriguejo': return '#8B0000';
+            case 'Sr. Sirigueijo': return '#8B0000';
             case 'Plankton': return '#006400';
             case 'Sandy': return '#8B4513';
             case 'Lula': return '#2F4F4F';

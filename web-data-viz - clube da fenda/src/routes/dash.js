@@ -43,5 +43,8 @@ router.get("/vizualizarAvatar", (req, res) => {
     dashController.vizualizarAvatar(req, res);
 });
 
+router.delete("/excluirConta", (req, res) => {
+    dashController.excluirConta(req, res);
+});
 
 module.exports = router;

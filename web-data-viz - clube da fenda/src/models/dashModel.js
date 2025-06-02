@@ -104,6 +104,20 @@ function vizualizarAvatar(idUserServer) {
     return database.executar(instrucao);
 }
 
+function excluirConta(idUserServer) {
+    const instrucaoExcluirPartidas = `
+        DELETE FROM partida WHERE idUser = ${idUserServer};
+    `;
+    const instrucaoExcluirUsuario = `
+        DELETE FROM usuario WHERE id = ${idUserServer};
+    `;
+
+    console.log("Executando instrução SQL para excluir partidas:", instrucaoExcluirPartidas);
+    console.log("Executando instrução SQL para excluir usuário:", instrucaoExcluirUsuario);
+
+    return database.executar(instrucaoExcluirPartidas)
+        .then(() => database.executar(instrucaoExcluirUsuario));
+}
 
 module.exports = {
     listarQuiz,
@@ -115,5 +129,6 @@ module.exports = {
     listarRanking,
     atualizarPerfil,
     atualizarAvatar,
-    vizualizarAvatar
+    vizualizarAvatar,
+    excluirConta
 }

@@ -237,14 +237,22 @@ a {
 }
 
 .perfil-botoes button {
-    background-color: var(--azul-escuro);
-    color: var(--branco);
     border: none;
     padding: 10px 18px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s, transform 0.3s;
+}
+
+#editar button{
+    background-color: var(--azul-escuro) !important;
+    color: var(--branco);
+}
+
+#excluir button {
+    background-color: var(--vermelho-gravata) !important;
+    color: var(--branco);
 }
 
 .perfil-botoes button:hover {
@@ -277,4 +285,39 @@ a {
 .selecao-avatar:hover {
     transform: scale(1.1);
     box-shadow: 0 0 10px var(--azul-escuro);
+}
+
+#editar {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#excluir {
+    background-color: var(--vermelho-gravata); 
+    color: var(--branco);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#editar:hover {
+    transform: translateY(-2px); 
+}
+
+#excluir:hover {
+    transform: translateY(-2px); 
+}
+
+#editar:active,
+#excluir:active {
+    transform: translateY(0);
 }

@@ -33,7 +33,8 @@
         </div>
 
         <nav role="navigation">
-                <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatarNav" id="perfil-avatarNav">
+            <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatarNav"
+                id="perfil-avatarNav">
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
@@ -62,7 +63,8 @@
         <div class="perfil-container">
             <div class="perfil-card">
                 <div class="avatar-container">
-                    <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+                    <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar"
+                        id="perfil-avatar">
                     <br>
                     <button onclick="mostrarOpcoesAvatar()">Trocar Foto</button>
                 </div>
@@ -118,8 +120,11 @@
                 </div>
 
                 <div class="perfil-botoes">
-                    <button onclick="editarPerfil()">
+                    <button id="editar" onclick="editarPerfil()">
                         Editar Perfil
+                    </button>
+                    <button id="excluir" onclick="excluirConta()">
+                        Excluir Perfil
                     </button>
                 </div>
             </div>
@@ -132,6 +137,7 @@
 </html>
 <script src="../js/redirecionadores.js"></script>
 <script>
+     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     const mapaAvatares = {
         1: './css-dashboard/img/avatars/bob_esponja.jpg',
@@ -143,18 +149,19 @@
         7: './css-dashboard/img/avatars/plankton.png'
     };
 
+
     function abrirPagina() {
         const fkAvatar = sessionStorage.ID_AVATAR;
-        vizualizarAvatar(fkAvatar)
-        if (fkAvatar) {
+
+        if (fkAvatar && mapaAvatares[fkAvatar]) {
             document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
-            document.getElementById('perfil-avatarNav').src = mapaAvatares[fkAvatar];           
-        }else{
+            document.getElementById('perfil-avatarNav').src = mapaAvatares[fkAvatar];
+        } else {
             document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
             document.getElementById('perfil-avatarNav').src = './css-dashboard/img/avatars/default.webp';
         }
-        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    };
+    }
+
 
     function limparSessao() {
         sessionStorage.clear();
@@ -256,11 +263,11 @@
     }
 
     function selecionarAvatar(fkAvatar, caminho) {
-    document.getElementById('perfil-avatar').src = caminho;
-    sessionStorage.ID_AVATAR = fkAvatar;
-    fecharOpcoesAvatar();
-    atualizarAvatarNoServidor(fkAvatar);
-}
+        document.getElementById('perfil-avatar').src = caminho;
+        sessionStorage.ID_AVATAR = fkAvatar;
+        fecharOpcoesAvatar();
+        atualizarAvatarNoServidor(fkAvatar);
+    }
 
 
     function atualizarAvatarNoServidor(fkAvatar) {
@@ -296,12 +303,50 @@
                     console.log('Erro ao atualizar avatar');
                 }
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.error(
                     `Deu tudo certo
                     `
                 );
-                })
+            })
+    }
+
+    function excluirConta() {
+        const idUserServer = sessionStorage.ID_USUARIO; // Obtém o ID do usuário do sessionStorage
+
+        console.log("ID do usuário:", idUserServer); // Verifica se o ID está definido
+
+        if (!idUserServer) {
+            alert("Erro: ID do usuário não encontrado!");
+            return;
+        }
+
+        fetch("/dash/excluirConta", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ idUserServer }), // Envia o ID do usuário no corpo da requisição
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    console.log("Conta deletada com sucesso!");
+
+                    setTimeout(function () {
+                        window.location = "../login.html"; // Redireciona para a página de login
+                    }, 1000);
+                } else {
+                    console.log("Houve um erro ao tentar deletar a conta!");
+                    resposta.text().then((texto) => {
+                        console.error(texto);
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.error("Erro na requisição:", erro);
+            });
+
+        return false;
     }
 
 </script>

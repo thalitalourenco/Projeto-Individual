@@ -102,6 +102,8 @@
 </html>
 <script src="../js/redirecionadores.js"></script>
 <script>
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
   const mapaAvatares = {
     1: './css-dashboard/img/avatars/bob_esponja.jpg',
     2: './css-dashboard/img/avatars/patrick.png',
@@ -114,14 +116,13 @@
 
   function abrirPagina() {
     const fkAvatar = sessionStorage.ID_AVATAR;
-    vizualizarAvatar(fkAvatar)
-    if (fkAvatar) {
+
+    if (fkAvatar && mapaAvatares[fkAvatar]) {
       document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
     } else {
       document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
     }
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-  };
+  }
 
   function vizualizarAvatar(fkAvatar) {
     var idUsuario = sessionStorage.getItem('ID_USUARIO')

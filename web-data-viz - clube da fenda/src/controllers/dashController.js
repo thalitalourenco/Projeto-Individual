@@ -152,6 +152,21 @@ function vizualizarAvatar(req, res) {
     });
 }
 
+function excluirConta(req, res) {
+    const { idUserServer } = req.body; // Obtém o ID do usuário do corpo da requisição
+
+    if (!idUserServer) {
+        return res.status(400).send('ID do usuário não fornecido!');
+    }
+
+    dashModel.excluirConta(idUserServer) // Chama o modelo para excluir a conta
+        .then(() => res.status(200).send('Conta excluída com sucesso!'))
+        .catch(erro => {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage || 'Erro ao excluir conta.');
+        });
+}  
+
 
 module.exports = {
     listarQuiz,
@@ -163,5 +178,6 @@ module.exports = {
     listarRanking,
     atualizarPerfil,
     atualizarAvatar,
-    vizualizarAvatar
+    vizualizarAvatar,
+    excluirConta
 }
