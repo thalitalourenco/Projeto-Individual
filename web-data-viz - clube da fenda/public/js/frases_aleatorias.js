@@ -14,8 +14,6 @@ function mostrarFrase() {
   document.getElementById("quote").innerText = frases[index];
 }
 
-// Mostra a primeira frase imediatamente ao carregar
 mostrarFrase();
 
-// Troca a frase a cada 5 segundos
-setInterval(mostrarFrase, 3000);
+setInterval(mostrarFrase, 4000);

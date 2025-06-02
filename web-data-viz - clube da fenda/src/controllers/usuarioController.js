@@ -24,6 +24,7 @@ function autenticar(req, res) {
                                         nome: resultadoAutenticar[0].nome,
                                         telefone: resultadoAutenticar[0].telefone,
                                         senha: resultadoAutenticar[0].senha,
+                                        fkAvatar: resultadoAutenticar[0].fkAvatar
                                     });
                         
                     } else if (resultadoAutenticar.length == 0) {

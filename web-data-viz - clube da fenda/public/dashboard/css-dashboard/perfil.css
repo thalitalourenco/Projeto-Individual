@@ -1,0 +1,269 @@
+:root {
+    --amarelo-bob: #ffeb3b;
+    --amarelo-sombra: #f0c800;
+    --marrom-calca: #8b5e3c;
+    --branco: #ffffff;
+    --vermelho-gravata: #ff0000;
+    --preto-sapato: #000000;
+    --azul-olhos: #3b9eff;
+    --azul-escuro: #0080ff;
+    --azul-mais-escuro: #04509d;
+    --azul_acinzentado: #436c95;
+    --azul-oceano-claro: #b8e7f2;
+    --azul-submarino: #7fd6e3;
+    --verde-alga: #7cd3a3;
+    --verde-escuro: #029c47;
+    --rosa-agua-viva: #ff91c0;
+    --roxo-pedra: #a282be;
+    --roxo-claro: #dbb2ff;
+    --roxo-escuro: #735d86;
+    --areia-fundo-mar: #f2e1a1;
+    --azul-esverdeado-logo: #ADD8E6;
+    --gelo: #f6f5f5;
+    --cinza-claro: #e0e0e0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--gelo);
+    height: 100vh;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.menu-lateral {
+    background-color: var(--azul-mais-escuro);
+    width: 19%;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.linha {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.espaco {
+    width: 20px;
+}
+
+.letra {
+    font-family: 'SpongeboyRegular', sans-serif;
+    font-size: 1.9rem;
+    display: inline-block;
+    background: url('../css-dashboard/fontes/textura\ bob\ esponja.jpg') center center / 200% no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hello {
+    font-size: 1.5rem;
+    color: var(--gelo);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-top: 1%;
+    text-align: center;
+}
+
+.menu-lateral nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.menu-lateral nav ul li {
+    display: flex;
+    align-items: center;
+    padding: 10% 10%;
+    transition: background-color 0.3s;
+    gap: 12px;
+}
+
+.menu-lateral nav ul li:hover {
+    background-color: var(--azul-escuro);
+    cursor: pointer;
+    border-left: 4px solid var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li span.material-symbols-outlined {
+    font-size: 2.3rem;
+    color: var(--amarelo-bob);
+}
+
+.menu-lateral nav ul li a {
+    color: var(--gelo);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.menu-lateral nav ul li:hover a {
+    color: var(--branco);
+}
+
+.menu-lateral nav ul li.ativo {
+    background-color: var(--azul_acinzentado);
+    border-left: 4px solid var(--amarelo-sombra);
+}
+
+.menu-lateral nav ul li.ativo span.material-symbols-outlined {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.85; }
+}
+.main-overview {
+    margin-left: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 81%;
+    height: 110vh;
+}
+
+.perfil-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil-card {
+    background-color: var(--branco);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--azul-escuro);
+    transition: all 0.3s;
+}
+
+.perfil-avatar:hover {
+    box-shadow: 0 0 15px var(--azul-escuro);
+    transform: scale(1.05);
+}
+
+.perfil-card h2 {
+    margin: 15px 0 5px;
+    color: var(--azul-mais-escuro);
+}
+
+.perfil-card p {
+    margin: 5px 0;
+    color: var(--cinza-escuro);
+}
+
+.perfil-info {
+    margin: 20px 0;
+    text-align: left;
+    width: 90%;
+}
+
+.info-item {
+    background-color: var(--gelo);
+    width: 90%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--cinza-claro);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.info-item:hover {
+    background-color: var(--branco);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-item span {
+    font-weight: 600;
+    color: var(--azul-mais-escuro);
+}
+
+.perfil-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.perfil-botoes button {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.perfil-botoes button:hover {
+    background-color: var(--azul-mais-escuro);
+    transform: translateY(-2px);
+}
+
+.perfil-botoes button:active {
+    transform: translateY(0);
+}
+
+.lista-avatars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.selecao-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--azul-escuro);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.selecao-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px var(--azul-escuro);
+}

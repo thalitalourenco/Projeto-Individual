@@ -76,6 +76,34 @@ function listarRanking() {
     return database.executar(instrucaoSql);
 }
 
+function atualizarPerfil(idUserServer, nome, email, telefone, senha) {
+    const instrucaoSql = `
+        UPDATE usuario SET 
+            nome = '${nome}', 
+            email = '${email}', 
+            telefone = '${telefone}', 
+            senha = '${senha}'
+        WHERE id = ${idUserServer};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarAvatar(idUserServer, fkAvatar) {
+    const instrucao = `
+        UPDATE usuario SET fkAvatar = ${fkAvatar} WHERE id = ${idUserServer};
+    `;
+    return database.executar(instrucao);
+}
+
+function vizualizarAvatar(idUserServer) {
+    const instrucao = `
+        SELECT fkAvatar FROM usuario WHERE id = ${idUserServer};
+    `;
+    return database.executar(instrucao);
+}
+
 
 module.exports = {
     listarQuiz,
@@ -84,5 +112,8 @@ module.exports = {
     listarPontuacaoGaryDoodle,
     jogosMaisJogados,
     personagensPartidas,
-    listarRanking
+    listarRanking,
+    atualizarPerfil,
+    atualizarAvatar,
+    vizualizarAvatar
 }

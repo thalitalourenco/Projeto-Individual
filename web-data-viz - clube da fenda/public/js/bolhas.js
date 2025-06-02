@@ -16,5 +16,4 @@ function criarBolha() {
   setTimeout(() => bolha.remove(), 8000);
 }
 
-// Cria uma nova bolha a cada 400ms
 setInterval(criarBolha, 400);

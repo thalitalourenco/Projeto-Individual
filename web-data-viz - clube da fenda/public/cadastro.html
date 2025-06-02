@@ -194,7 +194,7 @@
 
     function validarSenha() {
         var senhaVar = input_senha.value;
-        input_senha.value = senhaVar.replaceAll("'", '').replaceAll('=', '').replaceAll('-', '').replaceAll(';', '').replaceAll('"', '').replaceAll('#', '');
+        input_senha.value = senhaVar.replaceAll("'", '').replaceAll('=', '').replaceAll('-', '').replaceAll(';', '').replaceAll('"', '');
         var senhaMaiuscula = senhaVar.toUpperCase();
         var senhaMinuscula = senhaVar.toLowerCase();
         var senhaExclamacao = senhaVar.includes('!');

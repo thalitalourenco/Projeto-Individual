@@ -113,6 +113,46 @@ function listarRanking(req, res) {
     });
 }
 
+function atualizarPerfil(req, res) {
+    const { idUsuario, nome, email, telefone, senha } = req.body;
+
+    dashModel.atualizarPerfil(idUsuario, nome, email, telefone, senha)
+        .then(function (resultado) {
+            if (resultado.affectedRows > 0) {
+                res.status(200).json({ mensagem: "Perfil atualizado com sucesso!" });
+            } else {
+                res.status(204).send("Nenhuma alteração realizada.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
+function atualizarAvatar(req, res) {
+    const { idUsuario, fkAvatar } = req.body;
+
+    dashModel.atualizarAvatar(idUsuario, fkAvatar)
+    .then(() => res.status(200).send('Avatar atualizado com sucesso!'))
+    .catch(erro => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function vizualizarAvatar(req, res) {
+    const { idUsuario, fkAvatar } = req.body;
+
+    dashModel.vizualizarAvatar(idUsuario, fkAvatar)
+    .then(() => res.status(200).send('Avatar vizualizado com sucesso!'))
+    .catch(erro => {
+        console.log(erro);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 module.exports = {
     listarQuiz,
     listarQuizPersonalidade,
@@ -120,5 +160,8 @@ module.exports = {
     listarPontuacaoGaryDoodle,
     jogosMaisJogados,
     personagensPartidas,
-    listarRanking
+    listarRanking,
+    atualizarPerfil,
+    atualizarAvatar,
+    vizualizarAvatar
 }

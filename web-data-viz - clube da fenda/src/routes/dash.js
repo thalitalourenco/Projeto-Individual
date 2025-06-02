@@ -31,5 +31,17 @@ router.get("/listarRanking", function (req, res) {
     dashController.listarRanking(req, res);
 });
 
+router.patch("/atualizarPerfil", function (req, res) {
+    dashController.atualizarPerfil(req, res);
+});
+
+router.patch("/atualizarAvatar", (req, res) => {
+    dashController.atualizarAvatar(req, res);
+});
+
+router.get("/vizualizarAvatar", (req, res) => {
+    dashController.vizualizarAvatar(req, res);
+});
+
 
 module.exports = router;

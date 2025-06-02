@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games | Clube da Fenda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="./css-dashboard/perfil.css" />
+</head>
+
+<body>
+
+    <body onload="validarSessao()"></body>
+    <header class="menu-lateral">
+        <div class="logo">
+            <div class="linha">
+                <span class="letra" style="background-position: 0% 0%;">C</span>
+                <span class="letra" style="background-position: 8% 0%;">l</span>
+                <span class="letra" style="background-position: 16% 0%;">u</span>
+                <span class="letra" style="background-position: 24% 0%;">b</span>
+                <span class="letra" style="background-position: 32% 0%;">e</span>
+                <span class="espaco"></span>
+                <span class="letra" style="background-position: 48% 0%;">d</span>
+                <span class="letra" style="background-position: 56% 0%;">a</span>
+            </div>
+            <div class="linha">
+                <span class="letra" style="background-position: 72% 0%;">F</span>
+                <span class="letra" style="background-position: 80% 0%;">e</span>
+                <span class="letra" style="background-position: 88% 0%;">n</span>
+                <span class="letra" style="background-position: 96% 0%;">d</span>
+                <span class="letra" style="background-position: 104% 0%;">a</span>
+            </div>
+        </div>
+
+        <nav role="navigation">
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+            <ul>
+                <li id="dashboard">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <a href="overview.html">OVERVIEW</a>
+                </li>
+                <li id="games">
+                    <span class="material-symbols-outlined">sports_esports</span>
+                    <a href="games.html">GAMES</a>
+                </li>
+                <li class="ativo" aria-current="page" id="perfil">
+                    <span class="material-symbols-outlined">person</span>
+                    <a href="perfil.html">PERFIL</a>
+                </li>
+                <li id="sair">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a onclick="limparSessao()">SAIR</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-overview">
+        <div class="perfil-container">
+            <div class="perfil-card">
+                <div class="avatar-container">
+                    <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+                    <br>
+                    <button onclick="mostrarOpcoesAvatar()">Trocar Foto</button>
+                </div>
+
+                <div id="opcoes-avatar" style="display:none;">
+                    <h3>Escolha seu avatar</h3>
+                    <div class="lista-avatars">
+                        <img src="./css-dashboard/img/avatars/bob_esponja.jpg" alt="Avatar 1" class="selecao-avatar"
+                            onclick="selecionarAvatar(1, './css-dashboard/img/avatars/bob_esponja.jpg')">
+
+                        <img src="./css-dashboard/img/avatars/patrick.png" alt="Avatar 2" class="selecao-avatar"
+                            onclick="selecionarAvatar(2, './css-dashboard/img/avatars/patrick.png')">
+
+                        <img src="./css-dashboard/img/avatars/sr.sirigueijo.png" alt="Avatar 3" class="selecao-avatar"
+                            onclick="selecionarAvatar(3, './css-dashboard/img/avatars/sr.sirigueijo.png')">
+
+                        <img src="./css-dashboard/img/avatars/sandy.jpg" alt="Avatar 4" class="selecao-avatar"
+                            onclick="selecionarAvatar(4, './css-dashboard/img/avatars/sandy.jpg')">
+
+                        <img src="./css-dashboard/img/avatars/lula_molusco.jpg" alt="Avatar 5" class="selecao-avatar"
+                            onclick="selecionarAvatar(5, './css-dashboard/img/avatars/lula_molusco.jpg')">
+
+                        <img src="./css-dashboard/img/avatars/gary_sem_fundo-removebg-preview (1).png" alt="Avatar 6"
+                            class="selecao-avatar"
+                            onclick="selecionarAvatar(6, './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview (1).png')">
+
+                        <img src="./css-dashboard/img/avatars/plankton.png" alt="Avatar 7" class="selecao-avatar"
+                            onclick="selecionarAvatar(7, './css-dashboard/img/avatars/plankton.png')">
+
+                    </div>
+                    <button onclick="fecharOpcoesAvatar()">Cancelar</button>
+                </div>
+                <h2 id="perfil-nome-titulo">Nome do Usuário</h2>
+                <p id="perfil-email-titulo">usuario@email.com</p>
+
+                <div class="perfil-info">
+                    <button class="info-item">
+                        <span>Nome:</span>
+                        <span id="perfil-nome">nome_usuario</span>
+                    </button>
+                    <button class="info-item">
+                        <span>Email:</span>
+                        <span id="perfil-email">usuario@email.com</span>
+                    </button>
+                    <button class="info-item">
+                        <span>Telefone:</span>
+                        <span id="perfil-telefone">(11) 98119-2588</span>
+                    </button>
+                    <button class="info-item">
+                        <span>Senha:</span>
+                        <span id="perfil-senha">********</span>
+                    </button>
+                </div>
+
+                <div class="perfil-botoes">
+                    <button onclick="editarPerfil()">
+                        Editar Perfil
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
+<script src="../js/redirecionadores.js"></script>
+<script>
+
+    const mapaAvatares = {
+        1: './css-dashboard/img/avatars/bob_esponja.jpg',
+        2: './css-dashboard/img/avatars/patrick.png',
+        3: './css-dashboard/img/avatars/sr.sirigueijo.png',
+        4: './css-dashboard/img/avatars/sandy.jpg',
+        5: './css-dashboard/img/avatars/lula_molusco.jpg',
+        6: './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview.png',
+        7: './css-dashboard/img/avatars/plankton.png'
+    };
+
+    window.onload = function () {
+        const fkAvatar = sessionStorage.ID_AVATAR;
+        vizualizarAvatar(fkAvatar)
+        if (fkAvatar) {
+            document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+        }else{
+            document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+        }
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    };
+
+    function limparSessao() {
+        sessionStorage.clear();
+        window.location = "/login.html";
+    }
+
+    const usuario = {
+        nome: sessionStorage.NOME_USUARIO,
+        email: sessionStorage.EMAIL_USUARIO,
+        idUsuario: sessionStorage.ID_USUARIO,
+        telefone: sessionStorage.TELEFONE_USUARIO,
+        senha: sessionStorage.SENHA_USUARIO,
+    };
+
+    console.log(usuario);
+
+    document.getElementById("perfil-nome-titulo").innerText = usuario.nome;
+    document.getElementById("perfil-email-titulo").innerText = usuario.email;
+    document.getElementById("perfil-nome").innerText = usuario.nome;
+    document.getElementById("perfil-email").innerText = usuario.email;
+    document.getElementById("perfil-telefone").innerText = usuario.telefone;
+    document.getElementById("perfil-senha").innerText = usuario.senha;
+
+
+    let editando = false;
+
+    function editarPerfil() {
+        if (!editando) {
+            transformarEmInput("perfil-nome");
+            transformarEmInput("perfil-email");
+            transformarEmInput("perfil-telefone");
+            transformarEmInput("perfil-senha");
+
+            document.querySelector(".perfil-botoes button").innerText = "Salvar";
+            editando = true;
+        } else {
+            salvarPerfil();
+            document.querySelector(".perfil-botoes button").innerText = "Editar Perfil";
+            editando = false;
+        }
+    }
+
+    function transformarEmInput(id) {
+        const span = document.getElementById(id);
+        const valor = span.innerText;
+        span.innerHTML = `<input id="input-${id}" value="${valor}" style="border:none; background:none; width: 100%; text-align:right;">`;
+    }
+
+    function salvarPerfil() {
+        const nome = document.getElementById("input-perfil-nome").value;
+        const email = document.getElementById("input-perfil-email").value;
+        const telefone = document.getElementById("input-perfil-telefone").value;
+        const senha = document.getElementById("input-perfil-senha").value;
+
+        fetch("/dash/atualizarPerfil", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                nome: nome,
+                email: email,
+                telefone: telefone,
+                senha: senha
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    alert("Perfil atualizado com sucesso!");
+
+                    document.getElementById("perfil-nome").innerText = nome;
+                    document.getElementById("perfil-email").innerText = email;
+                    document.getElementById("perfil-telefone").innerText = telefone;
+                    document.getElementById("perfil-senha").innerText = senha;
+
+                    sessionStorage.NOME_USUARIO = nome;
+                    sessionStorage.EMAIL_USUARIO = email;
+                    sessionStorage.TELEFONE_USUARIO = telefone;
+                    sessionStorage.SENHA_USUARIO = senha;
+                } else {
+                    res.text().then(texto => {
+                        alert("Erro ao atualizar perfil: " + texto);
+                    });
+                }
+            })
+            .catch(erro => {
+                console.error(erro);
+                alert("Erro ao atualizar perfil.");
+            });
+    }
+
+    function mostrarOpcoesAvatar() {
+        document.getElementById('opcoes-avatar').style.display = 'block';
+    }
+
+    function fecharOpcoesAvatar() {
+        document.getElementById('opcoes-avatar').style.display = 'none';
+    }
+
+    function selecionarAvatar(fkAvatar, caminho) {
+    document.getElementById('perfil-avatar').src = caminho;
+    sessionStorage.ID_AVATAR = fkAvatar;
+    fecharOpcoesAvatar();
+    atualizarAvatarNoServidor(fkAvatar);
+}
+
+
+    function atualizarAvatarNoServidor(fkAvatar) {
+        fetch('/dash/atualizarAvatar', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                idUsuario: sessionStorage.ID_USUARIO,
+                fkAvatar: fkAvatar
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    alert('Avatar atualizado com sucesso!');
+                    console.log(fkAvatar)
+                } else {
+                    console.log('Erro ao atualizar avatar');
+                }
+            })
+            .catch(() => console.error('Deu tudo certo'));
+    }
+
+    function vizualizarAvatar(fkAvatar) {
+        var idUsuario = sessionStorage.getItem('ID_USUARIO')
+        fetch('/dash/vizualizarAvatar', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => {
+                if (res.ok) {
+                    console.log('Avatar atualizado com sucesso!');
+                } else {
+                    console.log('Erro ao atualizar avatar');
+                }
+            })
+            .catch(function (error){
+                console.error(
+                    `Deu tudo certo
+                    `
+                );
+                })
+    }
+
+</script>
