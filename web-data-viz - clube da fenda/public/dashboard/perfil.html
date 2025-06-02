@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="./css-dashboard/perfil.css" />
 </head>
 
-<body>
-
-    <body onload="validarSessao()"></body>
+<body onload="abrirPagina()">
     <header class="menu-lateral">
         <div class="logo">
             <div class="linha">
@@ -35,6 +33,7 @@
         </div>
 
         <nav role="navigation">
+                <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatarNav" id="perfil-avatar">
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
@@ -144,13 +143,15 @@
         7: './css-dashboard/img/avatars/plankton.png'
     };
 
-    window.onload = function () {
+    function abrirPagina() {
         const fkAvatar = sessionStorage.ID_AVATAR;
         vizualizarAvatar(fkAvatar)
         if (fkAvatar) {
             document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+            document.getElementById('perfil-avatarNav').src = mapaAvatares[fkAvatar];           
         }else{
             document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+            document.getElementById('perfil-avatarNav').src = './css-dashboard/img/avatars/default.webp';
         }
         b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     };

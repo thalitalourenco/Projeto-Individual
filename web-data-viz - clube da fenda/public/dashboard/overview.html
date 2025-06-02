@@ -13,7 +13,7 @@
 </head>
 
 <body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados();">
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina() ">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -34,8 +34,13 @@
         <span class="letra" style="background-position: 104% 0%;">a</span>
       </div>
     </div>
-
+  </div>
     <nav role="navigation">
+      <div class="div_avatar">
+      <div class="avatar-container">
+        <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+      </div>
+    
       <div class="hello">
         <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
       </div>
@@ -129,154 +134,195 @@
 <script src="../js/redirecionadores.js"></script>
 
 <script>
-  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    const mapaAvatares = {
+        1: './css-dashboard/img/avatars/bob_esponja.jpg',
+        2: './css-dashboard/img/avatars/patrick.png',
+        3: './css-dashboard/img/avatars/sr.sirigueijo.png',
+        4: './css-dashboard/img/avatars/sandy.jpg',
+        5: './css-dashboard/img/avatars/lula_molusco.jpg',
+        6: './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview.png',
+        7: './css-dashboard/img/avatars/plankton.png'
+    };
+
+    function abrirPagina() {
+        const fkAvatar = sessionStorage.ID_AVATAR;
+        vizualizarAvatar(fkAvatar)
+        if (fkAvatar) {
+            document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+        }else{
+            document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+        }
+        b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    };
+
+    function vizualizarAvatar(fkAvatar) {
+        var idUsuario = sessionStorage.getItem('ID_USUARIO')
+        fetch('/dash/vizualizarAvatar', {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => {
+                if (res.ok) {
+                    console.log('Avatar atualizado com sucesso!');
+                } else {
+                    console.log('Erro ao atualizar avatar');
+                }
+            })
+            .catch(function (error){
+                console.error(
+                    `Deu tudo certo
+                    `
+                );
+                })
+    }
+
 
   function obterDados() {
-  const idUserServer = sessionStorage.ID_USUARIO;
+    const idUserServer = sessionStorage.ID_USUARIO;
 
-  const nomeJogos = {
-    1: 'Quiz',
-    2: 'Personalidade',
-    3: 'Cruzadinha',
-    4: 'Gary'
-  };
+    const nomeJogos = {
+      1: 'Quiz',
+      2: 'Personalidade',
+      3: 'Cruzadinha',
+      4: 'Gary'
+    };
 
-  const coresFundo = {
-    1: '#36A2EB',
-    2: '#FFCE56',
-    3: '#FF6384',
-    4: '#4BC0C0'
-  };
+    const coresFundo = {
+      1: '#36A2EB',
+      2: '#FFCE56',
+      3: '#FF6384',
+      4: '#4BC0C0'
+    };
 
-  const coresBorda = {
-    1: '#1F77B4',
-    2: '#C49C94',
-    3: '#D62728',
-    4: '#17BECF'
-  };
+    const coresBorda = {
+      1: '#1F77B4',
+      2: '#C49C94',
+      3: '#D62728',
+      4: '#17BECF'
+    };
 
-  const nomePersonagens = {
-    1: 'Bob',
-    2: 'Patrick',
-    3: 'Sr. Siriguejo',
-    4: 'Plankton',
-    5: 'Sandy',
-    6: 'Lula'
-  };
+    const nomePersonagens = {
+      1: 'Bob',
+      2: 'Patrick',
+      3: 'Sr. Siriguejo',
+      4: 'Plankton',
+      5: 'Sandy',
+      6: 'Lula'
+    };
 
-  const coresPersonagensFundo = {
-  1: '#FFD700', 
-  2: '#FF69B4', 
-  3: '#B22222', 
-  4: '#228B22', 
-  5: '#D2B48C', 
-  6: '#4682B4'  
-};
+    const coresPersonagensFundo = {
+      1: '#FFD700',
+      2: '#FF69B4',
+      3: '#B22222',
+      4: '#228B22',
+      5: '#D2B48C',
+      6: '#4682B4'
+    };
 
-const coresPersonagensBorda = {
-  1: '#B8860B', 
-  2: '#C71585', 
-  3: '#8B0000', 
-  4: '#006400', 
-  5: '#8B4513', 
-  6: '#2F4F4F'  
-};
+    const coresPersonagensBorda = {
+      1: '#B8860B',
+      2: '#C71585',
+      3: '#8B0000',
+      4: '#006400',
+      5: '#8B4513',
+      6: '#2F4F4F'
+    };
 
-  const ctx = document.getElementById('meuGrafico').getContext('2d');
-  const ctx2 = document.getElementById('meuGrafico2').getContext('2d');
+    const ctx = document.getElementById('meuGrafico').getContext('2d');
+    const ctx2 = document.getElementById('meuGrafico2').getContext('2d');
 
-  const meuGrafico = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'Vezes jogadas',
-        data: [],
-        backgroundColor: [],
-        borderColor: [],
-        borderWidth: 1
-      }]
-    },
-    options: {}
-  });
+    const meuGrafico = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Vezes jogadas',
+          data: [],
+          backgroundColor: [],
+          borderColor: [],
+          borderWidth: 1
+        }]
+      },
+      options: {}
+    });
 
-  const meuGrafico2 = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'Personagens mais escolhidos',
-        data: [],
-        backgroundColor: 'rgba(255, 205, 86, 0.5)',
-        borderColor: 'rgba(255, 205, 86, 1)',
-        borderWidth: 2
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    const meuGrafico2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Personagens mais escolhidos',
+          data: [],
+          backgroundColor: 'rgba(255, 205, 86, 0.5)',
+          borderColor: 'rgba(255, 205, 86, 1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
+    });
 
-  fetch(`/dash/jogosMaisJogados?idUserServer=${idUserServer}`)
-    .then(res => res.json())
-    .then(dados => {
-      const labels = dados.map(item => nomeJogos[item.idJogo] || 'Outro');
-      const data = dados.map(item => item.quantidade);
-      const backgroundColor = dados.map(item => coresFundo[item.idJogo] || '#999');
-      const borderColor = dados.map(item => coresBorda[item.idJogo] || '#666');
+    fetch(`/dash/jogosMaisJogados?idUserServer=${idUserServer}`)
+      .then(res => res.json())
+      .then(dados => {
+        const labels = dados.map(item => nomeJogos[item.idJogo] || 'Outro');
+        const data = dados.map(item => item.quantidade);
+        const backgroundColor = dados.map(item => coresFundo[item.idJogo] || '#999');
+        const borderColor = dados.map(item => coresBorda[item.idJogo] || '#666');
 
-      meuGrafico.data.labels = labels;
-      meuGrafico.data.datasets[0].data = data;
-      meuGrafico.data.datasets[0].backgroundColor = backgroundColor;
-      meuGrafico.data.datasets[0].borderColor = borderColor;
-      meuGrafico.update();
-    })
-    .catch(err => console.error('Erro ao buscar dados do gráfico 1:', err));
+        meuGrafico.data.labels = labels;
+        meuGrafico.data.datasets[0].data = data;
+        meuGrafico.data.datasets[0].backgroundColor = backgroundColor;
+        meuGrafico.data.datasets[0].borderColor = borderColor;
+        meuGrafico.update();
+      })
+      .catch(err => console.error('Erro ao buscar dados do gráfico 1:', err));
 
 
     fetch(`/dash/personagensPartidas?idUserServer=${idUserServer}`)
-  .then(res => res.json())
-  .then(dados => {
-    console.log('Recebidos personagens:', dados);
+      .then(res => res.json())
+      .then(dados => {
+        console.log('Recebidos personagens:', dados);
 
-    const labels = dados.map(item => item.personagem);
-    const data = dados.map(item => item.quantidade);
+        const labels = dados.map(item => item.personagem);
+        const data = dados.map(item => item.quantidade);
 
-    const backgroundColor = dados.map(item => {
-      switch (item.personagem) {
-        case 'Bob': return '#FFD700';
-        case 'Patrick': return '#FF69B4';
-        case 'Sr. Siriguejo': return '#B22222';
-        case 'Plankton': return '#228B22';
-        case 'Sandy': return '#D2B48C';
-        case 'Lula': return '#4682B4';
-        default: return '#ccc';
-      }
-    });
+        const backgroundColor = dados.map(item => {
+          switch (item.personagem) {
+            case 'Bob': return '#FFD700';
+            case 'Patrick': return '#FF69B4';
+            case 'Sr. Siriguejo': return '#B22222';
+            case 'Plankton': return '#228B22';
+            case 'Sandy': return '#D2B48C';
+            case 'Lula': return '#4682B4';
+            default: return '#ccc';
+          }
+        });
 
-    const borderColor = dados.map(item => {
-      switch (item.personagem) {
-        case 'Bob': return '#B8860B';
-        case 'Patrick': return '#C71585';
-        case 'Sr. Siriguejo': return '#8B0000';
-        case 'Plankton': return '#006400';
-        case 'Sandy': return '#8B4513';
-        case 'Lula': return '#2F4F4F';
-        default: return '#999';
-      }
-    });
+        const borderColor = dados.map(item => {
+          switch (item.personagem) {
+            case 'Bob': return '#B8860B';
+            case 'Patrick': return '#C71585';
+            case 'Sr. Siriguejo': return '#8B0000';
+            case 'Plankton': return '#006400';
+            case 'Sandy': return '#8B4513';
+            case 'Lula': return '#2F4F4F';
+            default: return '#999';
+          }
+        });
 
-    meuGrafico2.data.labels = labels;
-    meuGrafico2.data.datasets[0].data = data;
-    meuGrafico2.data.datasets[0].backgroundColor = backgroundColor;
-    meuGrafico2.data.datasets[0].borderColor = borderColor;
-    meuGrafico2.update();
-  })
-  .catch(err => console.error('Erro ao buscar dados do gráfico 2:', err));
+        meuGrafico2.data.labels = labels;
+        meuGrafico2.data.datasets[0].data = data;
+        meuGrafico2.data.datasets[0].backgroundColor = backgroundColor;
+        meuGrafico2.data.datasets[0].borderColor = borderColor;
+        meuGrafico2.update();
+      })
+      .catch(err => console.error('Erro ao buscar dados do gráfico 2:', err));
 
   }
 
@@ -304,42 +350,42 @@ const coresPersonagensBorda = {
   }
 
   function listarRanking() {
-  const idUser = sessionStorage.ID_USUARIO;
-  console.log("Enviando idUser para listarRanking:", idUser);
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarRanking:", idUser);
 
-  fetch(`/dash/listarRanking?idUserServer=${idUser}`)
-    .then(function (resposta) {
-      if (resposta.ok) {
-        if (resposta.status == 204) {
-          document.getElementById("rankingJogadores").innerHTML = `ERRO: Não há jogadores cadastrados!`;
-          return null; // para não continuar no próximo then
+    fetch(`/dash/listarRanking?idUserServer=${idUser}`)
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("rankingJogadores").innerHTML = `ERRO: Não há jogadores cadastrados!`;
+            return null; // para não continuar no próximo then
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
         }
-        return resposta.json();
-      } else {
-        throw "Erro na resposta da API";
-      }
-    })
-    .then(function (dados) {
-      if (dados) {
-        console.log("Dados recebidos: ", dados);
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
 
-        for (let i = 0; i < dados.length; i++) {
-          const jogador = dados[i].nome;
+          for (let i = 0; i < dados.length; i++) {
+            const jogador = dados[i].nome;
 
-          if (i == 0) {
-            document.getElementById("1lugar").innerHTML = `<span class="material-symbols-outlined" style="color: gold">trophy</span>${jogador}`;
-          } else if (i == 1) {
-            document.getElementById("2lugar").innerHTML = `<span class="material-symbols-outlined" style="color: silver">trophy</span>${jogador}`;
-          } else if (i == 2) {
-            document.getElementById("3lugar").innerHTML = `<span class="material-symbols-outlined" style="color: #CD7F32">trophy</span>${jogador}`;
-          } 
+            if (i == 0) {
+              document.getElementById("1lugar").innerHTML = `<span class="material-symbols-outlined" style="color: gold">trophy</span>${jogador}`;
+            } else if (i == 1) {
+              document.getElementById("2lugar").innerHTML = `<span class="material-symbols-outlined" style="color: silver">trophy</span>${jogador}`;
+            } else if (i == 2) {
+              document.getElementById("3lugar").innerHTML = `<span class="material-symbols-outlined" style="color: #CD7F32">trophy</span>${jogador}`;
+            }
+          }
         }
-      }
-    })
-    .catch(function (erro) {
-      console.error("Erro na requisição listarRanking:", erro);
-    });
-}
+      })
+      .catch(function (erro) {
+        console.error("Erro na requisição listarRanking:", erro);
+      });
+  }
 
   function listarQuiz() {
     const idUser = sessionStorage.ID_USUARIO;

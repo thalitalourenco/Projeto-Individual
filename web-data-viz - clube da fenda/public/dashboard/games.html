@@ -12,7 +12,7 @@
 
 <body>
 
-  <body onload="validarSessao()"></body>
+  <body onload="abrirPagina()"></body>
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -35,27 +35,31 @@
     </div>
 
     <nav role="navigation">
-      <div class="hello">
-        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-      </div>
-      <ul>
-        <li id="dashboard">
-          <span class="material-symbols-outlined">dashboard</span>
-          <a href="overview.html">OVERVIEW</a>
-        </li>
-        <li class="ativo" aria-current="page" id="games">
-          <span class="material-symbols-outlined">sports_esports</span>
-          <a href="games.html">GAMES</a>
-        </li>
-        <li id="perfil">
-          <span class="material-symbols-outlined">person</span>
-          <a href="perfil.html">PERFIL</a>
-        </li>
-        <li id="sair">
-          <span class="material-symbols-outlined">logout</span>
-          <a onclick="limparSessao()">SAIR</a>
-        </li>
-      </ul>
+      <div class="div_avatar">
+        <div class="avatar-container">
+          <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+        </div>
+        <div class="hello">
+          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+        </div>
+        <ul>
+          <li id="dashboard">
+            <span class="material-symbols-outlined">dashboard</span>
+            <a href="overview.html">OVERVIEW</a>
+          </li>
+          <li class="ativo" aria-current="page" id="games">
+            <span class="material-symbols-outlined">sports_esports</span>
+            <a href="games.html">GAMES</a>
+          </li>
+          <li id="perfil">
+            <span class="material-symbols-outlined">person</span>
+            <a href="perfil.html">PERFIL</a>
+          </li>
+          <li id="sair">
+            <span class="material-symbols-outlined">logout</span>
+            <a onclick="limparSessao()">SAIR</a>
+          </li>
+        </ul>
     </nav>
   </header>
 
@@ -109,7 +113,48 @@
 </html>
 <script src="../js/redirecionadores.js"></script>
 <script>
-  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  const mapaAvatares = {
+    1: './css-dashboard/img/avatars/bob_esponja.jpg',
+    2: './css-dashboard/img/avatars/patrick.png',
+    3: './css-dashboard/img/avatars/sr.sirigueijo.png',
+    4: './css-dashboard/img/avatars/sandy.jpg',
+    5: './css-dashboard/img/avatars/lula_molusco.jpg',
+    6: './css-dashboard/img/avatars/gary_sem_fundo-removebg-preview.png',
+    7: './css-dashboard/img/avatars/plankton.png'
+  };
+
+  function abrirPagina() {
+    const fkAvatar = sessionStorage.ID_AVATAR;
+    vizualizarAvatar(fkAvatar)
+    if (fkAvatar) {
+      document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+    } else {
+      document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+    }
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  };
+
+  function vizualizarAvatar(fkAvatar) {
+    var idUsuario = sessionStorage.getItem('ID_USUARIO')
+    fetch('/dash/vizualizarAvatar', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(res => {
+        if (res.ok) {
+          console.log('Avatar atualizado com sucesso!');
+        } else {
+          console.log('Erro ao atualizar avatar');
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Deu tudo certo
+                    `
+        );
+      })
+  }
+
   function limparSessao() {
     sessionStorage.clear();
     window.location = "/login.html";
