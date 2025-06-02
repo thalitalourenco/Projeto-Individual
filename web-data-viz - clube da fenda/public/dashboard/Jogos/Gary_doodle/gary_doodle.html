@@ -45,6 +45,10 @@
                     <span class="material-symbols-outlined">sports_esports</span>
                     <a href="/dashboard/games.html">GAMES</a>
                 </li>
+                <li id="perfil">
+                    <span class="material-symbols-outlined">person</span>
+                    <a href="perfil.html">PERFIL</a>
+                </li>
                 <li id="sair">
                     <span class="material-symbols-outlined">logout</span>
                     <a onclick="limparSessao()">SAIR</a>
@@ -92,7 +96,8 @@
 
 </html>
 
-<script src="/Users/Thalita/Desktop/Clube da fenda/web-data-viz - clube da fenda/public/js/redirecionadores.js"></script>
+<script
+    src="/Users/Thalita/Desktop/Clube da fenda/web-data-viz - clube da fenda/public/js/redirecionadores.js"></script>
 
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
@@ -255,8 +260,8 @@
     window.addEventListener('keydown', alterarDirecao);
 
     function limparSessao() {
-    sessionStorage.clear();
-    window.location = "/login.html";
-}
+        sessionStorage.clear();
+        window.location = "/login.html";
+    }
 
 </script>
