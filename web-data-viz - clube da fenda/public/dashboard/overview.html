@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clube da Fenda | Visão Geral</title>
+  <title>Visão Geral | Clube da Fenda</title>
+  <link rel="icon" href="../assets/img/Carrossel/bob_esponja.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="./css-dashboard/overview.css" />
@@ -13,7 +14,7 @@
 </head>
 
 <body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina();">
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarRanking(); obterDados(); abrirPagina();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -504,47 +505,6 @@
       })
       .catch(function (erro) {
         console.error("Erro na requisição listarPontuacaoGaryDoodle:", erro);
-      });
-  }
-
-  function listarCruzadinha() {
-    const idUser = sessionStorage.ID_USUARIO;
-    console.log("Enviando idUser para listarCruzadinha:", idUser);
-
-    fetch(`/dash/listarCruzadinha?idUserServer=${idUser}`)
-      .then(function (resposta) {
-        if (resposta.ok) {
-          if (resposta.status == 204) {
-            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
-            return;
-          }
-          return resposta.json();
-        } else {
-          throw "Erro na resposta da API";
-        }
-      })
-      .then(function (dados) {
-        if (dados) {
-          console.log("Dados recebidos: ", dados);
-          // Atualize o conteúdo com os dados recebidos
-          if (dados[0].tempoCruzadinha == undefined) {
-            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
-            document.getElementById("tempoCruzadinha").style.fontSize = "1.0rem";
-          } else {
-            const tempo = dados[0].tempoCruzadinha;
-
-            const minutos = Math.floor(tempo / 60);
-            const segundos = tempo % 60;
-
-            const tempoFormatado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-
-            document.getElementById("tempoCruzadinha").innerHTML = `${tempoFormatado}`;
-          }
-        }
-      })
-
-      .catch(function (erro) {
-        console.error("Erro na requisição listarCruzadinha:", erro);
       });
   }
 

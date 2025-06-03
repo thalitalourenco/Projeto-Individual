@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Games | Clube da Fenda</title>
+    <title>Perfil | Clube da Fenda</title>
+    <link rel="icon" href="../assets/img/Carrossel/bob_esponja.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="./css-dashboard/perfil.css" />
@@ -123,7 +124,7 @@
                     <button id="editar" onclick="editarPerfil()">
                         Editar Perfil
                     </button>
-                    <button id="excluir" onclick="excluirConta()">
+                    <button id="excluir" onclick="confirmacaoExcluir()">
                         Excluir Perfil
                     </button>
                 </div>
@@ -137,7 +138,7 @@
 </html>
 <script src="../js/redirecionadores.js"></script>
 <script>
-     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
     const mapaAvatares = {
         1: './css-dashboard/img/avatars/bob_esponja.jpg',
@@ -309,6 +310,13 @@
                     `
                 );
             })
+    }
+
+    function confirmacaoExcluir() {
+        let text = "Deseja excluir sua conta?";
+        if (confirm(text) == true) {
+            excluirConta();
+        }
     }
 
     function excluirConta() {
