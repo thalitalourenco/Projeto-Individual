@@ -50,84 +50,42 @@
         </div>
     </div>
     <div class="containerCadastro">
-        <div class="card_erro" id="cardErro">
-            <span id="mensagem_erro"></span>
-        </div>
         <div class="bolhas-container"></div>
         <div class="boxCadastro">
             <div class="Card">
-                <div class="buttonsForm">
-                    <div class="btnColor"></div>
-                    <button id="btnLogin">Login</button>
-                    <button id="btnCadastro">Cadastro</button>
-                </div>
-                <div class="titleCadastro">
-                    <h1>Criar conta</h1>
-                </div>
-                <form class="formulario">
-                    <input type="text" id="input_nome" required placeholder="Nome usuário" oninput="validarNome()">
-                    <input type="text" id="input_email" required placeholder="E-mail" oninput="validarEmail()">
-                    <input type="text" id="input_telefone" required placeholder="Telefone" maxlength="15"
-                        oninput="validarTelefone()">
-                    <input type="password" id="input_senha" placeholder="Senha" oninput="validarSenha()">
-                    <div class="containerSenha">
-                        <span id="span_maiuscula">Letras maiúsculas(A-Z)</span>
-                        <span id="span_minuscula">Letras minúsculas(a-z)</span>
-                        <span id="span_numero">Números (0-9)</span>
-                        <span id="span_especial">Caracteres especiais(!, @, etc.)</span>
-                        <span id="span_tamanho">Pelo menos 10 caracteres</span>
+                <div class="conteudoCard">
+                    <div class="buttonsForm">
+                        <div class="btnColor"></div>
+                        <button id="btnLogin">Login</button>
+                        <button id="btnCadastro">Cadastro</button>
                     </div>
-                    <input type="password" id="input_confirmacaoSenha" placeholder="Confirme a senha"
-                        oninput="validarConfirmacaoSenha()">
-                    <div id="div_mensagemSenhas">As senhas não coincidem.</div>
-                </form>
-                <div class="btnCadastro">
-                    <button onclick="cadastrar()">Cadastrar-se</button>
+                    <div class="titleCadastro">
+                        <h1>Criar conta</h1>
+                    </div>
+                    <form class="formulario">
+                        <input type="text" id="input_nome" required placeholder="Nome usuário" oninput="validarNome()">
+                        <input type="text" id="input_email" required placeholder="E-mail" oninput="validarEmail()">
+                        <input type="text" id="input_telefone" required placeholder="Telefone" maxlength="15"
+                            oninput="validarTelefone()">
+                        <input type="password" id="input_senha" placeholder="Senha" oninput="validarSenha()">
+                        <div class="containerSenha">
+                            <span id="span_maiuscula">Letras maiúsculas(A-Z)</span>
+                            <span id="span_minuscula">Letras minúsculas(a-z)</span>
+                            <span id="span_numero">Números (0-9)</span>
+                            <span id="span_especial">Caracteres especiais(!, @, etc.)</span>
+                            <span id="span_tamanho">Pelo menos 10 caracteres</span>
+                        </div>
+                        <input type="password" id="input_confirmacaoSenha" placeholder="Confirme a senha"
+                            oninput="validarConfirmacaoSenha()">
+                        <div id="div_mensagemSenhas">As senhas não coincidem.</div>
+                    </form>
+                    <div class="btnCadastro">
+                        <button onclick="cadastrar()">Cadastrar-se</button>
+                    </div>
                 </div>
-
-            </div>
-        </div>
-        <div id="div_aguardar" class="loading-gif">
-            <img src="./assets/img/bob-esponja-arco-iris.gif" id="loading-gif" style="display: none;">
-        </div>
-    </div>
-
-    <div class="rodape">
-        <div class="container">
-            <div class="menu">
-                <li>
-                    <a href="index.html"><img src="./assets/img/abacaxi.png" alt="casa abacaxi"></a>
-                </li>
-                <li>
-                    <a href="#sobre">Mergulhar</a>
-                </li>
-                <li>
-                    <a href="login.html">Login</a>
-                </li>
-                <li>
-                    <a href="cadastro.html">Cadastro</a>
-                </li>
-            </div>
-            <div class="rodape_home">
-                <a href="index.html">
-                    <h1 class="titulo">
-                        <span class="letra" style="background-position: 0% 0%;">C</span>
-                        <span class="letra" style="background-position: 8% 0%;">l</span>
-                        <span class="letra" style="background-position: 16% 0%;">u</span>
-                        <span class="letra" style="background-position: 24% 0%;">b</span>
-                        <span class="letra" style="background-position: 32% 0%;">e</span>
-                        <span class="letra espaco"></span>
-                        <span class="letra" style="background-position: 48% 0%;">d</span>
-                        <span class="letra" style="background-position: 56% 0%;">a</span>
-                        <span class="letra espaco"></span>
-                        <span class="letra" style="background-position: 72% 0%;">F</span>
-                        <span class="letra" style="background-position: 80% 0%;">e</span>
-                        <span class="letra" style="background-position: 88% 0%;">n</span>
-                        <span class="letra" style="background-position: 96% 0%;">d</span>
-                        <span class="letra" style="background-position: 104% 0%;">a</span>
-                    </h1>
-                </a>
-                <p>@2025 Clube da Fenda.Todos os direitos reservador.</p>
+                <div id="div_aguardar" class="loading-gif">
+                    <img src="./assets/img/Valentines Day Valentine Sticker.gif" id="loading-gif" style="display: none;">
+                </div>
             </div>
         </div>
     </div>
@@ -281,9 +239,9 @@
         const mensagemSenhas = document.getElementById('div_mensagemSenhas');
 
         if (senha !== confirmacaoSenha && confirmacaoSenha !== "") {
-            mensagemSenhas.style.display = 'block'; // Exibe a mensagem
+            mensagemSenhas.style.display = 'block'; 
         } else {
-            mensagemSenhas.style.display = 'none'; // Oculta a mensagem
+            mensagemSenhas.style.display = 'none'; 
         }
     }
 
@@ -312,27 +270,20 @@
                     senhaServer: senhaVar,
                 }),
             })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
+            .then(function (resposta) {
+                if (resposta.ok) {
 
-                    if (resposta.ok) {
-                        cardErro.style.display = "block";
+                    document.querySelector('.conteudoCard').style.display = 'none';
 
-                        loadingGif.style.display = "none";
+                    document.getElementById('div_aguardar').style.display = 'flex';
 
-                        mensagem_erro.innerHTML =
-                            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                        setTimeout(() => {
-                            window.location = "login.html";
-                        }, "2000");
-
-                        limparFormulario();
-                        finalizarAguardar();
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
-                })
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, 2000);
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
                     finalizarAguardar();
@@ -349,15 +300,13 @@
     const btnCadastro = document.getElementById('btnCadastro');
     const btnColor = document.querySelector('.btnColor');
 
-    // Quando clicar em "Cadastro"
     btnCadastro.addEventListener('click', () => {
-        btnColor.style.left = "50%"; // cor vai para Cadastro
+        btnColor.style.left = "50%"; 
     });
 
-    // Quando clicar em "Login"
     btnLogin.addEventListener('click', () => {
-        btnColor.style.left = "0%"; // cor volta para Login
-        window.location.href = 'login.html'; // redireciona para login.html
+        btnColor.style.left = "0%"; 
+        window.location.href = 'login.html'; 
     });
 
     function sumirMensagem() {

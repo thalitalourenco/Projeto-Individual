@@ -14,7 +14,7 @@
 </head>
 
 <body>
-
+    <audio id="musicaFundo" src="./assets/audio/abertura.mp3"></audio>
     <div class="header">
         <div class="container">
             <a href="index.html">
@@ -182,14 +182,6 @@
                 <p>Quiz de personalidade para descobrir seu personagem ideal.</p>
             </div>
 
-            <div class="card" id="cruzadinha">
-                <span class="material-symbols-outlined">
-                    crossword
-                </span>
-                <h1>Cruzadinha</h1>
-                <p>Cruzadinha sobre o universo de Bob Esponja para testar seu raciocínio</p>
-            </div>
-
             <div class="card">
                 <img src="./assets/img/Carrossel/gary_sem_fundo-removebg-preview (1).png" alt="">
                 <h1>Gary Doodle</h1>
@@ -197,6 +189,7 @@
                 </p>
             </div>
         </div>
+        <h2>Faça cadastro para poder acessar todos esses jogos divertidos</h2>
         <div class="botaoCadastro">
             <button onclick="direcionarCadastro()" id="cadastro">Cadastre-se</button>
         </div>
@@ -265,6 +258,14 @@
 </html>
 
 <script>
+    window.onload = function () {
+        const musica = document.getElementById('musicaFundo');
+        musica.volume = 0.3; 
+        musica.play().catch((erro) => {
+            console.log('Autoplay bloqueado pelo navegador:', erro);
+        });
+    };
+
     function direcionarCadastro() {
         window.location = 'cadastro.html';
     }

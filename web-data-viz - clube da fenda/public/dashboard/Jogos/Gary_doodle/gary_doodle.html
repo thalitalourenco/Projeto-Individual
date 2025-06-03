@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <audio id="musicaFundo"
+        src="./assets/audio/bob-esponja-triste.mp3"></audio>
     <header class="menu-lateral">
         <div class="logo">
             <div class="linha">
@@ -205,6 +207,12 @@
     }
 
     function mostrarGameOver() {
+        const musica = document.getElementById('musicaFundo');
+        musica.volume = 0.5;
+        musica.play().catch((erro) => {
+            console.log('Autoplay bloqueado pelo navegador:', erro);
+        });
+
         document.getElementById("tela_jogo").style.display = "none";
         document.getElementById("tela_gameOver").style.display = "flex";
 

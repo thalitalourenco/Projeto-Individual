@@ -173,23 +173,6 @@ input[type="button"],
   font-weight: bolder;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    /* Empilha os itens em telas menores */
-    width: 100%;
-    /* Ocupa toda a largura */
-  }
-
-  .navbar a {
-    padding: 10px;
-    /* Reduz o padding em telas menores */
-    font-size: 1rem;
-    /* Ajusta o tamanho da fonte */
-  }
-}
-
 /*BANNER*/
 
 .banner {
@@ -432,11 +415,18 @@ input[type="button"],
   width: 100%;
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(1, 1fr);
   gap: 15px;
   align-items: center;
   justify-items: center;
+}
+
+.banner-jogos h2{
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--azul-noite);
+  font-weight: 600;
 }
 
 .card span {
@@ -447,10 +437,6 @@ input[type="button"],
   color: var(--roxo-pedra);
 }
 
-#cruzadinha span {
-  color: var(--verde-escuro);
-}
-
 .botaoCadastro {
   width: 100%;
   align-items: center;
@@ -459,7 +445,7 @@ input[type="button"],
 }
 
 .botaoCadastro button {
-  margin-top: 5%;
+  margin-top: 1%;
   height: 50px;
   width: 180px;
   font-size: 1.3rem;

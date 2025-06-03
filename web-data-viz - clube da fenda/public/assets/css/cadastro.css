@@ -8,14 +8,39 @@
   --azul-olhos: #3b9eff;
   --azul-escuro: #0080ff;
   --azul-oceano-claro: #b8e7f2;
-  --azul-submarino: #7fd6e3;
+  --azul-submarino: #5abdcc;
   --verde-alga: #7cd3a3;
   --verde-escuro: #029c47;
   --rosa-agua-viva: #ff91c0;
   --roxo-pedra: #a67eb4;
   --areia-fundo-mar: #f2e1a1;
-  --azul-esverdeado-logo: #ADD8E6;
+  --azul-esverdeado-logo: #add8e6;
   --gelo: #f6f5f5;
+}
+
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  cursor: url('../img/agua-viva.png'), auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+button, a, input[type="submit"], input[type="button"], .clickable {
+  cursor: url('../img/rede.png'), auto;
+}
+
+@font-face {
+  font-family: 'SpongeboyRegular';
+  src: url('../Fontes/SpongeboyRegular.woff2') format('woff2'),
+       url('../Fontes/SpongeboyRegular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .bolhas-container {
@@ -44,46 +69,10 @@
     transform: translateY(0) scale(1);
     opacity: 0.8;
   }
-
   100% {
     transform: translateY(-120vh) scale(1.5);
     opacity: 0;
   }
-}
-
-a {
-  text-decoration: none;
-}
-
-html,
-body {
-  width: 100%;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  width: 100%;
-  font-family: 'Poppins', sans-serif;
-  cursor: url('../img/agua-viva.png'), auto;
-}
-
-
-button,
-a,
-input[type="submit"],
-input[type="button"],
-.clickable {
-  cursor: url('../img/rede.png'), auto;
-}
-
-@font-face {
-  font-family: 'SpongeboyRegular';
-  src: url('../Fontes/SpongeboyRegular.woff2') format('woff2'),
-    url('../Fontes/SpongeboyRegular.woff') format('woof');
-  font-weight: normal;
-  font-style: normal;
 }
 
 .header {
@@ -175,18 +164,6 @@ input[type="button"],
   font-weight: bolder;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .navbar a {
-    padding: 10px;
-    font-size: 1rem;
-  }
-}
-
 .containerCadastro {
   width: 100%;
   height: 86vh;
@@ -207,15 +184,27 @@ input[type="button"],
   height: 80%;
   border-radius: 20px;
   display: flex;
-  background-color: #fff;
+  background-color: var(--branco);
   align-items: center;
+}
+
+#div_aguardar img{
+  height: 75%;
+  width: auto;
 }
 
 .Card {
   border: 2px solid var(--amarelo-bob);
   width: 100%;
   height: 100%;
-  border-radius: 20px 20px 20px 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.conteudoCard{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -236,7 +225,6 @@ input[type="button"],
   position: relative;
   padding: 10px 29px;
 }
-
 
 .btnColor {
   position: absolute;
@@ -271,14 +259,13 @@ input[type="button"],
 }
 
 .btnCadastro button {
-  text-align: center;
   border: 1px solid var(--amarelo-sombra);
   background-color: var(--amarelo-bob);
   width: 100%;
+  margin-top: 5%;
   height: 45px;
   border-radius: 30px;
   cursor: pointer;
-  text-align: center;
   font-size: 1rem;
   font-weight: bolder;
   color: var(--preto-sapato);
@@ -293,7 +280,6 @@ input[type="button"],
   justify-content: center;
   align-items: center;
   padding-top: 8px;
-
 }
 
 .titleCadastro h1 {
@@ -318,7 +304,7 @@ input[type="button"],
   justify-content: space-between;
   flex-wrap: wrap;
   width: 80%;
-  color: #B0B0B0;
+  color: #b0b0b0;
 }
 
 .cardSenha span {
@@ -333,49 +319,3 @@ input[type="button"],
   font-size: smaller;
 }
 
-/*RODAPE*/
-.rodape {
-  width: 100%;
-  height: 350px;
-  background-color: var(--azul-submarino);
-  border-top: var(--azul-olhos);
-  justify-content: center;
-  align-items: center;
-}
-
-.rodape .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 50px 550px 50px 350px;
-  width: 50%;
-  flex-direction: column;
-}
-
-.rodape .menu {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--azul-submarino);
-  list-style: none;
-  width: 50%;
-  align-items: center;
-}
-
-.rodape_home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: var(--amarelo-bob);
-  padding: 20px 0 20px 0;
-}
-
-.rodape a {
-  color: var(--amarelo-bob);
-  text-decoration: none;
-}
-
-.rodape img {
-  width: 45px;
-  height: 45px;
-}
