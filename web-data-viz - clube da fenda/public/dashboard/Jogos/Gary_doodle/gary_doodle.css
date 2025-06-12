@@ -1,5 +1,5 @@
 :root {
-    --rosa-patrick: hsl(302, 87%, 76%);
+  --rosa-patrick: #fe87f6;
     --rosa-mais-claro: #FFB4FA;
     --rosa-mais-escuro: #d051d0;
     --rosa-mais-escuro2: #b036b0;
@@ -26,10 +26,7 @@
     --azul-esverdeado-logo: #ADD8E6;
     --gelo: #f6f5f5;
   }
-  
-/* gary_doodle.css */
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -151,7 +148,6 @@
     }
   }
   
-  /* Áreas principais (tela inicial, jogo e game over) */
   #tela_inicial,
   #tela_jogo,
   #tela_gameOver {
@@ -166,7 +162,6 @@
     background-color: var(--rosa-patrick);
   }
   
-  /* Título Gary Doodle */
   .titulo_telaInicial {
     font-size: 48px;
     font-weight: 800;
@@ -199,14 +194,12 @@
     text-align: center;
   }
   
-  /* Imagens */
   .gary_inicial {
     width: 200px;
     height: auto;
     margin-bottom: 25px;
   }
   
-  /* Botão play */
   .botao_play {
     background-color: var(--rosa-mais-escuro);
     color: white;
