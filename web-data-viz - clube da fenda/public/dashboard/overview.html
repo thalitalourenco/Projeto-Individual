@@ -14,7 +14,7 @@
 </head>
 
 <body
-  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarRanking(); obterDados(); abrirPagina();">
+  onload="validarSessao(); listarQuiz(); listarQuizPersonalidade(); listarPontuacaoGaryDoodle(); listarCruzadinha(); listarRanking(); obterDados(); abrirPagina();">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -74,13 +74,13 @@
       </div>
     </div>
 
-    <!-- <div class="card">
+    <div class="card">
       <div class="card-content">
         <h3>Seu menor tempo na Cruzadinha</h3>
         <div id="tempoCruzadinha">Pontuação</div>
         <button onclick="jogarCruzadinha()">Jogar</button>
       </div>
-    </div> -->
+    </div>
 
     <div class="card">
       <div class="card-content">
@@ -171,8 +171,7 @@
       })
       .catch(function (error) {
         console.error(
-          `Deu tudo certo
-                    `
+          `Deu tudo certo`
         );
       })
   }
@@ -359,7 +358,7 @@
         if (resposta.ok) {
           if (resposta.status == 204) {
             document.getElementById("rankingJogadores").innerHTML = `ERRO: Não há jogadores cadastrados!`;
-            return null; // para não continuar no próximo then
+            return null;
           }
           return resposta.json();
         } else {
@@ -407,7 +406,6 @@
       .then(function (dados) {
         if (dados) {
           console.log("Dados recebidos: ", dados);
-          // Atualize o conteúdo com os dados recebidos
           if (dados[0].pontuacaoQuiz == undefined) {
             document.getElementById("pontuacaoQuiz").innerHTML = `Você ainda não jogou o Quiz!`;
             document.getElementById("pontuacaoQuiz").style.fontSize = "1.0rem";
@@ -494,7 +492,6 @@
       .then(function (dados) {
         if (dados) {
           console.log("Dados recebidos: ", dados);
-          // Atualize o conteúdo com os dados recebidos
           if (dados[0].pontuacaoGary == undefined) {
             document.getElementById("pontuacaoGaryDoodle").innerHTML = `Você ainda não jogou o Gary Doodle!`;
             document.getElementById("pontuacaoGaryDoodle").style.fontSize = "1.0rem";
@@ -508,5 +505,45 @@
       });
   }
 
+
+  function listarCruzadinha() {
+    const idUser = sessionStorage.ID_USUARIO;
+    console.log("Enviando idUser para listarCruzadinha:", idUser);
+
+    fetch(`/dash/listarCruzadinha?idUserServer=${idUser}`)
+      .then(function (resposta) {
+        if (resposta.ok) {
+          if (resposta.status == 204) {
+            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
+            return;
+          }
+          return resposta.json();
+        } else {
+          throw "Erro na resposta da API";
+        }
+      })
+      .then(function (dados) {
+        if (dados) {
+          console.log("Dados recebidos: ", dados);
+          if (dados[0].tempoCruzadinha == undefined) {
+            document.getElementById("tempoCruzadinha").innerHTML = `Você ainda não jogou a Cruzadinha!`;
+            document.getElementById("tempoCruzadinha").style.fontSize = "1.0rem";
+          } else {
+            const tempo = dados[0].tempoCruzadinha;
+
+            const minutos = Math.floor(tempo / 60);
+            const segundos = tempo % 60;
+
+            const tempoFormatado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+
+            document.getElementById("tempoCruzadinha").innerHTML = `${tempoFormatado}`;
+          }
+        }
+      })
+
+      .catch(function (erro) {
+        console.error("Erro na requisição listarCruzadinha:", erro);
+      });
+  }
 
 </script>

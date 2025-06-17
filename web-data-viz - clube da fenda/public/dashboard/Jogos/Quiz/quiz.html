@@ -11,52 +11,58 @@
     <script src="/web-data-viz - clube da fenda/public/js/redirecionadores.js"></script>
 </head>
 
-<body>
+<body onload="abrirPagina()">
     <header class="menu-lateral">
         <div class="logo">
-          <div class="linha">
-            <span class="letra" style="background-position: 0% 0%;">C</span>
-            <span class="letra" style="background-position: 8% 0%;">l</span>
-            <span class="letra" style="background-position: 16% 0%;">u</span>
-            <span class="letra" style="background-position: 24% 0%;">b</span>
-            <span class="letra" style="background-position: 32% 0%;">e</span>
-            <span class="espaco"></span>
-            <span class="letra" style="background-position: 48% 0%;">d</span>
-            <span class="letra" style="background-position: 56% 0%;">a</span>
-          </div>
-          <div class="linha">
-            <span class="letra" style="background-position: 72% 0%;">F</span>
-            <span class="letra" style="background-position: 80% 0%;">e</span>
-            <span class="letra" style="background-position: 88% 0%;">n</span>
-            <span class="letra" style="background-position: 96% 0%;">d</span>
-            <span class="letra" style="background-position: 104% 0%;">a</span>
-          </div>
+            <div class="linha">
+                <span class="letra" style="background-position: 0% 0%;">C</span>
+                <span class="letra" style="background-position: 8% 0%;">l</span>
+                <span class="letra" style="background-position: 16% 0%;">u</span>
+                <span class="letra" style="background-position: 24% 0%;">b</span>
+                <span class="letra" style="background-position: 32% 0%;">e</span>
+                <span class="espaco"></span>
+                <span class="letra" style="background-position: 48% 0%;">d</span>
+                <span class="letra" style="background-position: 56% 0%;">a</span>
+            </div>
+            <div class="linha">
+                <span class="letra" style="background-position: 72% 0%;">F</span>
+                <span class="letra" style="background-position: 80% 0%;">e</span>
+                <span class="letra" style="background-position: 88% 0%;">n</span>
+                <span class="letra" style="background-position: 96% 0%;">d</span>
+                <span class="letra" style="background-position: 104% 0%;">a</span>
+            </div>
         </div>
-    
+
         <nav role="navigation">
-          <div class="hello">
-            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-          </div>
-          <ul>
-            <li id="dashboard">
-              <span class="material-symbols-outlined">dashboard</span>
-              <a href="/dashboard/overview.html">OVERVIEW</a>
-            </li>
-            <li class="ativo" aria-current="page" id="games">
-              <span class="material-symbols-outlined">sports_esports</span>
-              <a href="/dashboard/games.html">GAMES</a>
-            </li>
-            <li id="perfil">
-                <span class="material-symbols-outlined">person</span>
-                <a href="perfil.html">PERFIL</a>
-              </li>
-            <li id="sair">
-              <span class="material-symbols-outlined">logout</span>
-              <a onclick="limparSessao()">SAIR</a>
-            </li>
-          </ul>
+            <div class="div_avatar">
+                <div class="avatar-container">
+                    <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar"
+                        id="perfil-avatar">
+                </div>
+            </div>
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+            <ul>
+                <li id="dashboard">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <a href="/dashboard/overview.html">OVERVIEW</a>
+                </li>
+                <li class="ativo" aria-current="page" id="games">
+                    <span class="material-symbols-outlined">sports_esports</span>
+                    <a href="/dashboard/games.html">GAMES</a>
+                </li>
+                <li id="perfil">
+                    <span class="material-symbols-outlined">person</span>
+                    <a href="/dashboard/perfil.html">PERFIL</a>
+                </li>
+                <li id="sair">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a onclick="limparSessao()">SAIR</a>
+                </li>
+            </ul>
         </nav>
-      </header>
+    </header>
 
     <div id="tela-inicial" style="display: block;">
         <div id="titulo">
@@ -90,6 +96,26 @@
 </html>
 <script>
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    const mapaAvatares = {
+        1: '../avatars/bob_esponja.jpg',
+        2: '../avatars/patrick.png',
+        3: '../avatars/sr.sirigueijo.png',
+        4: '../avatars/sandy.jpg',
+        5: '../avatars/lula_molusco.jpg',
+        6: '../avatars/gary_sem_fundo-removebg-preview.png',
+        7: '../avatars/plankton.png'
+    };
+
+    function abrirPagina() {
+        const fkAvatar = sessionStorage.ID_AVATAR;
+
+        if (fkAvatar && mapaAvatares[fkAvatar]) {
+            document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+        } else {
+            document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+        }
+    }
 
     function iniciarQuiz() {
         document.getElementById("tela-inicial").style.display = "none";
@@ -230,7 +256,7 @@
             perguntaAtual++;
 
             if (perguntaAtual < perguntas.length) {
-                mostrarPergunta(); 
+                mostrarPergunta();
             } else {
                 document.getElementById("tela-quiz").style.display = "none";
                 document.getElementById("tela-feedback").style.display = "block";
@@ -239,13 +265,13 @@
 
                 cadastrar();
             }
-        }, 1000); 
+        }, 1000);
     }
 
     function cadastrar() {
         const dados = {
             idUserServer: sessionStorage.ID_USUARIO,
-            pontuacaoQuizServer: pontuacao, 
+            pontuacaoQuizServer: pontuacao,
         };
 
         console.log("Enviando dados para o servidor:", dados);
@@ -291,9 +317,8 @@
     }
 
     function limparSessao() {
-    sessionStorage.clear();
-    window.location = "/login.html";
-}
-   
-</script>
+        sessionStorage.clear();
+        window.location = "/login.html";
+    }
 
+</script>

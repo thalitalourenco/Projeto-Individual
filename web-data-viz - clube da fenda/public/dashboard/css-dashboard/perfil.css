@@ -1,24 +1,11 @@
 :root {
     --amarelo-bob: #ffeb3b;
     --amarelo-sombra: #f0c800;
-    --marrom-calca: #8b5e3c;
     --branco: #ffffff;
     --vermelho-gravata: #ff0000;
-    --preto-sapato: #000000;
-    --azul-olhos: #3b9eff;
     --azul-escuro: #0080ff;
     --azul-mais-escuro: #04509d;
     --azul_acinzentado: #436c95;
-    --azul-oceano-claro: #b8e7f2;
-    --azul-submarino: #7fd6e3;
-    --verde-alga: #7cd3a3;
-    --verde-escuro: #029c47;
-    --rosa-agua-viva: #ff91c0;
-    --roxo-pedra: #a282be;
-    --roxo-claro: #dbb2ff;
-    --roxo-escuro: #735d86;
-    --areia-fundo-mar: #f2e1a1;
-    --azul-esverdeado-logo: #ADD8E6;
     --gelo: #f6f5f5;
     --cinza-claro: #e0e0e0;
 }

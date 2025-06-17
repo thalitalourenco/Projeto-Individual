@@ -320,9 +320,9 @@
     }
 
     function excluirConta() {
-        const idUserServer = sessionStorage.ID_USUARIO; // Obtém o ID do usuário do sessionStorage
+        const idUserServer = sessionStorage.ID_USUARIO; 
 
-        console.log("ID do usuário:", idUserServer); // Verifica se o ID está definido
+        console.log("ID do usuário:", idUserServer);
 
         if (!idUserServer) {
             alert("Erro: ID do usuário não encontrado!");
@@ -334,14 +334,14 @@
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ idUserServer }), // Envia o ID do usuário no corpo da requisição
+            body: JSON.stringify({ idUserServer }),
         })
             .then(function (resposta) {
                 if (resposta.ok) {
                     console.log("Conta deletada com sucesso!");
 
                     setTimeout(function () {
-                        window.location = "../login.html"; // Redireciona para a página de login
+                        window.location = "../login.html"; 
                     }, 1000);
                 } else {
                     console.log("Houve um erro ao tentar deletar a conta!");

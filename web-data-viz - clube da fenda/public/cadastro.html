@@ -85,7 +85,8 @@
                     </div>
                 </div>
                 <div id="div_aguardar" class="loading-gif">
-                    <img src="./assets/img/Valentines Day Valentine Sticker.gif" id="loading-gif" style="display: none;">
+                    <img src="./assets/img/Valentines Day Valentine Sticker.gif" id="loading-gif"
+                        style="display: none;">
                 </div>
             </div>
         </div>
@@ -98,141 +99,49 @@
 <script>
 
     function validarNome() {
-        var nomeVar = input_nome.value;
-        if (nomeVar.length > 0) {
-            if (input_nome.value.length > 0) {
-                input_nome.style.border = '1px solid green';
-            } else {
-                input_nome.style.border = '1px solid red';
-            }
-        } else {
-            input_nome.style.border = '1px solid #604da4';
-        }
+        const nomeVar = input_nome.value.trim();
+        input_nome.style.border = nomeVar.length > 0 ? '1px solid green' : '1px solid red';
     }
+
     function validarTelefone() {
-        var telefoneVar = input_telefone.value.replace(/\D/g, '');
+        const telefoneVar = input_telefone.value.replace(/\D/g, '');
+        let formatandoInput = '';
 
-        var formatandoInput = '';
-        for (var i = 0; i < telefoneVar.length; i++) {
-            if (i === 0) {
-                formatandoInput += '(' + telefoneVar[i];
-            } else if (i === 1) {
-                formatandoInput += telefoneVar[i] + ') ';
-            } else if (i === 6) {
-                formatandoInput += telefoneVar[i] + '-';
-            } else {
-                formatandoInput += telefoneVar[i];
-            }
+        for (let i = 0; i < telefoneVar.length; i++) {
+            if (i === 0) formatandoInput += '(' + telefoneVar[i];
+            else if (i === 1) formatandoInput += telefoneVar[i] + ') ';
+            else if (i === 6) formatandoInput += telefoneVar[i] + '-';
+            else formatandoInput += telefoneVar[i];
         }
-        
+
         input_telefone.value = formatandoInput;
-
-        if (telefoneVar.length > 0) {
-            if (input_telefone.value.length >= 15) {
-                input_telefone.style.border = '1px solid green';
-            } else {
-                input_telefone.style.border = '1px solid red';
-            }
-        } else {
-            input_telefone.style.border = '1px solid #604da4';
-        }
-
+        input_telefone.style.border = telefoneVar.length >= 10 ? '1px solid green' : '1px solid red';
     }
 
     function validarEmail() {
-        var emailVar = input_email.value;
-        if (emailVar.length > 0) {
-            if (emailVar.includes('@') && (emailVar.endsWith('.com') || emailVar.endsWith('.br'))) {
-                input_email.style.border = '1px solid green';
-            } else {
-                input_email.style.border = '1px solid red';
-            }
-        } else {
-            input_email.style.border = '1px solid #604da4';
-        }
+        const emailVar = input_email.value.trim();
+        const emailValido = emailVar.includes('@') && (emailVar.endsWith('.com') || emailVar.endsWith('.br'));
+        input_email.style.border = emailValido ? '1px solid green' : '1px solid red';
     }
 
     function validarSenha() {
-        var senhaVar = input_senha.value;
-        input_senha.value = senhaVar.replaceAll("'", '').replaceAll('=', '').replaceAll('-', '').replaceAll(';', '').replaceAll('"', '');
-        var senhaMaiuscula = senhaVar.toUpperCase();
-        var senhaMinuscula = senhaVar.toLowerCase();
-        var senhaExclamacao = senhaVar.includes('!');
-        var senhaArroba = senhaVar.includes('@');
-        var senhaSifrao = senhaVar.includes('$');
-        var senhaPorcetagem = senhaVar.includes('%');
-        var senhaEcomercial = senhaVar.includes('&');
-        var senhaAsteristico = senhaVar.includes('*');
-        var senhaUnderline = senhaVar.includes('_');
-        var senhaHashtag = senhaVar.includes('#');
-        var senhaNumero = false;
-        var letraMaiuscula = false;
-        var letraMinusculo = false;
+        let senhaVar = input_senha.value.trim();
+        senhaVar = senhaVar.replace(/['"=;-]/g, '');
 
-        if (senhaVar != senhaMaiuscula) {
-            letraMinusculo = true;
-        } else {
-            letraMinusculo = false;
-        }
+        const letraMaiuscula = /[A-Z]/.test(senhaVar);
+        const letraMinuscula = /[a-z]/.test(senhaVar);
+        const senhaNumero = /\d/.test(senhaVar); 
+        const senhaEspecial = /[!@#$%&*_#]/.test(senhaVar);
+        const tamanhoValido = senhaVar.length >= 10;
 
-        if (senhaVar != senhaMinuscula) {
-            letraMaiuscula = true;
-        } else {
-            letraMaiuscula = false;
-        }
-        if (senhaVar.includes(0)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(1)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(2)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(3)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(4)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(5)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(6)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(7)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(8)) {
-            senhaNumero = true;
-        } else if (senhaVar.includes(9)) {
-            senhaNumero = true;
-        } else {
-            senhaNumero = false;
-        }
+        span_maiuscula.style.color = letraMaiuscula ? 'green' : 'red';
+        span_minuscula.style.color = letraMinuscula ? 'green' : 'red';
+        span_numero.style.color = senhaNumero ? 'green' : 'red';
+        span_especial.style.color = senhaEspecial ? 'green' : 'red';
+        span_tamanho.style.color = tamanhoValido ? 'green' : 'red';
 
-        if (letraMaiuscula) {
-            span_maiuscula.style.color = 'green';
-        }
-
-        if (letraMinusculo) {
-            span_minuscula.style.color = 'green';
-        }
-
-        if (senhaNumero) {
-            span_numero.style.color = 'green';
-        }
-
-        if (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag) {
-            span_especial.style.color = 'green';
-        }
-
-        if (senhaVar.length >= 10) {
-            span_tamanho.style.color = 'green';
-        }
-
-        if (senhaVar.length > 0) {
-            if (senhaNumero && letraMaiuscula && letraMinusculo && (senhaArroba || senhaExclamacao || senhaSifrao || senhaPorcetagem || senhaEcomercial || senhaAsteristico || senhaUnderline || senhaHashtag)) {
-                input_senha.style.border = '1px solid green';
-            } else {
-                input_senha.style.border = '1px solid red';
-            }
-        } else {
-            input_senha.style.border = '1px solid #604da4';
-        }
+        const senhaValida = letraMaiuscula && letraMinuscula && senhaNumero && senhaEspecial && tamanhoValido;
+        input_senha.style.border = senhaValida ? '1px solid green' : '1px solid red';
     }
 
     function validarConfirmacaoSenha() {
@@ -241,9 +150,9 @@
         const mensagemSenhas = document.getElementById('div_mensagemSenhas');
 
         if (senha !== confirmacaoSenha && confirmacaoSenha !== "") {
-            mensagemSenhas.style.display = 'block'; 
+            mensagemSenhas.style.display = 'block';
         } else {
-            mensagemSenhas.style.display = 'none'; 
+            mensagemSenhas.style.display = 'none';
         }
     }
 
@@ -272,20 +181,20 @@
                     senhaServer: senhaVar,
                 }),
             })
-            .then(function (resposta) {
-                if (resposta.ok) {
+                .then(function (resposta) {
+                    if (resposta.ok) {
 
-                    document.querySelector('.conteudoCard').style.display = 'none';
+                        document.querySelector('.conteudoCard').style.display = 'none';
 
-                    document.getElementById('div_aguardar').style.display = 'flex';
+                        document.getElementById('div_aguardar').style.display = 'flex';
 
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, 2000);
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, 2000);
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
                     finalizarAguardar();
@@ -303,15 +212,16 @@
     const btnColor = document.querySelector('.btnColor');
 
     btnCadastro.addEventListener('click', () => {
-        btnColor.style.left = "50%"; 
+        btnColor.style.left = "50%";
     });
 
     btnLogin.addEventListener('click', () => {
-        btnColor.style.left = "0%"; 
-        window.location.href = 'login.html'; 
+        btnColor.style.left = "0%";
+        window.location.href = 'login.html';
     });
 
     function sumirMensagem() {
         cardErro.style.display = "none";
     }
+    
 </script>

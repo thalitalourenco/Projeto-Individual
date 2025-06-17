@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
-<body>
+<body onload="abrirPagina()">
   <header class="menu-lateral">
     <div class="logo">
       <div class="linha">
@@ -32,6 +32,11 @@
       </div>
     </div>
     <nav role="navigation">
+      <div class="div_avatar">
+        <div class="avatar-container">
+          <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+        </div>
+      </div>
       <div class="hello">
         <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
       </div>
@@ -46,7 +51,7 @@
         </li>
         <li id="perfil">
           <span class="material-symbols-outlined">person</span>
-          <a href="perfil.html">PERFIL</a>
+          <a href="/dashboard/perfil.html">PERFIL</a>
         </li>
         <li id="sair">
           <span class="material-symbols-outlined">logout</span>
@@ -106,9 +111,32 @@
       <button id="voltar-inicio" onclick="voltarInicio()">Tela inicial</button>
     </div>
   </div>
-  <script src="/Users/Thalita/Desktop/Clube da fenda/web-data-viz - clube da fenda/public/js/frases_aleatorias.js"></script>
+  <script
+    src="/Users/Thalita/Desktop/Clube da fenda/web-data-viz - clube da fenda/public/js/frases_aleatorias.js"></script>
   <script>
+
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    const mapaAvatares = {
+      1: '../avatars/bob_esponja.jpg',
+      2: '../avatars/patrick.png',
+      3: '../avatars/sr.sirigueijo.png',
+      4: '../avatars/sandy.jpg',
+      5: '../avatars/lula_molusco.jpg',
+      6: '../avatars/gary_sem_fundo-removebg-preview.png',
+      7: '../avatars/plankton.png'
+    };
+
+    function abrirPagina() {
+      const fkAvatar = sessionStorage.ID_AVATAR;
+
+      if (fkAvatar && mapaAvatares[fkAvatar]) {
+        document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+      } else {
+        document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+      }
+    }
+
     const perguntas = [
       {
         pergunta: "O que você mais gosta de fazer no tempo livre?",
@@ -273,19 +301,15 @@
     }
 
     function mostrarResultado() {
-      // Esconde a tela do quiz
       document.getElementById("tela-quiz").style.display = "none";
 
-      // Mostra a tela de feedback
       const telaFeedback = document.getElementById("tela-feedback");
       telaFeedback.style.display = "flex";
 
-      // Determina o personagem com a maior pontuação
       const personagem = Object.keys(pontuacao).reduce((a, b) =>
         pontuacao[a] > pontuacao[b] ? a : b
       );
 
-      // Mensagens de feedback
       const mensagens = {
         Bob: "Você é otimista e trabalhador, assim como o Bob Esponja!🧽",
         Patrick: "Você é leal e descontraído, como o Patrick!⭐️",
@@ -295,9 +319,6 @@
         Lula: "Você é criativo e reservado, como o Lula Molusco!🦑"
       };
 
-
-
-      // Caminhos das imagens
       const imagens = {
         Bob: "./assets/Personagens/bob_esponja.png",
         Patrick: "./assets/Personagens/patrick.png",
@@ -307,13 +328,12 @@
         Lula: "./assets/Personagens/lula_molusco.png"
       };
 
-      // Atualiza o texto e a imagem do feedback
+
       document.getElementById("resultado-texto").textContent = mensagens[personagem];
       const imagem = document.getElementById("resultado-imagem");
       imagem.src = imagens[personagem];
       imagem.alt = `Imagem de ${personagem}`;
 
-      // <-- LINHA IMPORTANTE PARA MOSTRAR O FEEDBACK -->
       document.getElementById("resultado").style.display = "block";
 
       cadastrar();
@@ -327,7 +347,7 @@
       );
 
       const dados = {
-        idUserServer: sessionStorage.ID_USUARIO, // Certifique-se de que "ID_USUARIO" está definido
+        idUserServer: sessionStorage.ID_USUARIO,
         personagemQuizServer: personagem,
       };
 
@@ -376,9 +396,9 @@
     }
 
     function limparSessao() {
-    sessionStorage.clear();
-    window.location = "/login.html";
-}
+      sessionStorage.clear();
+      window.location = "/login.html";
+    }
   </script>
 </body>
 

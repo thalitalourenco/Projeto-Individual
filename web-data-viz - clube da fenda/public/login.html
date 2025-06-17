@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    
+
     <div class="header">
         <div class="container">
             <a href="index.html">
@@ -92,12 +92,12 @@
     const btnColor = document.querySelector('.btnColor');
 
     btnLogin.addEventListener('click', () => {
-        btnColor.style.left = "50%"; // cor vai para Login
+        btnColor.style.left = "50%";
     });
 
     btnCadastro.addEventListener('click', () => {
-        btnColor.style.left = "0%"; // cor volta para cadastro
-        window.location.href = 'cadastro.html'; // redireciona para login.html
+        btnColor.style.left = "0%";
+        window.location.href = 'cadastro.html';
 
     });
 
@@ -145,7 +145,7 @@
 
                     setTimeout(function () {
                         window.location = "./dashboard/overview.html";
-                    }, 1000); 
+                    }, 1000);
 
                 });
 
@@ -167,8 +167,8 @@
     }
 
     function sumirMensagem() {
-    var divErrosLogin = document.getElementById("div_erros_login");
-    divErrosLogin.innerHTML = "";
-    divErrosLogin.style.display = "none";
+        var divErrosLogin = document.getElementById("div_erros_login");
+        divErrosLogin.innerHTML = "";
+        divErrosLogin.style.display = "none";
     }
 </script>

@@ -111,7 +111,24 @@
                     <li>Superação</li>
                 </ul>
             </div>
+        </div>
+    </div>
 
+    <div class="tempoAssistido">
+        <h1 class="tituloTempoAssistido">Quanto tempo você já assistiu de Bob Esponja?</h1>
+        <div class="requisicao" style="display: flex;">
+            <h2 class="descricaoInput">
+                Digite quantos episódios você já assistiu e descubra quantas horas você mergulhou nesse universo
+                divertido!
+            </h2>
+            <input type="number" id="input_qtdEp" placeholder="Digite aqui o número de episódios…">
+            <button onclick="calcularTempo()">Calcular tempo</button>
+            <img src="./assets/img/Kids Choice Awards 3D Sticker by Nickelodeon.gif" alt="Bob Esponja">
+        </div>
+        <div class="TelaResposta">
+            <div class="resposta"></div>
+            <div class="mensagem"></div>
+            <img class="foto" src="" alt="">
         </div>
     </div>
 
@@ -195,24 +212,6 @@
         </div>
     </div>
 
-    <div class="tempoAssistido">
-        <h1 class="tituloTempoAssistido">Quanto tempo você já assistiu de Bob Esponja?</h1>
-        <div class="requisicao" style="display: flex;">
-            <h2 class="descricaoInput">
-                Digite quantos episódios você já assistiu e descubra quantas horas você mergulhou nesse universo
-                divertido!
-            </h2>
-            <input type="number" id="input_qtdEp" placeholder="Digite aqui o número de episódios…">
-            <button onclick="calcularTempo()">Calcular tempo</button>
-            <img src="./assets/img/Kids Choice Awards 3D Sticker by Nickelodeon.gif" alt="Bob Esponja">
-        </div>
-        <div class="TelaResposta">
-            <div class="resposta"></div>
-            <div class="mensagem"></div>
-            <img class="foto" src="" alt="">
-        </div>
-    </div>
-
     <div class="rodape">
 
         <div class="menu">
@@ -260,7 +259,7 @@
 <script>
     window.onload = function () {
         const musica = document.getElementById('musicaFundo');
-        musica.volume = 0.3; 
+        musica.volume = 0.3;
         musica.play().catch((erro) => {
             console.log('Autoplay bloqueado pelo navegador:', erro);
         });

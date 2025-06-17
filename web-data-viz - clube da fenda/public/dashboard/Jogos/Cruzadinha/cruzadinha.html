@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body onload="abrirPagina()">
 
   <header id="menu-lateral">
     <div class="logo">
@@ -35,6 +35,11 @@
     </div>
 
     <nav role="navigation">
+      <div class="div_avatar">
+        <div class="avatar-container">
+          <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
+        </div>
+      </div>
       <div class="hello">
         <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
       </div>
@@ -49,7 +54,7 @@
         </li>
         <li id="perfil">
           <span class="material-symbols-outlined">person</span>
-          <a href="perfil.html">PERFIL</a>
+          <a href="/dashboard/perfil.html">PERFIL</a>
         </li>
         <li id="sair">
           <span class="material-symbols-outlined">logout</span>
@@ -141,6 +146,26 @@
 <script>
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+  const mapaAvatares = {
+    1: '../avatars/bob_esponja.jpg',
+    2: '../avatars/patrick.png',
+    3: '../avatars/sr.sirigueijo.png',
+    4: '../avatars/sandy.jpg',
+    5: '../avatars/lula_molusco.jpg',
+    6: '../avatars/gary_sem_fundo-removebg-preview.png',
+    7: '../avatars/plankton.png'
+  };
+
+  function abrirPagina() {
+    const fkAvatar = sessionStorage.ID_AVATAR;
+
+    if (fkAvatar && mapaAvatares[fkAvatar]) {
+      document.getElementById('perfil-avatar').src = mapaAvatares[fkAvatar];
+    } else {
+      document.getElementById('perfil-avatar').src = './css-dashboard/img/avatars/default.webp';
+    }
+  }
+
   function iniciarJogo() {
     document.getElementById("tela-inicial").style.display = "none";
     document.getElementById("menu-lateral").style.display = "none";
@@ -170,9 +195,8 @@
     { word: "PEDRA", row: 6, col: 0, dir: "across", num: 13 },
   ];
 
-  // criação da tabela
   const table = document.getElementById("crossword");
-  let posicaoUsada = {}; // mantém as posições e letras das palavras
+  let posicaoUsada = {};
 
   for (let i = 0; i < altura; i++) {
     const tr = document.createElement("tr");
@@ -241,7 +265,6 @@
     document.querySelector(".timer").textContent = "Tempo: 00:00";
   }
 
-  // verifica as respostas
   function verificarRespostas() {
     let corretas = 0;
     let total = 0;
@@ -266,7 +289,6 @@
       total++;
     }
 
-    // Para o timer APENAS depois de verificar todas as respostas
     pararTimer();
 
     if (corretas === total) {
@@ -330,7 +352,6 @@
   }
 
   function resetarJogo() {
-    // Limpa inputs e classes, mas não zera posicaoUsada, que é fixa para as palavras
     const inputs = document.querySelectorAll("#crossword input");
     inputs.forEach((input) => {
       input.value = "";

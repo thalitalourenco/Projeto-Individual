@@ -1,22 +1,14 @@
 :root {
   --amarelo-bob: #ffeb3b;
   --amarelo-sombra: #f0c800;
-  --marrom-calca: #8b5e3c;
   --branco: #ffffff;
-  --vermelho-gravata: #ff0000;
-  --preto-sapato: #000000;
   --azul-olhos: #3b9eff;
   --azul-escuro: #0080ff;
   --azul-mais-escuro: #04509d;
   --azul_acinzentado: #436c95;
   --azul-oceano-claro: #b8e7f2;
-  --azul-submarino: #7fd6e3;
-  --verde-alga: #7cd3a3;
-  --verde-escuro: #029c47;
   --rosa-agua-viva: #ff91c0;
   --roxo-pedra: #a67eb4;
-  --areia-fundo-mar: #f2e1a1;
-  --azul-esverdeado-logo: #ADD8E6;
   --gelo: #f6f5f5;
 }
 
@@ -125,6 +117,16 @@ body {
   animation: pulse 1.5s infinite;
 }
 
+.perfil-avatar {
+  margin-left: 28%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--azul-escuro);
+  transition: all 0.3s;
+}
+
 @keyframes pulse {
 
   0%,
@@ -170,7 +172,6 @@ body {
 
 .espaco {
   width: 20px;
-  /* ajusta o espaço visível */
   display: inline-block;
 }
 

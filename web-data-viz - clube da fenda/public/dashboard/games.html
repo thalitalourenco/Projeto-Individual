@@ -40,27 +40,28 @@
         <div class="avatar-container">
           <img src="./css-dashboard/img/avatars/default.webp" alt="Avatar" class="perfil-avatar" id="perfil-avatar">
         </div>
-        <div class="hello">
-          <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-        </div>
-        <ul>
-          <li id="dashboard">
-            <span class="material-symbols-outlined">dashboard</span>
-            <a href="overview.html">OVERVIEW</a>
-          </li>
-          <li class="ativo" aria-current="page" id="games">
-            <span class="material-symbols-outlined">sports_esports</span>
-            <a href="games.html">GAMES</a>
-          </li>
-          <li id="perfil">
-            <span class="material-symbols-outlined">person</span>
-            <a href="perfil.html">PERFIL</a>
-          </li>
-          <li id="sair">
-            <span class="material-symbols-outlined">logout</span>
-            <a onclick="limparSessao()">SAIR</a>
-          </li>
-        </ul>
+      </div>
+      <div class="hello">
+        <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+      </div>
+      <ul>
+        <li id="dashboard">
+          <span class="material-symbols-outlined">dashboard</span>
+          <a href="overview.html">OVERVIEW</a>
+        </li>
+        <li class="ativo" aria-current="page" id="games">
+          <span class="material-symbols-outlined">sports_esports</span>
+          <a href="games.html">GAMES</a>
+        </li>
+        <li id="perfil">
+          <span class="material-symbols-outlined">person</span>
+          <a href="perfil.html">PERFIL</a>
+        </li>
+        <li id="sair">
+          <span class="material-symbols-outlined">logout</span>
+          <a onclick="limparSessao()">SAIR</a>
+        </li>
+      </ul>
     </nav>
   </header>
 
@@ -82,6 +83,17 @@
           <p class="descricao">Qual personagem você seria do Bob Esponja?</p>
           <img src="./css-dashboard/img/bob_esponja.png" alt="bob esponja">
           <button onclick="window.location.href='./Jogos/Quiz_personalidade/quizPersonalidade.html'"><span
+              class="play">►</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="container-cruzadinha">
+        <div class="card-content">
+          <h3>Cruzadinha</h3>
+          <p class="descricao">Tente acertar as palavras!</p>
+          <span class="material-symbols-outlined" id="simbolo-cruzadinha">crossword</span>
+          <button onclick="window.location.href='./Jogos/Cruzadinha/cruzadinha.html'"><span
               class="play">►</span></button>
         </div>
       </div>

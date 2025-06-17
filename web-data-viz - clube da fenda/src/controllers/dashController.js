@@ -153,13 +153,13 @@ function vizualizarAvatar(req, res) {
 }
 
 function excluirConta(req, res) {
-    const { idUserServer } = req.body; // Obtém o ID do usuário do corpo da requisição
+    const { idUserServer } = req.body;
 
     if (!idUserServer) {
         return res.status(400).send('ID do usuário não fornecido!');
     }
 
-    dashModel.excluirConta(idUserServer) // Chama o modelo para excluir a conta
+    dashModel.excluirConta(idUserServer) 
         .then(() => res.status(200).send('Conta excluída com sucesso!'))
         .catch(erro => {
             console.log(erro);
